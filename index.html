@@ -21,26 +21,21 @@
             --text-dim: #9ca3af; 
             --warning: #fbbf24;
             --success: #10b981;
-            /* The "Apple-Like" Fluid Curve */
+            /* Fluid Motion Curve */
             --ease-fluid: cubic-bezier(0.19, 1, 0.22, 1);
         }
         
         /* HARDWARE RESET */
-        html { 
-            /* Allow height to grow automatically - Fixes blank page */
-            height: auto; 
-            min-height: 100%;
-            -webkit-font-smoothing: antialiased; 
-            background: #000; 
-        }
+        html { height: auto; min-height: 100%; background: #000; }
         
         body { 
             margin: 0; padding: 0; 
-            background-color: transparent !important; /* Critical for background visibility */
+            background-color: transparent !important; /* Critical for fixed bg visibility */
             color: var(--text); 
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             width: 100%; min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
@@ -51,21 +46,20 @@
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
 
-        /* --- 2. THE MOBILE-PROOF BACKGROUND LAYER --- */
+        /* --- 2. MOBILE-PROOF BACKGROUND LAYER --- */
         #fixed-bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             z-index: -10; /* Locked behind everything */
             pointer-events: none;
             overflow: hidden;
-            /* Force GPU to keep it sticky on mobile */
-            will-change: transform; transform: translateZ(0); 
+            transform: translateZ(0); /* Force GPU */
         }
         
         .bg-image { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: #000 url('product-1.webp') no-repeat center bottom; 
             
-            /* --- DESKTOP SCALE: 65% --- */
+            /* --- DESKTOP DEFAULT: 65% SCALE --- */
             background-size: 65%; 
             
             /* COLOR RESTORED */
@@ -79,7 +73,7 @@
         }
 
         .grain { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -5; 
             opacity: 0.035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
@@ -111,7 +105,7 @@
         .logo { font-weight: 900; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: #fff; text-decoration: none; }
         .nav-links { list-style: none; display: flex; gap: 30px; }
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-weight: 700; transition: 0.3s; letter-spacing: 1px; }
-        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
         /* --- 5. ANIMATIONS --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s var(--ease-fluid); }
@@ -121,7 +115,6 @@
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; z-index: 10; }
         .hero-text { 
             padding: 60px 40px; 
-            /* Dark glass for visibility */
             background: rgba(5, 5, 8, 0.6); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
             border-radius: 40px; border: 1px solid var(--glass-border); text-align: center; max-width: 700px; width: 100%; 
             box-shadow: 0 40px 100px rgba(0,0,0,0.8);
@@ -149,7 +142,7 @@
         .section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
         .section-title { font-size: clamp(30px, 5vw, 48px); font-weight: 800; text-align: center; margin-bottom: 70px; color: #fff; }
 
-        /* SHOP GRID (5, 10, 15% Logic) */
+        /* SHOP GRID */
         .shop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 80px; }
         .shop-card { 
             background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -228,10 +221,13 @@
         .cart-items { flex: 1; overflow-y: auto; margin: 30px 0; border-top: 1px solid #222; }
         .cart-summary { background: #000; padding: 25px; border-radius: 20px; border: 1px solid #222; }
 
-        /* MOBILE RESPONSIVE OPTIMIZATION */
+        /* MOBILE RESPONSIVE OPTIMIZATION (CRITICAL FIX) */
         @media (max-width: 900px) { 
-            /* Fix Mobile Background Issues: "Cover" ensures it fills screen on phone */
-            .bg-image { background-size: cover; background-position: center; } 
+            /* THE FIX: On mobile, force background to cover so it's not tiny */
+            .bg-image { 
+                background-size: cover !important; 
+                background-position: center !important; 
+            }
             
             .hero-text { padding: 40px 20px; background: rgba(5,5,8,0.8); margin-top: 0; }
             h1 { font-size: 42px; }
