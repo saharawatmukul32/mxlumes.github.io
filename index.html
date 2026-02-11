@@ -15,13 +15,14 @@
             --accent-grad: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
             --accent-solid: #6366f1;
             --bg: #000000; 
-            --glass-bg: rgba(8, 8, 10, 0.85); 
-            --glass-border: rgba(255, 255, 255, 0.1); 
+            /* Deep OLED Glass */
+            --glass-bg: rgba(5, 5, 8, 0.85); 
+            --glass-border: rgba(255, 255, 255, 0.08); 
             --text: #ffffff; 
             --text-dim: #9ca3af; 
             --warning: #fbbf24;
             --success: #10b981;
-            /* The "Apple-Like" Fluid Curve */
+            /* Fluid Motion Curve */
             --ease-fluid: cubic-bezier(0.19, 1, 0.22, 1);
         }
         
@@ -30,7 +31,7 @@
         
         body { 
             margin: 0; padding: 0; 
-            background-color: transparent !important; /* Critical for background visibility */
+            background-color: transparent !important; /* Critical for fixed bg */
             color: var(--text); 
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             width: 100%; min-height: 100%;
@@ -39,35 +40,36 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
 
-        /* LENIS CONFIG (Fixes Blank Page Issue) */
-        html.lenis, html.lenis body { height: auto; } 
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        /* LENIS CONFIG */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
 
-        /* --- 2. THE MOBILE-PROOF BACKGROUND LAYER --- */
+        /* --- 2. MOBILE-PROOF BACKGROUND LAYER --- */
         #fixed-bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             z-index: -10; /* Locked behind everything */
             pointer-events: none;
             overflow: hidden;
-            /* Force GPU to keep it sticky on mobile */
-            will-change: transform; transform: translateZ(0); 
+            will-change: transform; transform: translateZ(0); /* GPU Force */
         }
         
         .bg-image { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* 65% SCALE APPLIED HERE */
             background: #000 url('product-1.webp') no-repeat center bottom; 
+            
+            /* --- REQUESTED CHANGE: 65% SCALE --- */
             background-size: 65%; 
-            /* COLOR RESTORED: Not B&W */
+            
+            /* Visual Aesthetics */
             filter: saturate(1.1) contrast(1.1) brightness(0.7);
         }
 
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             /* Gradient ensures text pops */
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 60%, #000000 100%); 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 60%, #000000 100%); 
         }
 
         .grain { 
@@ -75,7 +77,7 @@
             opacity: 0.035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
-        /* --- 3. CURSOR (DESKTOP ONLY) --- */
+        /* --- 3. CURSOR ENGINE (DESKTOP ONLY) --- */
         @media (hover: hover) and (pointer: fine) {
             body, a, button { cursor: none; }
             .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; }
@@ -95,7 +97,7 @@
 
         /* --- 4. NAVIGATION --- */
         .navbar { 
-            position: fixed; top: 0; width: 100%; height: 64px; 
+            position: fixed; top: 0; width: 100%; height: 60px; 
             background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             z-index: 1000; border-bottom: 1px solid var(--glass-border); 
         }
@@ -103,7 +105,7 @@
         .logo { font-weight: 900; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: #fff; text-decoration: none; }
         .nav-links { list-style: none; display: flex; gap: 30px; }
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-weight: 700; transition: 0.3s; letter-spacing: 1px; }
-        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
         /* --- 5. ANIMATIONS --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s var(--ease-fluid); }
@@ -133,7 +135,7 @@
         }
         .cta-btn:hover { transform: scale(1.05); }
 
-        /* --- 7. MAIN CONTENT (Scrolls over background) --- */
+        /* --- 7. MAIN CONTENT --- */
         .main-content { 
             position: relative; background: var(--bg); z-index: 10; 
             border-top: 1px solid var(--glass-border); box-shadow: 0 -50px 100px #000; 
@@ -141,7 +143,7 @@
         .section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
         .section-title { font-size: clamp(30px, 5vw, 48px); font-weight: 800; text-align: center; margin-bottom: 70px; color: #fff; }
 
-        /* SHOP GRID (5, 10, 15% Logic) */
+        /* SHOP GRID */
         .shop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 80px; }
         .shop-card { 
             background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -222,8 +224,9 @@
 
         /* MOBILE RESPONSIVE OPTIMIZATION */
         @media (max-width: 900px) { 
-            /* Fix Mobile Background Issues: 65% on Desktop, COVER on Mobile */
+            /* Fix Mobile Background Issues: "Cover" ensures it fills screen on phone */
             .bg-image { background-size: cover; background-position: center; } 
+            
             .hero-text { padding: 40px 20px; background: rgba(5,5,8,0.8); margin-top: 0; }
             h1 { font-size: 42px; }
             .shop-grid, .omni-body, .gallery-grid, .guide-grid, .footer-grid { grid-template-columns: 1fr; }
