@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="M-X Lumes: Professional 3:1 Epoxy Resin Systems.">
+    <meta name="description" content="M-X Lumes: Professional 3:1 Epoxy Resin Systems. ISO 9001 Certified.">
     <title>M-X Lumes | The Professional Standard</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
 
     <style>
         /* -----------------------------------------------------------
-           1. OLED THEME CORE
+           1. OLED MIDNIGHT THEME (REFINED)
            ----------------------------------------------------------- */
         :root {
             --bg-oled: #000000;
@@ -22,10 +22,10 @@
             --text-main: #ffffff;
             --text-dim: #888888;
             --accent: #ffffff;
-            --border: rgba(255, 255, 255, 0.15);
-            --border-hover: rgba(255, 255, 255, 0.4);
-            --glass: rgba(18, 18, 18, 0.75);
-            --blur: blur(25px);
+            --border: rgba(255, 255, 255, 0.12);
+            --border-hover: rgba(255, 255, 255, 0.3);
+            --glass: rgba(20, 20, 20, 0.6);
+            --blur: blur(20px);
             --radius: 24px;
             --success: #10b981;
             --warning: #f59e0b;
@@ -33,6 +33,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
         html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 100px; }
         
         body {
@@ -54,7 +55,7 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
 
         /* -----------------------------------------------------------
-           2. CINEMATIC BACKGROUND ENGINE (STABLE 65%)
+           2. CINEMATIC BACKGROUND ENGINE (STABLE MASK)
            ----------------------------------------------------------- */
         .bg-layer {
             position: fixed;
@@ -62,36 +63,29 @@
             z-index: -5;
             background-color: #000;
             
-            /* YOUR FILE */
+            /* FILE: product-1.webp */
             background-image: url('product-1.webp');
             
-            /* DESKTOP CONFIG: 65% Scale, Anchored Bottom */
+            /* DESKTOP: 65% Scale, Anchored Bottom */
             background-position: center bottom;
             background-repeat: no-repeat;
             background-size: 65%;
             
-            /* SMOOTH FADE (Vignette) so edges don't look hard */
-            -webkit-mask-image: radial-gradient(circle at center 80%, black 40%, transparent 100%);
-            mask-image: radial-gradient(circle at center 80%, black 40%, transparent 100%);
+            /* VIGNETTE MASK: Fades image edges into black background */
+            -webkit-mask-image: radial-gradient(circle at 50% 100%, black 30%, transparent 100%);
+            mask-image: radial-gradient(circle at 50% 100%, black 30%, transparent 100%);
             
-            opacity: 0.9;
+            opacity: 0.8; /* Subtle blend */
             transition: opacity 0.5s ease;
         }
 
-        .bg-gradient {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4;
-            /* Heavy gradient at bottom to blend image into footer */
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, #000 95%);
-            pointer-events: none;
-        }
-
         .grain {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; opacity: 0.04; pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4; opacity: 0.04; pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* -----------------------------------------------------------
-           3. LAYOUT & ANIMATION
+           3. LAYOUT & GLASS COMPONENTS
            ----------------------------------------------------------- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         .section { padding: 120px 0; position: relative; z-index: 2; }
@@ -102,21 +96,25 @@
         .glass {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
             border: 1px solid var(--border); border-radius: var(--radius);
-            transition: 0.3s; overflow: hidden;
+            transition: 0.3s ease; overflow: hidden;
         }
-        .glass:hover { border-color: var(--border-hover); transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+        .glass:hover { 
+            border-color: var(--border-hover); 
+            transform: translateY(-5px); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6); 
+        }
 
         .btn { padding: 16px 32px; border-radius: 50px; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; transition: 0.3s; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
         .btn-primary { background: #fff; color: #000; }
         .btn-primary:hover { background: #dcdcdc; transform: scale(1.02); }
-        .btn-outline { border: 1px solid var(--border); color: #fff; background: rgba(255,255,255,0.05); }
-        .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+        .btn-outline { border: 1px solid var(--border); color: #fff; background: rgba(255,255,255,0.02); }
+        .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
 
         /* -----------------------------------------------------------
            4. NAVIGATION & HERO
            ----------------------------------------------------------- */
         .navbar { position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; display: flex; align-items: center; transition: 0.4s; border-bottom: 1px solid transparent; }
-        .navbar.scrolled { background: rgba(0,0,0,0.95); border-bottom: 1px solid var(--border); }
+        .navbar.scrolled { background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--border); backdrop-filter: blur(10px); }
         .nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 800; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
         .nav-links { display: flex; gap: 30px; }
@@ -128,7 +126,7 @@
         .hero p { color: #ccc; font-size: 18px; max-width: 500px; margin-bottom: 40px; }
 
         /* -----------------------------------------------------------
-           5. SHOP GRID
+           5. SHOP GRID (Stable Images)
            ----------------------------------------------------------- */
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .product-card { padding: 30px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
@@ -146,7 +144,7 @@
         .g-item:hover .g-img { filter: grayscale(0%); transform: scale(1.05); }
 
         /* -----------------------------------------------------------
-           7. FEATURES
+           7. FEATURES (Timeline, Table, Safety)
            ----------------------------------------------------------- */
         .specs-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
         .spec-row { display: flex; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
@@ -170,7 +168,7 @@
         .dd-box.donts { background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.3); }
 
         /* -----------------------------------------------------------
-           8. CALCULATOR (Base Version)
+           8. CALCULATOR (Base Logic)
            ----------------------------------------------------------- */
         .calc-box { display: grid; grid-template-columns: 1.5fr 1fr; overflow: hidden; }
         .calc-in { padding: 50px; border-right: 1px solid var(--border); }
@@ -183,11 +181,11 @@
         .shape-btn.active { background: #fff; color: #000; border-color: #fff; }
 
         /* -----------------------------------------------------------
-           9. FOOTER
+           9. FOOTER (With YOUR Image)
            ----------------------------------------------------------- */
         .footer { 
             position: relative; padding: 120px 0 40px; margin-top: 100px; 
-            /* YOUR FILE */
+            /* FILE: last page background.png */
             background: #000 url('last page background.png') no-repeat center bottom; 
             background-size: cover; border-top: 1px solid #1a1a1b;
         }
@@ -212,16 +210,15 @@
         .cart-sidebar.active .cart-inner { transform: translateX(0); }
 
         /* -----------------------------------------------------------
-           11. MOBILE MEDIA
+           11. MOBILE MEDIA QUERIES
            ----------------------------------------------------------- */
         @media (max-width: 900px) {
             /* Mobile Background: Cover + Full Opacity */
             .bg-layer { 
                 background-size: cover; 
                 background-position: center center; 
-                opacity: 0.6;
-                /* Remove Mask on Mobile for visibility */
-                -webkit-mask-image: none; 
+                opacity: 0.5;
+                -webkit-mask-image: none; /* Remove vignette on mobile */
                 mask-image: none;
             }
             .grid-3, .specs-layout, .gallery-grid, .calc-box, .dos-donts, .f-grid { grid-template-columns: 1fr; }
@@ -248,6 +245,7 @@
                 <a href="#shop" class="nav-link">Shop</a>
                 <a href="#specs" class="nav-link">Specs</a>
                 <a href="#calc" class="nav-link">Calc</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
             </div>
         </div>
     </nav>
