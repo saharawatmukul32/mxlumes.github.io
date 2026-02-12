@@ -3,248 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="M-X Lumes: Professional 3:1 Epoxy Resin Systems. ISO 9001 Certified.">
-    <title>M-X Lumes | The Professional Standard</title>
+    <meta name="description" content="M-X Lumes: Professional 3:1 Epoxy Resin Systems.">
+    <title>M-X Lumes | Professional Resin Systems</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;800&family=Space+Grotesk:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <style>
         /* -----------------------------------------------------------
-           1. OLED MIDNIGHT THEME (PERFORMANCE OPTIMIZED)
+           1. CORE PERFORMANCE VARIABLES
            ----------------------------------------------------------- */
         :root {
-            --bg-oled: #000000;
-            --bg-panel: #050505;
-            --text-main: #f2f2f2;
-            --text-dim: #909090;
-            --accent: #ffffff;
-            --brand-glow: rgba(99, 102, 241, 0.5);
-            --border: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(255, 255, 255, 0.4);
-            --glass: rgba(15, 15, 15, 0.7);
-            --blur: blur(30px);
-            --radius: 24px;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --ease-elastic: cubic-bezier(0.19, 1, 0.22, 1);
+            --bg: #000000;
+            --panel: #080808;
+            --text: #f0f0f0;
+            --dim: #888;
+            --accent: #fff;
+            --border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(20, 20, 20, 0.8);
+            --blur: blur(20px);
+            --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
+        /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        ::selection { background: rgba(99, 102, 241, 0.3); color: #fff; }
         
-        html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 100px; }
+        /* SMOOTH SCROLLING & OPTIMIZATION */
+        html { 
+            scroll-behavior: smooth; 
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
         
         body {
-            background-color: var(--bg-oled);
-            color: var(--text-main);
+            background-color: var(--bg);
+            color: var(--text);
             font-family: 'Manrope', sans-serif;
-            line-height: 1.7;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            /* Performance: Hardware accelerate text */
-            text-rendering: optimizeLegibility;
+            width: 100%;
         }
 
-        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.1; letter-spacing: -0.03em; }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        button { cursor: pointer; border: none; outline: none; background: none; font-family: inherit; }
-        img { display: block; max-width: 100%; height: auto; }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-
         /* -----------------------------------------------------------
-           2. CINEMATIC BACKGROUND
+           2. ZERO-JITTER BACKGROUND ENGINE
            ----------------------------------------------------------- */
         .bg-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -5;
             background-color: #000;
+            /* Using product-1.webp */
             background-image: url('product-1.webp');
+            
+            /* DESKTOP DEFAULT */
+            background-size: 65%;
             background-position: center bottom;
             background-repeat: no-repeat;
-            background-size: 65%;
-            -webkit-mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
-            mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
-            opacity: 0.85;
-            /* Performance: Hint browser to optimize this layer */
-            will-change: opacity, transform;
-            transition: opacity 0.8s ease;
+            
+            /* Performance Hacks */
+            transform: translateZ(0); 
+            will-change: opacity;
+            opacity: 0.8;
         }
 
         .bg-gradient {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 60%, #000 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, #000 90%);
             pointer-events: none;
         }
 
-        .grain {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; opacity: 0.035; pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
         /* -----------------------------------------------------------
-           3. LAYOUT & COMPONENTS
+           3. LAYOUT & GLASS (PERFORMANCE TUNED)
            ----------------------------------------------------------- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 30px; }
-        .section { padding: 130px 0; position: relative; z-index: 2; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         
-        /* Performance: Added will-change to prevent jank */
-        .reveal { 
-            opacity: 0; transform: translateY(40px); filter: blur(10px); 
-            transition: all 1.2s var(--ease-elastic);
-            will-change: transform, opacity, filter; 
-        }
-        .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
-
+        /* Content Visibility prevents lag by not rendering off-screen items */
+        .section { padding: 100px 0; content-visibility: auto; contain-intrinsic-size: 1000px; } 
+        
         .glass {
-            background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            border: 1px solid var(--border); border-radius: var(--radius);
-            position: relative; overflow: hidden; transition: all 0.4s var(--ease-elastic);
-            /* Performance hint */
-            will-change: transform, box-shadow;
-        }
-        .glass::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); opacity: 0.3;
-        }
-        .glass:hover { 
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 80px -10px var(--brand-glow);
-            transform: translateY(-6px) scale(1.005);
+            background: var(--glass); 
+            border: 1px solid var(--border); 
+            border-radius: 20px;
+            /* Only blur on desktop to save mobile battery/fps */
+            backdrop-filter: var(--blur); 
+            -webkit-backdrop-filter: var(--blur);
         }
 
-        .btn { padding: 18px 36px; border-radius: 60px; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
-        .btn-primary { background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
-        .btn-primary:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.25); }
-        .btn-outline { border: 1px solid var(--border); color: #fff; background: rgba(255,255,255,0.03); }
-        .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s var(--ease); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Typography */
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.1; color: #fff; }
+        .btn { 
+            padding: 16px 32px; border-radius: 50px; font-weight: 700; text-transform: uppercase; font-size: 11px; 
+            letter-spacing: 1px; transition: 0.2s; cursor: pointer; display: inline-flex; justify-content: center;
+        }
+        .btn-primary { background: #fff; color: #000; border: none; }
+        .btn-outline { border: 1px solid var(--border); color: #fff; background: rgba(255,255,255,0.05); }
 
         /* -----------------------------------------------------------
-           4. NAVIGATION & HERO
+           4. GALLERY MASONRY (FIXES CROPPING)
            ----------------------------------------------------------- */
-        .navbar { position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; display: flex; align-items: center; transition: 0.5s ease; border-bottom: 1px solid transparent; }
-        .navbar.scrolled { background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); height: 70px; }
+        /* We use columns instead of grid rows to let images keep natural height */
+        .gallery-masonry {
+            column-count: 3;
+            column-gap: 20px;
+        }
+        
+        .g-item {
+            break-inside: avoid; /* Don't split images */
+            margin-bottom: 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #111;
+            position: relative;
+        }
+        
+        .g-img {
+            width: 100%;
+            height: auto; /* Natural height - NO CROPPING */
+            display: block;
+            transition: 0.5s;
+            /* Default: Grayscale on Desktop */
+            filter: grayscale(100%);
+        }
+        
+        /* Desktop Hover */
+        @media (hover: hover) {
+            .g-item:hover .g-img { filter: grayscale(0%); transform: scale(1.03); }
+        }
+
+        /* -----------------------------------------------------------
+           5. NAV & HERO
+           ----------------------------------------------------------- */
+        .navbar { position: fixed; top: 0; width: 100%; height: 70px; z-index: 1000; display: flex; align-items: center; transition: 0.3s; }
+        .navbar.scrolled { background: rgba(0,0,0,0.95); border-bottom: 1px solid var(--border); }
         .nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 800; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; color: #fff; }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-link { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-dim); letter-spacing: 1px; transition: color 0.3s; }
-        .nav-link:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .logo { font-weight: 800; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: #fff; text-decoration: none; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-link { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--dim); text-decoration: none; }
 
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 10; padding-top: 80px; }
-        .hero h1 { font-size: clamp(48px, 6vw, 100px); margin-bottom: 24px; font-weight: 800; background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { color: var(--text-dim); font-size: 18px; max-width: 500px; margin-bottom: 40px; font-weight: 300; }
-
-        /* -----------------------------------------------------------
-           5. SHOP & GALLERY
-           ----------------------------------------------------------- */
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .product-card { padding: 35px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
-        .p-img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 25px; opacity: 0.9; transition: 0.6s var(--ease-elastic); }
-        .product-card:hover .p-img { opacity: 1; transform: scale(1.03); }
-        .p-tag { font-size: 10px; border: 1px solid var(--border); padding: 5px 10px; border-radius: 20px; color: var(--text-dim); text-transform: uppercase; display: inline-block; margin-bottom: 15px; letter-spacing: 1px; }
-
-        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 80px; }
-        .g-item { height: 320px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); position: relative; background: #080808; }
-        .g-item.wide { grid-column: span 2; }
-        .g-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.8; transition: 0.7s var(--ease-elastic); cursor: crosshair; }
-        .g-item:hover .g-img { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 70px; }
+        .hero h1 { font-size: clamp(42px, 6vw, 90px); margin-bottom: 20px; font-weight: 800; letter-spacing: -1px; }
+        .hero p { color: #ccc; font-size: 16px; max-width: 500px; margin-bottom: 30px; }
 
         /* -----------------------------------------------------------
-           6. FEATURES
+           6. SHOP
            ----------------------------------------------------------- */
-        .specs-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; }
-        .spec-row { display: flex; justify-content: space-between; padding: 25px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; }
-        .spec-row span { color: var(--text-dim); }
-        .spec-row b { color: #fff; font-weight: 600; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .product-card { padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
+        .p-img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; opacity: 0.9; }
+        
+        /* -----------------------------------------------------------
+           7. FEATURES
+           ----------------------------------------------------------- */
+        .specs-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+        .spec-row { display: flex; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
         
         .timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 40px 0; }
-        .t-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3), transparent); }
-        .t-step { display: flex; align-items: center; margin-bottom: 80px; position: relative; }
+        .t-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.2); }
+        .t-step { display: flex; align-items: center; margin-bottom: 60px; position: relative; }
         .t-step:nth-child(even) { flex-direction: row-reverse; }
-        .t-content { width: 42%; padding: 40px; background: var(--glass); border: 1px solid var(--border); border-radius: 24px; transition: 0.3s; }
-        .t-dot { position: absolute; left: 50%; width: 10px; height: 10px; background: #fff; border-radius: 50%; transform: translateX(-50%); box-shadow: 0 0 20px #fff; }
+        .t-content { width: 45%; padding: 30px; background: var(--panel); border: 1px solid var(--border); border-radius: 20px; }
+        .t-dot { position: absolute; left: 50%; width: 12px; height: 12px; background: #fff; border-radius: 50%; transform: translateX(-50%); }
 
-        .comp-wrapper { overflow-x: auto; margin-top: 60px; }
-        .comp-table { width: 100%; min-width: 700px; border-collapse: collapse; background: var(--glass); border-radius: 24px; }
-        .comp-table th { padding: 30px; text-align: left; font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 1px; }
-        .comp-table td { padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; }
-        .hl { color: #fff; font-weight: 700; background: rgba(255,255,255,0.02); }
-
-        .calc-box { display: grid; grid-template-columns: 1.5fr 1fr; overflow: hidden; }
-        .calc-in { padding: 60px; border-right: 1px solid var(--border); }
-        .calc-out { padding: 60px; background: rgba(15,15,15,0.8); display: flex; flex-direction: column; justify-content: center; }
-        .inp-grp { margin-bottom: 25px; }
-        .inp-grp label { display: block; font-size: 10px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; font-weight: 700; letter-spacing: 1px; }
-        .inp-grp input { width: 100%; padding: 18px; background: #030303; border: 1px solid #222; color: #fff; border-radius: 12px; outline: none; transition: 0.3s; font-size: 16px; }
-        .inp-grp input:focus { border-color: #fff; box-shadow: 0 0 0 2px rgba(255,255,255,0.1); }
-        .shape-btn { flex: 1; padding: 14px; background: transparent; border: 1px solid #333; color: #888; border-radius: 12px; margin-right: 10px; cursor: pointer; text-transform: uppercase; font-size: 10px; font-weight: 700; transition: 0.3s; }
-        .shape-btn.active { background: #fff; color: #000; border-color: #fff; }
-
-        .dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 60px; }
-        .dd-box { padding: 50px; border-radius: 24px; border: 1px solid var(--border); }
-        .dd-box.dos { background: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.2); }
-        .dd-box.donts { background: rgba(239, 68, 68, 0.03); border-color: rgba(239, 68, 68, 0.2); }
+        .dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 60px; }
+        .dd-box { padding: 30px; border-radius: 20px; border: 1px solid var(--border); }
+        .dd-box.dos { background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.3); }
+        .dd-box.donts { background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.3); }
 
         /* -----------------------------------------------------------
-           7. PREMIUM FOOTER
+           8. CALCULATOR
            ----------------------------------------------------------- */
-        .footer { position: relative; padding: 150px 0 60px; margin-top: 150px; background: #000 url('last page background.png') no-repeat center bottom; background-size: cover; overflow: hidden; }
-        .footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent); }
-        .footer-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, #000 0%, rgba(5,5,10,0.85) 40%, rgba(5,5,10,0.4) 100%); pointer-events: none; z-index: 1; }
+        .calc-box { display: grid; grid-template-columns: 1.5fr 1fr; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: var(--panel); }
+        .calc-in { padding: 40px; border-right: 1px solid var(--border); }
+        .calc-out { padding: 40px; background: rgba(20,20,20,0.5); display: flex; flex-direction: column; justify-content: center; }
+        .inp-grp { margin-bottom: 20px; }
+        .inp-grp label { display: block; font-size: 10px; color: var(--dim); margin-bottom: 5px; font-weight: 700; text-transform: uppercase; }
+        .inp-grp input { width: 100%; padding: 12px; background: #000; border: 1px solid #333; color: #fff; border-radius: 8px; outline: none; }
+        .shape-btn { padding: 10px 20px; border: 1px solid #333; color: #888; border-radius: 8px; margin-right: 5px; }
+        .shape-btn.active { background: #fff; color: #000; }
+
+        /* -----------------------------------------------------------
+           9. FOOTER
+           ----------------------------------------------------------- */
+        .footer { 
+            position: relative; padding: 100px 0 40px; margin-top: 100px; 
+            background: #000 url('last page background.png') no-repeat center bottom; 
+            background-size: cover; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.7) 100%); pointer-events: none; }
         .footer-content { position: relative; z-index: 2; }
-        .footer-watermark { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 30vw; font-weight: 800; color: #fff; opacity: 0.02; pointer-events: none; white-space: nowrap; line-height: 0.8; font-family: 'Space Grotesk', sans-serif; }
-        
-        .footer-cta { text-align: center; margin-bottom: 100px; }
-        .footer-cta h2 { font-size: clamp(32px, 4vw, 56px); margin-bottom: 20px; }
-        .footer-cta p { color: var(--text-dim); max-width: 400px; margin: 0 auto 30px; }
-
-        .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; }
-        .f-col h4 { font-size: 11px; font-weight: 800; color: #fff; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
-        .f-col h4::before { content:''; display:block; width:6px; height:6px; background:#6366f1; border-radius:50%; }
-        .f-link { display: block; color: var(--text-dim); margin-bottom: 15px; font-size: 14px; transition: all 0.3s; position: relative; padding-left: 0; }
-        .f-link:hover { color: #fff; padding-left: 10px; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-        .f-link:hover::before { content: '›'; position: absolute; left: 0; color: #6366f1; font-weight: 800; }
-        
-        .social-row { display: flex; gap: 15px; margin-top: 30px; }
-        .social-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; transition: 0.3s; background: rgba(255,255,255,0.02); }
-        .social-btn:hover { background: #fff; color: #000; transform: translateY(-3px); }
-        .f-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px; margin-top: 80px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #666; }
+        .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+        .f-link { display: block; color: #888; margin-bottom: 10px; font-size: 13px; text-decoration: none; }
 
         /* -----------------------------------------------------------
-           8. CART & MODALS
+           10. CART
            ----------------------------------------------------------- */
-        .cart-fab { position: fixed; bottom: 40px; right: 40px; width: 64px; height: 64px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2000; box-shadow: 0 0 40px rgba(255,255,255,0.2); transition: transform 0.3s var(--ease-elastic); }
-        .cart-fab:hover { transform: scale(1.1); }
-        .cart-count { position: absolute; top: -2px; right: -2px; background: #000; color: #fff; font-size: 10px; width: 22px; height: 22px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; }
-        
+        .cart-fab { position: fixed; bottom: 30px; right: 30px; width: 56px; height: 56px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2000; box-shadow: 0 5px 20px rgba(255,255,255,0.2); }
+        .cart-count { position: absolute; top: 0; right: 0; background: #000; color: #fff; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 1px solid #fff; }
         .cart-sidebar { position: fixed; top: 0; right: 0; width: 100%; height: 100vh; z-index: 3000; pointer-events: none; }
         .cart-overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.8); opacity: 0; transition: 0.3s; }
-        .cart-inner { position: absolute; right: 0; width: 420px; height: 100%; background: #050505; border-left: 1px solid var(--border); transform: translateX(100%); transition: 0.5s var(--ease-elastic); display: flex; flex-direction: column; padding: 50px; }
+        .cart-inner { position: absolute; right: 0; width: 100%; max-width: 400px; height: 100%; background: #080808; border-left: 1px solid var(--border); transform: translateX(100%); transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); display: flex; flex-direction: column; padding: 30px; }
         .cart-sidebar.active { pointer-events: all; }
         .cart-sidebar.active .cart-overlay { opacity: 1; }
         .cart-sidebar.active .cart-inner { transform: translateX(0); }
 
         /* -----------------------------------------------------------
-           9. MOBILE OPTIMIZATION
+           11. CRITICAL MOBILE OPTIMIZATIONS
            ----------------------------------------------------------- */
         @media (max-width: 900px) {
-            .bg-layer { background-size: cover; background-position: center; opacity: 0.5; -webkit-mask-image: none; mask-image: none; }
-            .grid-3, .specs-layout, .gallery-grid, .calc-box, .dos-donts, .f-grid { grid-template-columns: 1fr; }
-            .g-item.wide { grid-column: span 1; }
-            .cart-inner { width: 100%; padding: 30px; }
+            /* 1. FORCE COLOR ON MOBILE IMAGES */
+            .g-img { filter: none !important; } 
+            
+            /* 2. BACKGROUND STABILITY */
+            .bg-layer { 
+                background-size: cover; 
+                background-position: center; 
+                opacity: 0.5;
+            }
+            
+            /* 3. MASONRY STACKING */
+            .gallery-masonry { column-count: 2; column-gap: 10px; } /* 2 Columns on mobile */
+            
+            /* 4. LAYOUT STACKING */
+            .grid-3, .specs-layout, .calc-box, .dos-donts, .f-grid { grid-template-columns: 1fr; }
+            
+            /* 5. DISABLE HEAVY BLUR */
+            .glass { backdrop-filter: none; background: rgba(15,15,15,0.95); }
+            
+            /* 6. TIMELINE FIX */
             .t-line { left: 20px; }
             .t-step { flex-direction: column !important; align-items: flex-start; margin-left: 50px; }
             .t-dot { left: 20px; transform: translateX(-50%); }
             .t-content { width: 100%; }
-            .hero h1 { font-size: 48px; }
-            .footer-cta h2 { font-size: 32px; }
-            .f-bottom { flex-direction: column; gap: 20px; }
+            
+            /* 7. TEXT SIZING */
+            .hero h1 { font-size: 42px; }
+            .container { padding: 0 15px; }
         }
     </style>
 </head>
@@ -252,68 +250,57 @@
 
     <div class="bg-layer"></div>
     <div class="bg-gradient"></div>
-    <div class="grain"></div>
 
     <nav class="navbar">
         <div class="container nav-inner">
             <a href="#" class="logo">M-X LUMES</a>
             <div class="nav-links">
-                <a href="#shop" class="nav-link">Shop</a>
-                <a href="#specs" class="nav-link">Specs</a>
-                <a href="#calc" class="nav-link">Calc</a>
+                <a href="#shop" class="nav-link">SHOP</a>
+                <a href="#calc" class="nav-link">CALC</a>
             </div>
         </div>
     </nav>
 
     <header class="hero">
         <div class="reveal active">
-            <h1>Molecular Clarity.<br>OLED Contrast.</h1>
-            <p>The definitive 3:1 epoxy system. Engineered for professional artisans.</p>
-            <div style="margin-top:40px; display:flex; gap:15px; justify-content:center;">
+            <h1>Molecular Clarity.</h1>
+            <p>Professional Grade 3:1 Epoxy Resin System.</p>
+            <div style="margin-top:30px; display:flex; gap:10px; justify-content:center;">
                 <button class="btn btn-primary" onclick="document.getElementById('shop').scrollIntoView()">Shop Now</button>
-                <button class="btn btn-outline" onclick="document.getElementById('specs').scrollIntoView()">Data Sheet</button>
+                <button class="btn btn-outline" onclick="document.getElementById('specs').scrollIntoView()">Specs</button>
             </div>
         </div>
     </header>
 
     <section id="shop" class="section">
         <div class="container">
-            <h2 style="text-align:center; font-size:42px; margin-bottom:80px;">Studio Lineup</h2>
+            <h2 style="text-align:center; font-size:32px; margin-bottom:40px;">Studio Systems</h2>
             <div class="grid-3">
                 <div class="glass product-card reveal">
-                    <div>
-                        <span class="p-tag">Starter Kit</span>
-                        <img src="product-1.webp" alt="1.2KG Kit" class="p-img" loading="lazy" decoding="async">
-                        <h3>1.2 KG Kit</h3>
-                        <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">900g Resin + 300g Hardener.</p>
-                    </div>
-                    <div style="margin-top:20px;">
-                        <div style="font-size:24px; font-weight:700; margin-bottom:15px;">₹1,250</div>
-                        <button class="btn btn-primary" style="width:100%;" onclick="addToCart('Starter Kit', 1250)">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="glass product-card reveal" style="border-color:rgba(255,255,255,0.3);">
-                    <div>
-                        <span class="p-tag" style="background:#fff; color:#000; border-color:#fff;">Best Seller</span>
-                        <img src="product-1.webp" alt="7.5KG Kit" class="p-img" loading="lazy" decoding="async" style="filter:hue-rotate(15deg) contrast(1.1);">
-                        <h3>7.5 KG Kit</h3>
-                        <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">5.6KG Resin + 1.9KG Hardener.</p>
-                    </div>
-                    <div style="margin-top:20px;">
-                        <div style="font-size:24px; font-weight:700; margin-bottom:15px;">₹10,999</div>
-                        <button class="btn btn-primary" style="width:100%;" onclick="addToCart('Studio Pack', 10999)">Add to Cart</button>
+                    <img src="product-1.webp" class="p-img" alt="Starter Kit" loading="lazy">
+                    <h3>Starter Kit 1.2KG</h3>
+                    <p style="color:#888; font-size:13px; margin:5px 0 15px;">900g Resin + 300g Hardener</p>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:700;">₹1,250</span>
+                        <button class="btn btn-primary" onclick="addToCart('Starter Kit', 1250)">Add</button>
                     </div>
                 </div>
                 <div class="glass product-card reveal">
-                    <div>
-                        <span class="p-tag">Industrial</span>
-                        <img src="product-1.webp" alt="30KG Drum" class="p-img" loading="lazy" decoding="async" style="filter:grayscale(100%) brightness(0.8);">
-                        <h3>30 KG Drum</h3>
-                        <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">Bulk Supply. Requires mechanical mixing.</p>
+                    <img src="product-2.webp" class="p-img" alt="Studio Pack" loading="lazy" style="filter:hue-rotate(10deg);">
+                    <h3>Studio Pack 7.5KG</h3>
+                    <p style="color:#888; font-size:13px; margin:5px 0 15px;">5.6KG Resin + 1.9KG Hardener</p>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:700;">₹10,999</span>
+                        <button class="btn btn-primary" onclick="addToCart('Studio Pack', 10999)">Add</button>
                     </div>
-                    <div style="margin-top:20px;">
-                        <div style="font-size:24px; font-weight:700; margin-bottom:15px;">₹38,999</div>
-                        <button class="btn btn-primary" style="width:100%;" onclick="addToCart('Industrial Drum', 38999)">Add to Cart</button>
+                </div>
+                <div class="glass product-card reveal">
+                    <img src="product-3.webp" class="p-img" alt="Industrial" loading="lazy" style="filter:grayscale(100%);">
+                    <h3>Industrial 30KG</h3>
+                    <p style="color:#888; font-size:13px; margin:5px 0 15px;">Bulk Drum Supply</p>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:700;">₹38,999</span>
+                        <button class="btn btn-primary" onclick="addToCart('Industrial', 38999)">Add</button>
                     </div>
                 </div>
             </div>
@@ -323,96 +310,33 @@
     <section id="specs" class="section">
         <div class="container">
             <div class="specs-layout reveal">
-                <div class="glass" style="padding:50px;">
-                    <h3 style="margin-bottom:30px;">Technical Data</h3>
-                    <div class="spec-row"><span>Mix Ratio</span><b>3:1 (By Weight)</b></div>
+                <div class="glass" style="padding:30px;">
+                    <h3 style="margin-bottom:20px;">Data Sheet</h3>
+                    <div class="spec-row"><span>Mix Ratio</span><b>3:1</b></div>
                     <div class="spec-row"><span>Viscosity</span><b>180 mPas</b></div>
-                    <div class="spec-row"><span>Pot Life</span><b>60 Mins @ 25°C</b></div>
-                    <div class="spec-row"><span>Demold Time</span><b>24 Hours</b></div>
-                    <div class="spec-row"><span>Full Cure</span><b>7 Days</b></div>
-                    
-                    <div style="margin-top:40px; display:flex; gap:15px;">
-                        <a href="tds.pdf" target="_blank" class="btn btn-outline" style="flex:1;">Download TDS</a>
-                        <a href="sds.pdf" target="_blank" class="btn btn-outline" style="flex:1;">Download SDS</a>
+                    <div class="spec-row"><span>Pot Life</span><b>60 Mins</b></div>
+                    <div class="spec-row"><span>Demold</span><b>24 Hours</b></div>
+                    <div style="margin-top:20px; display:flex; gap:10px;">
+                        <a href="tds.pdf" class="btn btn-outline" style="flex:1;">TDS</a>
+                        <a href="sds.pdf" class="btn btn-outline" style="flex:1;">SDS</a>
                     </div>
                 </div>
-                
                 <div>
-                    <h3 style="margin-bottom:30px;">The Protocol</h3>
                     <div class="timeline">
                         <div class="t-line"></div>
                         <div class="t-step">
                             <div class="t-dot"></div>
-                            <div class="t-content">
-                                <h4>01. Measure</h4>
-                                <p style="font-size:13px; color:var(--text-dim); margin-top:5px;">By weight. 3 Parts A, 1 Part B.</p>
-                            </div>
+                            <div class="t-content"><h4>01. Measure</h4><p style="font-size:13px; color:#888;">By weight 3:1</p></div>
                         </div>
                         <div class="t-step">
                             <div class="t-dot"></div>
-                            <div class="t-content">
-                                <h4>02. Mix</h4>
-                                <p style="font-size:13px; color:var(--text-dim); margin-top:5px;">Stir 3 mins. Scrape sides.</p>
-                            </div>
+                            <div class="t-content"><h4>02. Mix</h4><p style="font-size:13px; color:#888;">Stir 3 mins</p></div>
                         </div>
                         <div class="t-step">
                             <div class="t-dot"></div>
-                            <div class="t-content">
-                                <h4>03. Pour</h4>
-                                <p style="font-size:13px; color:var(--text-dim); margin-top:5px;">Pour. Wait 5 mins. Torch.</p>
-                            </div>
+                            <div class="t-content"><h4>03. Pour</h4><p style="font-size:13px; color:#888;">Wait & Torch</p></div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="comp-wrapper reveal">
-                <table class="comp-table">
-                    <thead><tr><th>Feature</th><th class="hl">M-X Lumes Pro</th><th>Generic</th></tr></thead>
-                    <tbody>
-                        <tr><td>Bubble Release</td><td class="hl">Auto-Degas</td><td>Manual</td></tr>
-                        <tr><td>Clarity</td><td class="hl">Crystal Clear</td><td>Hazy</td></tr>
-                        <tr><td>UV Tech</td><td class="hl">Triple HALS</td><td>Single</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <section id="calc" class="section reveal">
-        <div class="container">
-            <h2 style="text-align:center; margin-bottom:50px;">Omni-Calc</h2>
-            <div class="glass calc-box">
-                <div class="calc-in">
-                    <div style="display:flex; gap:10px; margin-bottom:30px;">
-                        <button class="shape-btn active" id="btnRect" onclick="setShape('rect')">Rect</button>
-                        <button class="shape-btn" id="btnCirc" onclick="setShape('circ')">Circle</button>
-                        <button class="shape-btn" id="btnHex" onclick="setShape('hex')">Hex</button>
-                    </div>
-                    <div class="inp-grp"><label>Mix Ratio A:B</label><input type="text" value="3 : 1" readonly style="color:#888;"></div>
-                    
-                    <div id="dims-rect">
-                        <div class="inp-grp"><label>Length (cm)</label><input type="number" id="L" oninput="runCalc()"></div>
-                        <div class="inp-grp"><label>Width (cm)</label><input type="number" id="W" oninput="runCalc()"></div>
-                    </div>
-                    <div id="dims-circ" style="display:none;">
-                        <div class="inp-grp"><label>Diameter (cm)</label><input type="number" id="Dia" oninput="runCalc()"></div>
-                    </div>
-                    <div id="dims-hex" style="display:none;">
-                        <div class="inp-grp"><label>Side (cm)</label><input type="number" id="HexSide" oninput="runCalc()"></div>
-                    </div>
-                    
-                    <div class="inp-grp"><label>Depth (cm)</label><input type="number" id="D" oninput="runCalc()"></div>
-                    <div class="inp-grp"><label>Count</label><input type="number" id="Qty" value="1" oninput="runCalc()"></div>
-                </div>
-                <div class="calc-out">
-                    <span style="font-size:12px; color:#888; text-transform:uppercase; letter-spacing:1px;">Total Mix Required</span>
-                    <div style="font-size:56px; font-weight:800; color:#fff;" id="outTotal">0g</div>
-                    <div style="margin-top:30px;">
-                        <div>Part A: <span id="outA" style="font-weight:700;">0g</span></div>
-                        <div>Part B: <span id="outB" style="font-weight:700;">0g</span></div>
-                    </div>
-                    <div id="safety-msg" style="margin-top:20px; font-size:12px; color:var(--warning); display:none;">⚠️ Depth > 2.5cm! Pour in layers.</div>
                 </div>
             </div>
         </div>
@@ -420,118 +344,119 @@
 
     <section id="gallery" class="section reveal">
         <div class="container">
-            <h2 style="text-align:center; margin-bottom:50px;">Gallery</h2>
-            <div class="gallery-grid">
-                <div class="g-item wide"><img src="at3.png" class="g-img" loading="lazy" decoding="async"></div> <div class="g-item"><img src="at1.png" class="g-img" loading="lazy" decoding="async"></div> <div class="g-item"><img src="at2.png" class="g-img" loading="lazy" decoding="async"></div> <div class="g-item"><img src="at4.png" class="g-img" loading="lazy" decoding="async"></div> <div class="g-item"><img src="at5.png" class="g-img" loading="lazy" decoding="async"></div> <div class="g-item"><img src="at4.png" class="g-img" loading="lazy" decoding="async"></div> </div>
-
+            <h2 style="text-align:center; margin-bottom:40px;">Gallery</h2>
+            <div class="gallery-masonry">
+                <div class="g-item"><img src="at3.png" class="g-img" loading="lazy"></div>
+                <div class="g-item"><img src="at1.png" class="g-img" loading="lazy"></div>
+                <div class="g-item"><img src="at2.png" class="g-img" loading="lazy"></div>
+                <div class="g-item"><img src="at4.png" class="g-img" loading="lazy"></div>
+                <div class="g-item"><img src="at5.png" class="g-img" loading="lazy"></div>
+                <div class="g-item"><img src="at4.png" class="g-img" loading="lazy" style="filter:hue-rotate(45deg);"></div>
+            </div>
+            
             <div class="dos-donts">
                 <div class="dd-box dos">
-                    <h3 style="color:var(--success); margin-bottom:20px;">✓ The Dos</h3>
-                    <ul style="color:var(--text-dim); list-style:disc; padding-left:20px;">
-                        <li>Wear gloves and mask.</li>
-                        <li>Work at 25°C.</li>
-                        <li>Seal porous surfaces.</li>
+                    <h4 style="color:var(--success);">✓ Dos</h4>
+                    <ul style="font-size:13px; color:#888; list-style:inside;">
+                        <li>Wear Gloves</li>
+                        <li>Work at 25°C</li>
+                        <li>Seal Wood</li>
                     </ul>
                 </div>
                 <div class="dd-box donts">
-                    <h3 style="color:var(--danger); margin-bottom:20px;">✕ The Don'ts</h3>
-                    <ul style="color:var(--text-dim); list-style:disc; padding-left:20px;">
-                        <li>Don't mix by volume.</li>
-                        <li>Don't scrape cup on pour.</li>
-                        <li>Avoid water contact.</li>
+                    <h4 style="color:var(--danger);">✕ Don'ts</h4>
+                    <ul style="font-size:13px; color:#888; list-style:inside;">
+                        <li>No Volume Mix</li>
+                        <li>Don't Scrape Cup</li>
+                        <li>No Water</li>
                     </ul>
                 </div>
             </div>
-            
-            <div style="margin-top:40px; padding:20px; border:1px solid var(--warning); border-radius:12px; background:rgba(251,191,36,0.05); display:flex; gap:15px; align-items:center;">
-                <span style="font-size:24px;">⚠️</span>
-                <p style="font-size:12px; color:var(--text-dim);">Chemical Warning: Causes skin irritation. Avoid breathing fumes. Keep away from children.</p>
+        </div>
+    </section>
+
+    <section id="calc" class="section reveal">
+        <div class="container">
+            <div class="calc-box">
+                <div class="calc-in">
+                    <div style="display:flex; gap:10px; margin-bottom:20px;">
+                        <button class="shape-btn active" id="btnRect" onclick="setShape('rect')">Rect</button>
+                        <button class="shape-btn" id="btnCirc" onclick="setShape('circ')">Circ</button>
+                    </div>
+                    <div id="dims-rect">
+                        <div class="inp-grp"><label>L (cm)</label><input type="number" id="L" oninput="runCalc()"></div>
+                        <div class="inp-grp"><label>W (cm)</label><input type="number" id="W" oninput="runCalc()"></div>
+                    </div>
+                    <div id="dims-circ" style="display:none;">
+                        <div class="inp-grp"><label>Dia (cm)</label><input type="number" id="Dia" oninput="runCalc()"></div>
+                    </div>
+                    <div class="inp-grp"><label>Depth (cm)</label><input type="number" id="D" oninput="runCalc()"></div>
+                    <div class="inp-grp"><label>Qty</label><input type="number" id="Qty" value="1" oninput="runCalc()"></div>
+                </div>
+                <div class="calc-out">
+                    <span style="font-size:12px; color:#888;">TOTAL MIX</span>
+                    <div style="font-size:48px; font-weight:800; color:#fff;" id="outTotal">0g</div>
+                    <div style="margin-top:10px; font-size:14px;">
+                        Part A: <b id="outA">0g</b><br>
+                        Part B: <b id="outB">0g</b>
+                    </div>
+                    <div id="safety-msg" style="margin-top:10px; color:var(--warning); font-size:12px; display:none;">⚠️ Depth > 2.5cm</div>
+                </div>
             </div>
         </div>
     </section>
 
     <footer class="footer">
         <div class="footer-overlay"></div>
-        <div class="footer-watermark">M-X</div>
-        
         <div class="container footer-content">
-            <div class="footer-cta">
-                <h2>Ready to Create?</h2>
-                <p>Join the community of professional artisans using M-X Lumes.</p>
-                <button class="btn btn-primary" onclick="document.getElementById('shop').scrollIntoView()">Start Your Order</button>
-            </div>
-
             <div class="f-grid">
-                <div class="f-col">
-                    <h2 class="logo" style="margin-bottom:20px;">M-X LUMES</h2>
-                    <p style="color:var(--text-dim); font-size:13px; line-height:1.8;">Engineered in Meerut. The professional's choice for optical clarity and molecular stability.</p>
-                    <div class="social-row">
-                        <a href="#" class="social-btn">IG</a>
-                        <a href="#" class="social-btn">YT</a>
-                        <a href="#" class="social-btn">WA</a>
-                    </div>
+                <div>
+                    <h2 class="logo" style="margin-bottom:15px;">M-X LUMES</h2>
+                    <p style="color:#888; font-size:13px;">Engineered in Meerut, India.</p>
                 </div>
-                <div class="f-col">
-                    <h4>Products</h4>
-                    <a href="#" class="f-link">Transparent Plus</a>
-                    <a href="#" class="f-link">Deep Pour Pro</a>
-                    <a href="#" class="f-link">Pigment Pastes</a>
+                <div>
+                    <h4 style="font-size:12px; margin-bottom:15px;">LINKS</h4>
+                    <a href="#" class="f-link">Shop</a>
+                    <a href="#calc" class="f-link">Calculator</a>
                 </div>
-                <div class="f-col">
-                    <h4>Support</h4>
-                    <a href="#" class="f-link">Track Order</a>
-                    <a href="#" class="f-link">Shipping Policy</a>
-                    <a href="#" class="f-link">Returns</a>
-                </div>
-                <div class="f-col">
-                    <h4>Contact</h4>
-                    <a href="#" class="f-link">support@mxlumes.com</a>
-                    <a href="#" class="f-link">+91 98765 43210</a>
-                    <div style="font-size:12px; color:#666; margin-top:10px;">Mon-Sat: 10am - 7pm</div>
+                <div>
+                    <h4 style="font-size:12px; margin-bottom:15px;">LEGAL</h4>
+                    <a href="#" class="f-link">Privacy</a>
+                    <a href="#" class="f-link">Terms</a>
                 </div>
             </div>
-
-            <div class="f-bottom">
-                <div>© 2026 M-X Lumes. All Rights Reserved.</div>
-                <div style="display:flex; gap:20px;">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:20px; margin-top:40px; font-size:11px; color:#666;">
+                © 2026 M-X Lumes.
             </div>
         </div>
     </footer>
 
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-overlay" onclick="toggleCart()"></div>
-        <div class="cart-inner">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <h2>Cart</h2>
-                <button onclick="toggleCart()" style="color:#fff; font-size:24px;">×</button>
-            </div>
-            <div id="cartItems" style="flex:1; overflow-y:auto; margin:20px 0;">
-                <p style="color:var(--text-dim);">Your cart is empty.</p>
-            </div>
-            <div class="cart-summary">
-                <div class="cart-total" style="display:flex; justify-content:space-between; font-size:20px; font-weight:700;">
-                    <span>Total</span><span id="cartTotal">₹0</span>
-                </div>
-                <button class="btn btn-primary" style="width:100%; margin-top:20px;" onclick="checkoutWhatsApp()">Checkout WhatsApp</button>
-            </div>
-        </div>
-    </div>
-    
     <div class="cart-fab" onclick="toggleCart()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M9 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-7-2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2zm-5-10h2l1 14h13"/></svg>
         <div class="cart-count" id="cartCount">0</div>
     </div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-overlay" onclick="toggleCart()"></div>
+        <div class="cart-inner">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h2>Cart</h2>
+                <span onclick="toggleCart()" style="font-size:24px; cursor:pointer;">×</span>
+            </div>
+            <div id="cartItems" style="flex:1; overflow-y:auto;"></div>
+            <div style="border-top:1px solid var(--border); padding-top:20px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:700;"><span>Total</span><span id="cartTotal">₹0</span></div>
+                <button class="btn btn-primary" style="width:100%;" onclick="checkoutWhatsApp()">Checkout</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Scroll
+        // Navbar Scroll
         window.addEventListener('scroll', () => {
             document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Animation
+        // Animations
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
         });
@@ -544,11 +469,9 @@
             document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
             if(shape === 'rect') document.getElementById('btnRect').classList.add('active');
             if(shape === 'circ') document.getElementById('btnCirc').classList.add('active');
-            if(shape === 'hex') document.getElementById('btnHex').classList.add('active');
             
             document.getElementById('dims-rect').style.display = shape === 'rect' ? 'block' : 'none';
             document.getElementById('dims-circ').style.display = shape === 'circ' ? 'block' : 'none';
-            document.getElementById('dims-hex').style.display = shape === 'hex' ? 'block' : 'none';
             runCalc();
         }
 
@@ -559,12 +482,9 @@
 
             if(currentShape === 'rect') {
                 area = (parseFloat(document.getElementById('L').value)||0) * (parseFloat(document.getElementById('W').value)||0);
-            } else if (currentShape === 'circ') {
+            } else {
                 const d = parseFloat(document.getElementById('Dia').value)||0;
                 area = Math.PI * Math.pow(d/2, 2);
-            } else if (currentShape === 'hex') {
-                const s = parseFloat(document.getElementById('HexSide').value)||0;
-                area = ((3 * Math.sqrt(3)) / 2) * Math.pow(s, 2);
             }
 
             const mass = area * h * q * 1.13;
@@ -588,7 +508,7 @@
             let total = 0;
             cart.forEach((item, idx) => {
                 total += item.price;
-                container.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid #222;"><span>${item.name}</span><span>₹${item.price}</span><span onclick="removeFromCart(${idx})" style="color:red; cursor:pointer;">×</span></div>`;
+                container.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>${item.name}</span><span>₹${item.price}</span><span onclick="removeFromCart(${idx})" style="color:red;">×</span></div>`;
             });
             document.getElementById('cartTotal').innerText = `₹${total}`;
             document.getElementById('cartCount').innerText = cart.length;
@@ -602,10 +522,10 @@
         }
         function checkoutWhatsApp() {
             if(cart.length === 0) return alert('Cart is empty');
-            let msg = "Order Request:%0A";
+            let msg = "Order:%0A";
             let total = 0;
             cart.forEach(i => { msg += `- ${i.name} (₹${i.price})%0A`; total += i.price; });
-            msg += `%0ATotal: ₹${total}`;
+            msg += `Total: ₹${total}`;
             window.open(`https://wa.me/919876543210?text=${msg}`);
         }
     </script>
