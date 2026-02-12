@@ -14,7 +14,7 @@
 
     <style>
         /* -----------------------------------------------------------
-           1. OLED TITAN THEME (PREMIUM FLUIDITY RESTORED)
+           1. OLED MIDNIGHT THEME
            ----------------------------------------------------------- */
         :root {
             --bg-oled: #000000;
@@ -24,23 +24,18 @@
             --accent: #ffffff;
             --brand-glow: rgba(99, 102, 241, 0.5);
             --border: rgba(255, 255, 255, 0.12);
+            --border-hover: rgba(255, 255, 255, 0.4);
             --glass: rgba(18, 18, 18, 0.75);
             --blur: blur(25px);
             --radius: 24px;
-            
-            /* THE "LIQUID" PHYSICS CURVE */
-            --ease-fluid: cubic-bezier(0.19, 1, 0.22, 1);
-            
+            --ease: cubic-bezier(0.19, 1, 0.22, 1);
             --success: #10b981; --warning: #f59e0b; --danger: #ef4444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        ::selection { background: rgba(99, 102, 241, 0.3); color: #fff; }
         
-        html { 
-            scroll-behavior: smooth; 
-            font-size: 16px; 
-            scroll-padding-top: 100px; 
-        }
+        html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 100px; }
         
         body {
             background-color: var(--bg-oled);
@@ -61,57 +56,56 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
 
         /* -----------------------------------------------------------
-           2. CINEMATIC BACKGROUND
+           2. PREMIUM BACKGROUND ENGINE (SHARPENED)
            ----------------------------------------------------------- */
         .bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5;
             background-color: #000;
             background-image: url('product-1.webp');
             
-            /* Desktop: 65% anchored bottom */
+            /* Positioning: 65% Scale, Anchored Bottom */
             background-position: center bottom;
             background-repeat: no-repeat;
             background-size: 65%;
             
-            /* Vignette Mask */
-            -webkit-mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
-            mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
+            /* Smooth Mask: Fades edges into black void */
+            -webkit-mask-image: radial-gradient(circle at 50% 90%, black 40%, transparent 100%);
+            mask-image: radial-gradient(circle at 50% 90%, black 40%, transparent 100%);
             
-            opacity: 0.85;
-            transition: opacity 0.8s ease;
+            /* PREMIUM SHARPNESS FIXES */
+            opacity: 1; /* Full visibility */
+            filter: contrast(1.15) brightness(0.95) saturate(1.1); /* Deep OLED Look */
+            image-rendering: -webkit-optimize-contrast; /* Crisp edges */
+            
+            will-change: opacity; transition: opacity 0.8s ease;
         }
 
         .bg-gradient {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 60%, #000 100%);
+            /* Subtler gradient to let image shine through clearly */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.05) 50%, #000 95%);
             pointer-events: none;
         }
 
-        .grain {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; opacity: 0.035; pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
+        /* GRAIN DISABLED FOR CLARITY */
+        .grain { display: none; }
 
         /* -----------------------------------------------------------
-           3. UI COMPONENTS (FLUID ANIMATIONS)
+           3. UI COMPONENTS
            ----------------------------------------------------------- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 30px; }
-        .section { padding: 120px 0; position: relative; z-index: 2; }
+        .section { padding: 120px 0; position: relative; z-index: 2; content-visibility: auto; contain-intrinsic-size: 800px; }
         
-        .reveal { opacity: 0; transform: translateY(40px); filter: blur(10px); transition: all 1.2s var(--ease-fluid); }
+        .reveal { opacity: 0; transform: translateY(40px); filter: blur(10px); transition: all 1s var(--ease); }
         .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
 
         .glass {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
             border: 1px solid var(--border); border-radius: var(--radius);
-            position: relative; overflow: hidden; transition: all 0.5s var(--ease-fluid);
+            position: relative; overflow: hidden; transition: all 0.4s var(--ease);
         }
         .glass::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); opacity: 0.3; }
-        .glass:hover { 
-            border-color: rgba(255, 255, 255, 0.3); 
-            box-shadow: 0 30px 80px -20px var(--brand-glow); 
-            transform: translateY(-8px) scale(1.01); 
-        }
+        .glass:hover { border-color: rgba(255, 255, 255, 0.3); box-shadow: 0 20px 80px -10px var(--brand-glow); transform: translateY(-5px); }
 
         .btn { padding: 16px 32px; border-radius: 50px; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; transition: 0.3s; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
         .btn-primary { background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
@@ -125,7 +119,7 @@
         /* -----------------------------------------------------------
            4. NAV, HERO & MARQUEE
            ----------------------------------------------------------- */
-        .navbar { position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; display: flex; align-items: center; transition: 0.5s ease; border-bottom: 1px solid transparent; }
+        .navbar { position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; display: flex; align-items: center; transition: 0.4s; border-bottom: 1px solid transparent; }
         .navbar.scrolled { background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); height: 70px; }
         .nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 800; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
@@ -144,26 +138,26 @@
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* -----------------------------------------------------------
-           5. SHOP & STATS
+           5. STATS & SHOP
            ----------------------------------------------------------- */
         .stats-bar { border-bottom: 1px solid var(--border); padding: 40px 0; }
         .stats-grid { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; }
+        .stat-item { text-align: center; }
         .stat-num { font-size: 32px; font-weight: 800; color: #fff; display: block; }
         .stat-lbl { font-size: 10px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 1px; }
 
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .product-card { padding: 35px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
-        /* IMAGE STYLING */
-        .p-img { width: 100%; height: 280px; object-fit: contain; border-radius: 16px; margin-bottom: 25px; transition: 0.6s var(--ease-fluid); }
-        .product-card:hover .p-img { transform: scale(1.05); }
+        .p-img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 25px; opacity: 0.9; transition: 0.6s var(--ease); }
+        .product-card:hover .p-img { opacity: 1; transform: scale(1.03); }
         .p-tag { font-size: 10px; border: 1px solid var(--border); padding: 5px 10px; border-radius: 20px; color: var(--text-dim); text-transform: uppercase; display: inline-block; margin-bottom: 15px; letter-spacing: 1px; }
 
         /* -----------------------------------------------------------
-           6. GALLERY (MASONRY - at*.png)
+           6. GALLERY (MASONRY)
            ----------------------------------------------------------- */
         .gallery-masonry { column-count: 3; column-gap: 20px; }
         .g-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: #111; position: relative; }
-        .g-img { width: 100%; height: auto; display: block; transition: 0.6s var(--ease-fluid); filter: grayscale(100%); }
+        .g-img { width: 100%; height: auto; display: block; transition: 0.5s; filter: grayscale(100%); will-change: transform; }
         @media (hover: hover) { .g-item:hover .g-img { filter: grayscale(0%); transform: scale(1.03); } }
 
         /* -----------------------------------------------------------
@@ -195,6 +189,8 @@
         .dd-box { padding: 50px; border-radius: 24px; border: 1px solid var(--border); }
         .dd-box.dos { background: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.2); }
         .dd-box.donts { background: rgba(239, 68, 68, 0.03); border-color: rgba(239, 68, 68, 0.2); }
+
+        .chem-warn { padding: 20px; border: 1px solid var(--warning); border-radius: 12px; background: rgba(245,158,11,0.05); color: var(--text-dim); font-size: 13px; display: flex; gap: 15px; align-items: center; margin-top: 40px; }
 
         /* -----------------------------------------------------------
            8. PRO CALCULATOR (SLIDERS)
@@ -250,7 +246,7 @@
         .cost-est { margin-top: auto; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 16px; display: flex; justify-content: space-between; align-items: center; }
 
         /* -----------------------------------------------------------
-           9. FOOTER
+           9. PREMIUM FOOTER
            ----------------------------------------------------------- */
         .footer { position: relative; padding: 150px 0 60px; margin-top: 150px; background: #000 url('last page background.png') no-repeat center bottom; background-size: cover; overflow: hidden; }
         .footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent); }
@@ -275,7 +271,7 @@
         .cart-count { position: absolute; top: -2px; right: -2px; background: #000; color: #fff; font-size: 10px; width: 22px; height: 22px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; }
         .cart-sidebar { position: fixed; top: 0; right: 0; width: 100%; height: 100vh; z-index: 3000; pointer-events: none; }
         .cart-overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.8); opacity: 0; transition: 0.3s; }
-        .cart-inner { position: absolute; right: 0; width: 420px; height: 100%; background: #050505; border-left: 1px solid var(--border); transform: translateX(100%); transition: 0.5s var(--ease-elastic); display: flex; flex-direction: column; padding: 50px; }
+        .cart-inner { position: absolute; right: 0; width: 420px; height: 100%; background: #050505; border-left: 1px solid var(--border); transform: translateX(100%); transition: 0.5s var(--ease); display: flex; flex-direction: column; padding: 50px; }
         .cart-sidebar.active { pointer-events: all; }
         .cart-sidebar.active .cart-overlay { opacity: 1; }
         .cart-sidebar.active .cart-inner { transform: translateX(0); }
@@ -284,7 +280,8 @@
            11. MOBILE OPTIMIZATION
            ----------------------------------------------------------- */
         @media (max-width: 900px) {
-            .bg-layer { background-size: cover; background-position: center; opacity: 0.5; -webkit-mask-image: none; mask-image: none; }
+            /* Background: Cover + Full Opacity for Sharpness */
+            .bg-layer { background-size: cover; background-position: center; opacity: 1; -webkit-mask-image: none; mask-image: none; }
             .grid-3, .specs-layout, .gallery-masonry, .pro-calc-wrap, .dos-donts, .f-grid, .bento-grid { grid-template-columns: 1fr; }
             .gallery-masonry { column-count: 2; column-gap: 10px; }
             .g-img { filter: none !important; }
@@ -358,7 +355,7 @@
                 <div class="glass product-card reveal">
                     <div>
                         <span class="p-tag">Starter Kit</span>
-                        <img src="product-1.webp" alt="1.2KG Kit" class="p-img">
+                        <img src="product-1.webp" alt="1.2KG Kit" class="p-img" loading="lazy" decoding="async">
                         <h3>1.2 KG Kit</h3>
                         <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">900g Resin + 300g Hardener.</p>
                     </div>
@@ -370,7 +367,7 @@
                 <div class="glass product-card reveal" style="border-color:rgba(255,255,255,0.3);">
                     <div>
                         <span class="p-tag" style="background:#fff; color:#000; border-color:#fff;">Best Seller</span>
-                        <img src="7.5kg.png" alt="7.5KG Kit" class="p-img">
+                        <img src="7.5kg.png" alt="7.5KG Kit" class="p-img" loading="lazy" decoding="async">
                         <h3>7.5 KG Kit</h3>
                         <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">5.6KG Resin + 1.9KG Hardener.</p>
                     </div>
@@ -382,7 +379,7 @@
                 <div class="glass product-card reveal">
                     <div>
                         <span class="p-tag">Industrial</span>
-                        <img src="30kg.png" alt="30KG Drum" class="p-img">
+                        <img src="30kg.png" alt="30KG Drum" class="p-img" loading="lazy" decoding="async">
                         <h3>30 KG Drum</h3>
                         <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">Bulk Supply. Requires mechanical mixing.</p>
                     </div>
@@ -428,6 +425,7 @@
                             <tr><td>UV Tech</td><td class="hl">Triple HALS</td><td>Single</td></tr>
                         </tbody>
                     </table>
+                    <div class="chem-warn">⚠️ <b>Chemical Warning:</b> Causes skin irritation. Avoid breathing fumes. Wear protective gear.</div>
                 </div>
             </div>
         </div>
