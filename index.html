@@ -7,10 +7,11 @@
     <title>M-X Lumes | Professional Resin Systems</title>
     
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
 
     <style>
         /* =========================================
-           1. STABLE CORE VARIABLES
+           1. STABLE CORE & VARIABLES
            ========================================= */
         :root { 
             --accent-grad: linear-gradient(135deg, #4F46E5 0%, #a855f7 100%);
@@ -25,10 +26,16 @@
             --panel-bg: #0f0f12;
         }
         
-        /* HARDWARE RESET - NATIVE SCROLL STABILITY */
-        html { scroll-behavior: smooth; height: auto; min-height: 100%; background: #000; }
+        /* HARDWARE RESET - STABLE SCROLL */
+        html { height: auto; min-height: 100%; background: #000; scroll-behavior: smooth; }
         body { margin: 0; padding: 0; background-color: transparent; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; width: 100%; overflow-x: hidden; line-height: 1.6; }
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+
+        /* LENIS CONFIG */
+        html.lenis, html.lenis body { height: auto; } 
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
 
         /* =========================================
            2. BACKGROUND ENGINE
@@ -37,7 +44,9 @@
         .bg-image { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: url('product-1.webp') no-repeat center bottom; 
-            background-size: 65%; filter: saturate(1.1) contrast(1.1) brightness(0.65);
+            /* MOBILE: Cover / DESKTOP: 65% via Media Query */
+            background-size: cover; background-position: center;
+            filter: saturate(1.1) contrast(1.1) brightness(0.65);
             will-change: transform;
         }
         .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 60%, #000000 100%); }
@@ -51,7 +60,7 @@
         .logo { font-weight: 900; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: #fff; text-decoration: none; }
         .nav-links { list-style: none; display: flex; gap: 30px; }
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-weight: 700; transition: color 0.3s; }
-        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px rgba(99, 102, 241, 0.5); }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px var(--accent-solid); }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -65,59 +74,64 @@
         .cta-btn:hover { transform: scale(1.05); }
 
         /* =========================================
-           4. MAIN CONTENT
+           4. QUANTUM CALCULATOR CSS
+           ========================================= */
+        .qc-panel { background: var(--panel-bg); border-radius: 32px; border: 1px solid var(--glass-border); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        
+        /* Segmented Control */
+        .qc-segment { display: flex; background: rgba(0,0,0,0.5); padding: 5px; margin: 30px 30px 0; border-radius: 12px; border: 1px solid var(--glass-border); }
+        .qc-seg-btn { flex: 1; background: transparent; border: none; color: #666; font-size: 10px; font-weight: 800; padding: 10px; border-radius: 8px; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .qc-seg-btn.active { background: #333; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .qc-seg-btn:hover { color: #fff; }
+
+        .qc-body { display: grid; grid-template-columns: 1.6fr 1fr; }
+        .qc-config { padding: 30px; border-right: 1px solid var(--glass-border); }
+        .qc-results { padding: 30px; background: rgba(255,255,255,0.02); display: flex; flex-direction: column; justify-content: space-between; }
+
+        /* Shape Grid */
+        .shape-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 25px; }
+        .shape-btn { background: rgba(0,0,0,0.4); border: 1px solid #333; border-radius: 12px; padding: 15px 0; text-align: center; cursor: pointer; transition: 0.3s; color: #666; }
+        .shape-btn:hover { border-color: #666; color: #fff; }
+        .shape-btn.active { border-color: var(--accent-solid); background: rgba(99, 102, 241, 0.1); color: #fff; box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); }
+        .shape-icon { font-size: 18px; display: block; margin-bottom: 5px; }
+        .shape-label { font-size: 9px; font-weight: 700; text-transform: uppercase; }
+
+        /* Inputs */
+        .input-row { display: flex; gap: 15px; margin-bottom: 20px; }
+        .input-grp { flex: 1; position: relative; }
+        .input-grp label { font-size: 10px; font-weight: 700; color: #666; text-transform: uppercase; display: block; margin-bottom: 8px; letter-spacing: 1px; }
+        .input-grp input { width: 100%; background: #000; border: 1px solid #333; border-radius: 10px; padding: 14px; color: #fff; font-size: 14px; font-family: monospace; transition: 0.3s; outline: none; }
+        .input-grp input:focus { border-color: var(--accent-solid); }
+        
+        /* Slider */
+        .range-wrap { margin-bottom: 25px; }
+        .range-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 10px; font-weight: 700; color: #666; text-transform: uppercase; }
+        .range-slider { width: 100%; -webkit-appearance: none; background: #333; height: 4px; border-radius: 2px; outline: none; }
+        .range-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; background: var(--accent-solid); border-radius: 50%; cursor: pointer; transition: 0.2s; }
+        .range-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+        /* Visual Mix Bar */
+        .mix-bar-wrap { height: 8px; background: #333; border-radius: 4px; overflow: hidden; display: flex; margin-bottom: 20px; }
+        .mix-part-a { background: var(--accent-solid); height: 100%; transition: width 0.5s; }
+        .mix-part-b { background: #fff; height: 100%; transition: width 0.5s; }
+
+        /* Results Typography */
+        .res-big { font-size: 42px; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -1px; margin-bottom: 5px; }
+        .res-sub { font-size: 12px; color: var(--accent-solid); font-weight: 700; text-transform: uppercase; margin-bottom: 20px; display: block; }
+        .res-row { display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding: 12px 0; font-size: 13px; color: #888; }
+        .res-row span:last-child { color: #fff; font-weight: 600; font-family: monospace; }
+        
+        .print-btn { width: 100%; background: transparent; border: 1px solid #444; color: #fff; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 11px; text-transform: uppercase; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        .print-btn:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
+
+        /* =========================================
+           5. OTHER SECTIONS
            ========================================= */
         .main-content { position: relative; background: var(--bg); z-index: 10; border-top: 1px solid var(--glass-border); box-shadow: 0 -50px 100px #000; }
         .section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
         .section-title { font-size: clamp(30px, 5vw, 48px); font-weight: 800; text-align: center; margin-bottom: 70px; color: #fff; letter-spacing: -1px; }
 
-        /* --- QUANTUM CALCULATOR (NEW & POWERFUL) --- */
-        .qc-container { background: var(--panel-bg); border-radius: 32px; border: 1px solid var(--glass-border); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        
-        /* Top Bar: Modes & Presets */
-        .qc-top { background: rgba(255,255,255,0.03); padding: 20px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-        .qc-mode-switch { display: flex; background: #000; border-radius: 12px; padding: 4px; border: 1px solid #333; }
-        .qc-mode-btn { padding: 8px 16px; border-radius: 8px; font-size: 11px; color: #666; font-weight: 700; cursor: pointer; transition: 0.3s; border: none; background: transparent; text-transform: uppercase; }
-        .qc-mode-btn.active { background: var(--accent-solid); color: #fff; }
-        
-        .qc-presets { display: flex; gap: 10px; overflow-x: auto; }
-        .preset-pill { padding: 6px 12px; border: 1px solid #333; border-radius: 20px; font-size: 10px; color: var(--text-dim); cursor: pointer; white-space: nowrap; transition: 0.3s; }
-        .preset-pill:hover { border-color: var(--accent-solid); color: #fff; }
-
-        /* Split Layout */
-        .qc-grid { display: grid; grid-template-columns: 1.5fr 1fr; }
-        .qc-inputs { padding: 40px; border-right: 1px solid var(--glass-border); }
-        .qc-results { padding: 40px; background: rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: space-between; }
-
-        /* Input Styling */
-        .qc-group { margin-bottom: 25px; }
-        .qc-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-dim); font-weight: 700; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-        .qc-label span.unit { color: var(--accent-solid); cursor: pointer; }
-        
-        .shape-selector { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 25px; }
-        .shape-opt { background: #000; border: 1px solid #333; padding: 15px 0; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.3s; }
-        .shape-opt:hover, .shape-opt.active { border-color: var(--accent-solid); background: rgba(99, 102, 241, 0.1); color: #fff; }
-        .shape-icon { font-size: 18px; display: block; margin-bottom: 5px; }
-        .shape-name { font-size: 9px; text-transform: uppercase; font-weight: 700; }
-
-        .qc-field { width: 100%; background: #000; border: 1px solid #333; padding: 16px; border-radius: 10px; color: #fff; font-size: 16px; outline: none; transition: 0.3s; }
-        .qc-field:focus { border-color: var(--accent-solid); }
-        
-        .qc-slider-wrap { margin-top: 10px; }
-        .qc-slider { width: 100%; -webkit-appearance: none; height: 4px; background: #333; border-radius: 2px; outline: none; }
-        .qc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; background: var(--accent-solid); border-radius: 50%; cursor: pointer; }
-
-        /* Results Styling */
-        .res-card { background: rgba(255,255,255,0.03); border-radius: 16px; padding: 20px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05); }
-        .res-title { font-size: 10px; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 5px; }
-        .res-main { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.1; }
-        .res-sub { font-size: 14px; color: var(--accent-solid); font-weight: 700; }
-        
-        .breakdown-row { display: flex; justify-content: space-between; font-size: 13px; color: #888; margin-top: 5px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
-        .breakdown-row:last-child { border: none; }
-        .hl-val { color: #fff; font-weight: 600; }
-
-        /* SHOP GRID & OTHERS */
+        /* SHOP */
         .shop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 80px; }
         .shop-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 28px; padding: 35px 25px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
         .shop-card:hover { border-color: var(--accent-solid); transform: translateY(-5px); }
@@ -125,13 +139,17 @@
         .shop-price { font-size: 20px; color: var(--accent-solid); font-weight: 700; }
         .add-btn { width: 100%; padding: 14px; background: #fff; color: #000; border: none; border-radius: 12px; font-weight: 800; text-transform: uppercase; font-size: 11px; margin-top: 15px; cursor: pointer; }
 
-        .timeline { position: relative; margin: 80px 0; padding-left: 30px; border-left: 2px solid rgba(255,255,255,0.1); }
-        .timeline-item { margin-bottom: 50px; position: relative; padding-left: 40px; }
-        .timeline-item::before { content: ''; position: absolute; left: -36px; top: 5px; width: 14px; height: 14px; background: #000; border: 2px solid var(--accent-solid); border-radius: 50%; box-shadow: 0 0 15px var(--accent-solid); }
-        .t-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 10px; }
-        .t-desc { font-size: 15px; color: #999; max-width: 600px; line-height: 1.7; }
+        /* GALLERY & GUIDE */
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 100px; }
+        .gallery-item { position: relative; background: #050505; border-radius: 32px; height: 450px; overflow: hidden; border: 1px solid var(--glass-border); }
+        .gallery-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.5s; }
+        .gallery-item:hover .gallery-img { opacity: 1; transform: scale(1.05); }
+        
+        .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin: 60px 0; }
+        .guide-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 32px; padding: 60px 30px; text-align: center; }
+        .timer-badge { background: #000; color: #fff; padding: 12px 25px; border-radius: 10px; font-family: monospace; font-size: 22px; border: 1px solid #222; margin: 20px 0; display: inline-block; }
 
-        /* FOOTER */
+        /* FOOTER & CART */
         .footer-wrap { position: relative; padding: 150px 20px 80px; min-height: 100vh; background: #000 url('last page background.png') no-repeat center bottom; background-size: cover; border-top: 1px solid #1a1a1b; display: flex; flex-direction: column; justify-content: center; }
         .footer-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.9) 15%, rgba(0,0,0,0.5) 100%); z-index: 1; pointer-events: none; }
         .footer-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
@@ -140,7 +158,6 @@
         .f-col a { text-decoration: none; color: #888; font-size: 14px; display: block; margin-bottom: 12px; transition: 0.3s; }
         .f-col a:hover { color: #fff; transform: translateX(5px); }
 
-        /* CART */
         .cart-fab { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--accent-grad); border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1001; box-shadow: 0 10px 30px rgba(79, 70, 229, 0.4); cursor: pointer; transition: transform 0.3s; }
         .cart-fab:active { transform: scale(0.9); }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: #ff0000; color: white; width: 26px; height: 26px; border-radius: 50%; font-size: 12px; font-weight: 900; display: flex; justify-content: center; align-items: center; opacity: 0; }
@@ -153,11 +170,12 @@
         .cart-summary { background: #000; padding: 25px; border-radius: 20px; border: 1px solid #222; }
 
         @media (max-width: 900px) { 
-            .bg-image { background-size: cover !important; background-position: center !important; }
+            .bg-image { background-size: cover; background-position: center; }
             .hero-text { padding: 40px 20px; background: rgba(5,5,8,0.8); margin-top: 0; }
             h1 { font-size: 42px; }
-            .shop-grid, .qc-grid, .gallery-grid, .guide-grid, .footer-grid { grid-template-columns: 1fr; }
-            .qc-inputs { border-right: none; border-bottom: 1px solid #333; }
+            .shop-grid, .qc-body, .gallery-grid, .guide-grid, .footer-grid { grid-template-columns: 1fr; }
+            .qc-config { border-right: none; border-bottom: 1px solid #333; padding: 30px 20px; }
+            .qc-results { padding: 30px 20px; }
             .nav-links { display: none; }
             .cart-panel { width: 100%; }
             .section { padding: 80px 20px; }
@@ -177,7 +195,7 @@
             <a href="#" class="logo">M-X LUMES</a>
             <ul class="nav-links">
                 <li><a href="#shop">Inventory</a></li>
-                <li><a href="#calc">Quantum Calc</a></li>
+                <li><a href="#calc">Calculator</a></li>
                 <li><a href="#gallery">Studio</a></li>
                 <li><a href="#protocol">Guide</a></li>
             </ul>
@@ -197,19 +215,19 @@
             <h2 class="section-title">Kit Inventory</h2>
             <div class="shop-grid">
                 <div class="shop-card">
-                    <div><span style="font-size:10px; color:#666; font-weight:800; display:block; margin-bottom:10px;">STARTER</span><div class="shop-title">1.2 KG</div><div class="shop-price">₹1,250</div></div>
+                    <div><div class="shop-title">1.2 KG</div><div class="shop-price">₹1,250</div><p style="color:#666; font-size:12px;">Starter Kit</p></div>
                     <button class="add-btn" onclick="addToCart('Starter Kit (1.2KG)', 1250)">Add to Cart</button>
                 </div>
                 <div class="shop-card">
-                    <div><span style="font-size:10px; color:#666; font-weight:800; display:block; margin-bottom:10px;">STUDIO</span><div class="shop-title">4.8 KG</div><div class="shop-price">₹4,750</div></div>
+                    <div><div class="shop-title">4.8 KG</div><div class="shop-price">₹4,750</div><p style="color:#666; font-size:12px;">Studio Pack</p></div>
                     <button class="add-btn" onclick="addToCart('Studio Kit (4.8KG)', 4750)">Add to Cart</button>
                 </div>
                 <div class="shop-card" style="border-color:var(--accent-solid);">
-                    <div><span style="font-size:10px; color:var(--accent-solid); font-weight:800; display:block; margin-bottom:10px;">PRO</span><div class="shop-title">12 KG</div><div class="shop-price">₹11,250</div></div>
+                    <div><div class="shop-title">12 KG</div><div class="shop-price">₹11,250</div><p style="color:var(--accent-solid); font-size:12px;">Pro Choice</p></div>
                     <button class="add-btn" style="background:var(--accent-grad); color:#fff;" onclick="addToCart('Pro Pack (12KG)', 11250)">Add to Cart</button>
                 </div>
                 <div class="shop-card">
-                    <div><span style="font-size:10px; color:#666; font-weight:800; display:block; margin-bottom:10px;">INDUSTRIAL</span><div class="shop-title">24 KG</div><div class="shop-price">₹21,250</div></div>
+                    <div><div class="shop-title">24 KG</div><div class="shop-price">₹21,250</div><p style="color:#666; font-size:12px;">Industrial</p></div>
                     <button class="add-btn" onclick="addToCart('Industrial Pack (24KG)', 21250)">Add to Cart</button>
                 </div>
             </div>
@@ -217,81 +235,53 @@
 
         <section id="calc" class="section reveal">
             <h2 class="section-title">Quantum Calculator</h2>
-            <div class="qc-container">
-                <div class="qc-top">
-                    <div class="qc-mode-switch">
-                        <button class="qc-mode-btn active" id="modeCM" onclick="setUnit('cm')">CM</button>
-                        <button class="qc-mode-btn" id="modeIN" onclick="setUnit('inch')">INCH</button>
-                    </div>
-                    <div class="qc-presets">
-                        <div class="preset-pill" onclick="applyPreset('coaster')">Coaster</div>
-                        <div class="preset-pill" onclick="applyPreset('tray')">Tray (12mm)</div>
-                        <div class="preset-pill" onclick="applyPreset('table')">River Table</div>
-                    </div>
+            <div class="qc-panel">
+                <div class="qc-segment">
+                    <button class="qc-seg-btn active" onclick="setSystem(3, 1.13, this)">Art (3:1)</button>
+                    <button class="qc-seg-btn" onclick="setSystem(2, 1.09, this)">Deep (2:1)</button>
+                    <button class="qc-seg-btn" onclick="setSystem(1, 1.15, this)">Coat (1:1)</button>
                 </div>
-                <div class="qc-grid">
-                    <div class="qc-inputs">
-                        <div class="qc-group">
-                            <div class="qc-label">Select Geometry</div>
-                            <div class="shape-selector">
-                                <div class="shape-opt active" onclick="setShape('rect')"><span class="shape-icon">■</span><span class="shape-name">Rect</span></div>
-                                <div class="shape-opt" onclick="setShape('circ')"><span class="shape-icon">●</span><span class="shape-name">Round</span></div>
-                                <div class="shape-opt" onclick="setShape('hex')"><span class="shape-icon">⬡</span><span class="shape-name">Hex</span></div>
-                                <div class="shape-opt" onclick="setShape('tri')"><span class="shape-icon">▲</span><span class="shape-name">Tri</span></div>
-                            </div>
+                
+                <div class="qc-body">
+                    <div class="qc-config">
+                        <div class="shape-grid">
+                            <div class="shape-btn active" onclick="setShape('rect')"><span class="shape-icon">■</span><div class="shape-label">Rect</div></div>
+                            <div class="shape-btn" onclick="setShape('circ')"><span class="shape-icon">●</span><div class="shape-label">Round</div></div>
+                            <div class="shape-btn" onclick="setShape('hex')"><span class="shape-icon">⬡</span><div class="shape-label">Hex</div></div>
+                            <div class="shape-btn" onclick="setShape('tri')"><span class="shape-icon">▲</span><div class="shape-label">Tri</div></div>
                         </div>
 
-                        <div class="qc-group" id="input-dims">
-                            <div class="input-row">
-                                <div class="input-group"><label>Length</label><input type="number" id="L" placeholder="0" oninput="runQCalc()"></div>
-                                <div class="input-group"><label>Width</label><input type="number" id="W" placeholder="0" oninput="runQCalc()"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="input-row">
-                            <div class="input-group"><label>Depth</label><input type="number" id="D" placeholder="0" oninput="runQCalc()"></div>
-                            <div class="input-group"><label>Quantity</label><input type="number" id="Qty" value="1" oninput="runQCalc()"></div>
+                        <div id="dims-rect" class="input-row"><div class="input-grp"><label>Length</label><input type="number" id="L" placeholder="0" oninput="runQCalc()"></div><div class="input-grp"><label>Width</label><input type="number" id="W" placeholder="0" oninput="runQCalc()"></div></div>
+                        <div id="dims-circ" class="input-grp" style="display:none;"><label>Diameter</label><input type="number" id="Dia" placeholder="0" oninput="runQCalc()"></div>
+                        <div id="dims-hex" class="input-grp" style="display:none;"><label>Side</label><input type="number" id="HexSide" placeholder="0" oninput="runQCalc()"></div>
+                        <div id="dims-tri" class="input-row" style="display:none;"><div class="input-grp"><label>Base</label><input type="number" id="TriBase" placeholder="0" oninput="runQCalc()"></div><div class="input-grp"><label>Height</label><input type="number" id="TriHeight" placeholder="0" oninput="runQCalc()"></div></div>
+
+                        <div class="input-row" style="margin-top:20px;">
+                            <div class="input-grp"><label>Depth (CM)</label><input type="number" id="D" placeholder="0" oninput="runQCalc()"></div>
+                            <div class="input-grp"><label>Quantity</label><input type="number" id="Qty" value="1" oninput="runQCalc()"></div>
                         </div>
 
-                        <div class="qc-group">
-                            <div class="qc-label"><span>Wastage Buffer</span><span class="unit" id="wasteVal">5%</span></div>
-                            <div class="qc-slider-wrap"><input type="range" min="0" max="20" value="5" class="qc-slider" id="wasteSlider" oninput="runQCalc()"></div>
+                        <div class="range-wrap">
+                            <div class="range-header"><span>Wastage Buffer</span><span id="wasteVal">5%</span></div>
+                            <input type="range" min="0" max="20" value="5" class="range-slider" id="wasteSlider" oninput="runQCalc()">
                         </div>
-                        
-                        <div class="input-group"><label>Resin Cost (₹/KG)</label><input type="number" id="costInput" placeholder="Optional" oninput="runQCalc()"></div>
                     </div>
 
                     <div class="qc-results">
                         <div>
-                            <div class="res-card">
-                                <span class="res-title">Total Volume</span>
-                                <div class="res-main" id="resVol">0 ml</div>
-                                <div class="res-sub" id="resWeight">0 kg</div>
+                            <span class="res-sub">Total Required</span>
+                            <div class="res-big" id="resTotal">0g</div>
+                            <div class="mix-bar-wrap" style="margin-top:15px;">
+                                <div id="barA" class="mix-part-a" style="width:75%"></div>
+                                <div id="barB" class="mix-part-b" style="width:25%"></div>
                             </div>
-                            <div class="res-card">
-                                <span class="res-title">Mix Ratio (3:1)</span>
-                                <div class="breakdown-row"><span>Part A (Resin)</span><span class="hl-val" id="resA">0g</span></div>
-                                <div class="breakdown-row"><span>Part B (Hardener)</span><span class="hl-val" id="resB">0g</span></div>
-                            </div>
-                            <div class="res-card">
-                                <span class="res-title">Estimates</span>
-                                <div class="breakdown-row"><span>Pigment Needed</span><span class="hl-val" id="resPigment">0g</span></div>
-                                <div class="breakdown-row" style="color:var(--success);"><span>Total Cost</span><span class="hl-val" id="resCost" style="color:var(--success);">₹0</span></div>
-                            </div>
+                            <div class="res-row"><span>Resin (A)</span><span id="valA">0g</span></div>
+                            <div class="res-row"><span>Hardener (B)</span><span id="valB">0g</span></div>
+                            <div class="res-row"><span>Pigment Load</span><span id="valPigment" style="color:var(--warning);">0g</span></div>
                         </div>
-                        <button class="add-btn" style="margin-top:0;" onclick="window.print()">Print Ticket</button>
+                        <button class="print-btn" onclick="window.print()">Print Batch Ticket</button>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="section reveal">
-            <h2 class="section-title">Process Flow</h2>
-            <div class="timeline">
-                <div class="timeline-item"><div class="t-title" style="font-size:18px; color:#fff; font-weight:700;">Preparation</div><p style="color:#888; font-size:13px;">Clean dust. Level surface. Wear Nitrile gloves.</p></div>
-                <div class="timeline-item"><div class="t-title" style="font-size:18px; color:#fff; font-weight:700;">Weighing</div><p style="color:#888; font-size:13px;">Precision weigh 3:1 ratio by weight (not volume).</p></div>
-                <div class="timeline-item"><div class="t-title" style="font-size:18px; color:#fff; font-weight:700;">Mixing</div><p style="color:#888; font-size:13px;">Mix slowly for 3-5 minutes. Scrape sides.</p></div>
-                <div class="timeline-item"><div class="t-title" style="font-size:18px; color:#fff; font-weight:700;">Pour & Cure</div><p style="color:#888; font-size:13px;">Pour. Torch bubbles. Cover for 24 hours.</p></div>
             </div>
         </section>
 
@@ -301,6 +291,15 @@
                 <div class="gallery-item"><img src="gallary 1.png" class="gallery-img"></div>
                 <div class="gallery-item"><img src="gallary 3.png" class="gallery-img"></div>
                 <div class="gallery-item"><img src="gallary 2.png" class="gallery-img"></div>
+            </div>
+        </section>
+
+        <section id="protocol" class="section reveal">
+            <h2 class="section-title">Dashboard</h2>
+            <div class="guide-grid">
+                <div class="guide-card"><h3>Prep</h3><p style="color:#666; font-size:12px;">Gloves & 24°C</p></div>
+                <div class="guide-card" style="border-color:var(--accent-solid);"><h3>Timer</h3><div class="timer-badge" id="timerDisplay">03:00</div><button class="add-btn" style="margin-top:10px; width:auto; padding:8px 20px;" onclick="startTimer()">Start</button></div>
+                <div class="guide-card"><h3>Cure</h3><p style="color:#666; font-size:12px;">72 Hours</p></div>
             </div>
         </section>
     </div>
@@ -332,7 +331,12 @@
     </footer>
 
     <script>
-        // 1. COMMERCE
+        // 1. LENIS SMOOTH SCROLL
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), direction: 'vertical', smooth: true, touchMultiplier: 2 });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // 2. COMMERCE
         let cart = [];
         function addToCart(item, price) { cart.push({item, price}); updateCart(); toggleCart(); }
         function updateCart() {
@@ -353,93 +357,76 @@
             new Razorpay(options).open();
         }
 
-        // 2. QUANTUM CALCULATOR LOGIC
+        // 3. QUANTUM CALCULATOR LOGIC
         let qShape = 'rect';
-        let qUnit = 'cm';
-        
-        function setUnit(u) {
-            qUnit = u;
-            document.querySelectorAll('.qc-mode-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(u === 'cm' ? 'modeCM' : 'modeIN').classList.add('active');
+        let qDensity = 1.13;
+        let qRatioA = 3;
+        let qRatioB = 1;
+
+        function setSystem(ratioA, density, btn) {
+            qRatioA = ratioA; qRatioB = 1; qDensity = density;
+            document.querySelectorAll('.qc-seg-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Update Bar Visual
+            const total = qRatioA + qRatioB;
+            const pctA = (qRatioA / total) * 100;
+            document.getElementById('barA').style.width = pctA + '%';
+            document.getElementById('barB').style.width = (100 - pctA) + '%';
+            
             runQCalc();
         }
 
         function setShape(s) {
             qShape = s;
-            document.querySelectorAll('.shape-opt').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
             event.currentTarget.classList.add('active');
-            
-            const htmlMap = {
-                'rect': '<div class="input-row"><div class="input-group"><label>Length</label><input type="number" id="L" placeholder="0" oninput="runQCalc()"></div><div class="input-group"><label>Width</label><input type="number" id="W" placeholder="0" oninput="runQCalc()"></div></div>',
-                'circ': '<div class="input-group"><label>Diameter</label><input type="number" id="Dia" placeholder="0" oninput="runQCalc()"></div>',
-                'hex': '<div class="input-group"><label>Side Edge</label><input type="number" id="HexSide" placeholder="0" oninput="runQCalc()"></div>',
-                'tri': '<div class="input-row"><div class="input-group"><label>Base</label><input type="number" id="TriBase" placeholder="0" oninput="runQCalc()"></div><div class="input-group"><label>Height</label><input type="number" id="TriHeight" placeholder="0" oninput="runQCalc()"></div></div>'
-            };
-            document.getElementById('input-dims').innerHTML = htmlMap[s];
-            runQCalc();
-        }
-
-        function applyPreset(type) {
-            document.getElementById('D').value = type === 'coaster' ? 0.8 : type === 'tray' ? 1.2 : 4.0;
+            ['rect','circ','hex','tri'].forEach(d => document.getElementById('dims-'+d).style.display = 'none');
+            document.getElementById('dims-'+s).style.display = s==='circ' || s==='hex' ? 'block' : 'flex';
             runQCalc();
         }
 
         function runQCalc() {
-            const density = 1.13; 
             const waste = document.getElementById('wasteSlider').value;
             document.getElementById('wasteVal').innerText = waste + '%';
             
             let area = 0;
-            let depth = parseFloat(document.getElementById('D').value) || 0;
-            let qty = parseFloat(document.getElementById('Qty').value) || 1;
-            
-            // Unit Conversion to CM
-            const scale = qUnit === 'inch' ? 2.54 : 1;
-            depth *= scale;
+            const D = parseFloat(document.getElementById('D').value) || 0;
+            const Qty = parseFloat(document.getElementById('Qty').value) || 1;
 
             if (qShape === 'rect') {
-                area = (parseFloat(document.getElementById('L')?.value)||0) * (parseFloat(document.getElementById('W')?.value)||0) * (scale * scale);
+                area = (parseFloat(document.getElementById('L').value)||0) * (parseFloat(document.getElementById('W').value)||0);
             } else if (qShape === 'circ') {
-                let r = ((parseFloat(document.getElementById('Dia')?.value)||0) * scale) / 2;
+                const r = (parseFloat(document.getElementById('Dia').value)||0) / 2;
                 area = Math.PI * r * r;
             } else if (qShape === 'hex') {
-                let s = (parseFloat(document.getElementById('HexSide')?.value)||0) * scale;
+                const s = parseFloat(document.getElementById('HexSide').value)||0;
                 area = ((3 * Math.sqrt(3)) / 2) * s * s;
             } else if (qShape === 'tri') {
-                let b = (parseFloat(document.getElementById('TriBase')?.value)||0) * scale;
-                let h = (parseFloat(document.getElementById('TriHeight')?.value)||0) * scale;
-                area = 0.5 * b * h;
+                area = 0.5 * (parseFloat(document.getElementById('TriBase').value)||0) * (parseFloat(document.getElementById('TriHeight').value)||0);
             }
 
-            let volume = area * depth * qty; // cm3 = ml
-            let weight = volume * density; // grams
+            let volume = area * D * Qty; // cm3
+            let weight = volume * qDensity; // grams
             
-            // Add Waste
+            // Apply Waste
             weight = weight * (1 + (waste / 100));
-            volume = volume * (1 + (waste / 100));
+            
+            // Parts Calculation
+            const totalParts = qRatioA + qRatioB;
+            const partA = (weight * qRatioA) / totalParts;
+            const partB = (weight * qRatioB) / totalParts;
 
-            // Outputs
-            document.getElementById('resVol').innerText = Math.round(volume) + ' ml';
-            document.getElementById('resWeight').innerText = (weight / 1000).toFixed(2) + ' kg';
-            
-            const totalParts = 4; // 3:1 ratio
-            const partA = (weight * 3) / totalParts;
-            const partB = (weight * 1) / totalParts;
-            
-            document.getElementById('resA').innerText = Math.round(partA) + 'g';
-            document.getElementById('resB').innerText = Math.round(partB) + 'g';
-            
-            // Pigment Est (2% of weight)
-            document.getElementById('resPigment').innerText = Math.round(weight * 0.02) + 'g';
-            
-            // Cost
-            const price = parseFloat(document.getElementById('costInput').value) || 0;
-            if (price > 0) {
-                document.getElementById('resCost').innerText = '₹' + Math.round((weight/1000) * price).toLocaleString();
-            } else {
-                document.getElementById('resCost').innerText = '₹0';
-            }
+            // Update UI
+            document.getElementById('resTotal').innerText = Math.round(weight) + 'g';
+            document.getElementById('valA').innerText = Math.round(partA) + 'g';
+            document.getElementById('valB').innerText = Math.round(partB) + 'g';
+            document.getElementById('valPigment').innerText = (weight * 0.02).toFixed(1) + 'g'; // 2% load
         }
+
+        // 4. TIMER
+        let timer; let tl=180; function updateTimer() { document.getElementById('timerDisplay').innerText=`0${Math.floor(tl/60)}:${(tl%60).toString().padStart(2,'0')}`; }
+        function startTimer() { if(timer) return; timer=setInterval(()=>{ if(tl>0){tl--; updateTimer();}else{clearInterval(timer); alert("Mix Ready!");}},1000); }
 
         const obs = new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('active'); }); }, {threshold:0.1});
         document.querySelectorAll('.reveal, section').forEach(el=>obs.observe(el));
