@@ -8,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;800&family=Space+Grotesk:wght@300;500;600;700&display=swap" rel="stylesheet">
     
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -17,218 +17,348 @@
            1. OLED MIDNIGHT THEME (REFINED)
            ----------------------------------------------------------- */
         :root {
+            /* Colors */
             --bg-oled: #000000;
             --bg-panel: #050505;
-            --text-main: #ffffff;
-            --text-dim: #888888;
+            --text-main: #f2f2f2; /* Softened White */
+            --text-dim: #909090;
+            
+            /* Accents */
             --accent: #ffffff;
-            --border: rgba(255, 255, 255, 0.12);
-            --border-hover: rgba(255, 255, 255, 0.3);
-            --glass: rgba(20, 20, 20, 0.6);
-            --blur: blur(20px);
+            --accent-glow: rgba(255, 255, 255, 0.15);
+            --brand-glow: rgba(99, 102, 241, 0.3); /* Indigo Glow */
+            
+            /* Borders */
+            --border: rgba(255, 255, 255, 0.08); /* Fainter for elegance */
+            --border-hover: rgba(255, 255, 255, 0.4);
+            
+            /* Glassmorphism */
+            --glass: rgba(15, 15, 15, 0.7);
+            --blur: blur(30px);
             --radius: 24px;
+            
+            /* Status */
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
+            
+            /* Animation */
+            --ease-elastic: cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
+        /* Premium Selection Color */
+        ::selection { background: rgba(99, 102, 241, 0.3); color: #fff; }
+
         html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 100px; }
         
         body {
             background-color: var(--bg-oled);
             color: var(--text-main);
             font-family: 'Manrope', sans-serif;
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.1; letter-spacing: -0.02em; }
+        h1, h2, h3, h4 { 
+            font-family: 'Space Grotesk', sans-serif; 
+            line-height: 1.1; 
+            letter-spacing: -0.03em; /* Tight editorial tracking */
+        }
+        
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         button { cursor: pointer; border: none; outline: none; background: none; font-family: inherit; }
         img { display: block; max-width: 100%; }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
 
         /* -----------------------------------------------------------
-           2. CINEMATIC BACKGROUND ENGINE (STABLE MASK)
+           2. CINEMATIC BACKGROUND (VIGNETTE MASKED)
            ----------------------------------------------------------- */
         .bg-layer {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -5;
             background-color: #000;
-            
-            /* FILE: product-1.webp */
             background-image: url('product-1.webp');
             
-            /* DESKTOP: 65% Scale, Anchored Bottom */
+            /* Desktop: 65% Anchored Bottom */
             background-position: center bottom;
             background-repeat: no-repeat;
             background-size: 65%;
             
-            /* VIGNETTE MASK: Fades image edges into black background */
-            -webkit-mask-image: radial-gradient(circle at 50% 100%, black 30%, transparent 100%);
-            mask-image: radial-gradient(circle at 50% 100%, black 30%, transparent 100%);
+            /* Vignette: Softens the hard edges into the black void */
+            -webkit-mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
+            mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
             
-            opacity: 0.8; /* Subtle blend */
-            transition: opacity 0.5s ease;
+            opacity: 0.85;
+            transition: opacity 0.8s ease;
+        }
+
+        .bg-gradient {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4;
+            /* Heavy fade at bottom to merge with footer */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 60%, #000 100%);
+            pointer-events: none;
         }
 
         .grain {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4; opacity: 0.04; pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; opacity: 0.035; pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* -----------------------------------------------------------
-           3. LAYOUT & GLASS COMPONENTS
+           3. LAYOUT & PREMIUM COMPONENTS
            ----------------------------------------------------------- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        .section { padding: 120px 0; position: relative; z-index: 2; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 30px; }
+        .section { padding: 130px 0; position: relative; z-index: 2; }
         
-        .reveal { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* Blur Reveal */
+        .reveal { 
+            opacity: 0; transform: translateY(40px); filter: blur(10px);
+            transition: all 1.2s var(--ease-elastic); 
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
 
+        /* "Crystal" Glass Card */
         .glass {
-            background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            border: 1px solid var(--border); border-radius: var(--radius);
-            transition: 0.3s ease; overflow: hidden;
+            background: var(--glass); 
+            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+            border: 1px solid var(--border); 
+            border-radius: var(--radius);
+            position: relative; overflow: hidden;
+            transition: all 0.4s var(--ease-elastic);
         }
-        .glass:hover { 
-            border-color: var(--border-hover); 
-            transform: translateY(-5px); 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6); 
+        
+        /* Top Edge Light Reflection */
+        .glass::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            opacity: 0.3;
         }
 
-        .btn { padding: 16px 32px; border-radius: 50px; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; transition: 0.3s; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
-        .btn-primary { background: #fff; color: #000; }
-        .btn-primary:hover { background: #dcdcdc; transform: scale(1.02); }
-        .btn-outline { border: 1px solid var(--border); color: #fff; background: rgba(255,255,255,0.02); }
-        .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+        .glass:hover { 
+            border-color: rgba(255, 255, 255, 0.3);
+            /* Deep Indigo Ambient Glow */
+            box-shadow: 0 20px 80px -10px var(--brand-glow);
+            transform: translateY(-6px) scale(1.005);
+        }
+
+        /* Liquid Buttons */
+        .btn { 
+            padding: 18px 36px; border-radius: 60px; font-weight: 700; text-transform: uppercase; 
+            font-size: 11px; letter-spacing: 1.5px; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn-primary { 
+            background: #fff; color: #000; 
+            box-shadow: 0 0 20px rgba(255,255,255,0.1); 
+        }
+        .btn-primary:hover { 
+            background: #f0f0f0; transform: translateY(-2px); 
+            box-shadow: 0 10px 30px rgba(255,255,255,0.25);
+        }
+        .btn-outline { 
+            border: 1px solid var(--border); color: #fff; background: rgba(255,255,255,0.03); 
+        }
+        .btn-outline:hover { 
+            border-color: #fff; background: rgba(255,255,255,0.08); 
+        }
 
         /* -----------------------------------------------------------
            4. NAVIGATION & HERO
            ----------------------------------------------------------- */
-        .navbar { position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; display: flex; align-items: center; transition: 0.4s; border-bottom: 1px solid transparent; }
-        .navbar.scrolled { background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--border); backdrop-filter: blur(10px); }
+        .navbar { 
+            position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; 
+            display: flex; align-items: center; transition: 0.5s ease; border-bottom: 1px solid transparent; 
+        }
+        .navbar.scrolled { 
+            background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(20px); 
+            border-bottom: 1px solid var(--border); height: 70px;
+        }
         .nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 800; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-link { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-dim); }
-        .nav-link:hover { color: #fff; }
+        .logo { font-weight: 800; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; color: #fff; }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-link { 
+            font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-dim); 
+            letter-spacing: 1px; transition: color 0.3s;
+        }
+        .nav-link:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 10; padding-top: 80px; }
-        .hero h1 { font-size: clamp(48px, 6vw, 90px); margin-bottom: 20px; font-weight: 800; letter-spacing: -2px; }
-        .hero p { color: #ccc; font-size: 18px; max-width: 500px; margin-bottom: 40px; }
+        .hero { 
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; 
+            align-items: center; text-align: center; z-index: 10; padding-top: 80px;
+        }
+        .hero h1 { 
+            font-size: clamp(48px, 6vw, 100px); margin-bottom: 24px; font-weight: 800; 
+            background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { 
+            color: var(--text-dim); font-size: 18px; max-width: 500px; margin-bottom: 40px; font-weight: 300; 
+        }
 
         /* -----------------------------------------------------------
-           5. SHOP GRID (Stable Images)
+           5. SHOP GRID (Refined Cards)
            ----------------------------------------------------------- */
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .product-card { padding: 30px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
-        .p-img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; opacity: 0.9; transition: 0.5s; }
-        .product-card:hover .p-img { opacity: 1; transform: scale(1.02); }
-        .p-tag { font-size: 10px; border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; color: var(--text-dim); text-transform: uppercase; display: inline-block; margin-bottom: 10px; }
+        .product-card { padding: 35px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+        .p-img { 
+            width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 25px; 
+            opacity: 0.9; transition: 0.6s var(--ease-elastic); 
+        }
+        .product-card:hover .p-img { opacity: 1; transform: scale(1.03); }
+        .p-tag { 
+            font-size: 10px; border: 1px solid var(--border); padding: 5px 10px; border-radius: 20px; 
+            color: var(--text-dim); text-transform: uppercase; display: inline-block; margin-bottom: 15px; 
+            letter-spacing: 1px;
+        }
 
         /* -----------------------------------------------------------
-           6. GALLERY GRID (Uses PNGs)
+           6. GALLERY GRID (Stable PNGs)
            ----------------------------------------------------------- */
-        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 80px; }
-        .g-item { height: 300px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); position: relative; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 80px; }
+        .g-item { 
+            height: 320px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); 
+            position: relative; background: #080808;
+        }
         .g-item.wide { grid-column: span 2; }
-        .g-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.5s; cursor: crosshair; }
-        .g-item:hover .g-img { filter: grayscale(0%); transform: scale(1.05); }
+        .g-img { 
+            width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); opacity: 0.8; 
+            transition: 0.7s var(--ease-elastic); cursor: crosshair; 
+        }
+        .g-item:hover .g-img { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
 
         /* -----------------------------------------------------------
-           7. FEATURES (Timeline, Table, Safety)
+           7. FEATURES: SPECS & TIMELINE
            ----------------------------------------------------------- */
-        .specs-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
-        .spec-row { display: flex; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
+        .specs-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; }
+        .spec-row { 
+            display: flex; justify-content: space-between; padding: 25px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; 
+        }
+        .spec-row span { color: var(--text-dim); }
+        .spec-row b { color: #fff; font-weight: 600; }
         
         .timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 40px 0; }
-        .t-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.2); }
-        .t-step { display: flex; align-items: center; margin-bottom: 60px; position: relative; }
+        .t-line { 
+            position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; 
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3), transparent); 
+        }
+        .t-step { display: flex; align-items: center; margin-bottom: 80px; position: relative; }
         .t-step:nth-child(even) { flex-direction: row-reverse; }
-        .t-content { width: 45%; padding: 30px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 20px; }
-        .t-dot { position: absolute; left: 50%; width: 12px; height: 12px; background: #fff; border-radius: 50%; transform: translateX(-50%); box-shadow: 0 0 15px white; }
+        .t-content { 
+            width: 42%; padding: 40px; background: var(--glass); border: 1px solid var(--border); 
+            border-radius: 24px; transition: 0.3s;
+        }
+        .t-content:hover { border-color: rgba(255,255,255,0.3); }
+        .t-dot { 
+            position: absolute; left: 50%; width: 10px; height: 10px; background: #fff; 
+            border-radius: 50%; transform: translateX(-50%); box-shadow: 0 0 20px #fff; 
+        }
 
         .comp-wrapper { overflow-x: auto; margin-top: 60px; }
         .comp-table { width: 100%; min-width: 700px; border-collapse: collapse; background: var(--glass); border-radius: 24px; }
-        .comp-table th { padding: 25px; text-align: left; font-size: 11px; text-transform: uppercase; color: var(--text-dim); background: rgba(255,255,255,0.03); }
-        .comp-table td { padding: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
-        .hl { color: #fff; font-weight: 800; border-left: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.03); }
+        .comp-table th { padding: 30px; text-align: left; font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 1px; }
+        .comp-table td { padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; }
+        .hl { color: #fff; font-weight: 700; background: rgba(255,255,255,0.02); }
 
         .dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 60px; }
-        .dd-box { padding: 40px; border-radius: 24px; border: 1px solid var(--border); }
-        .dd-box.dos { background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.3); }
-        .dd-box.donts { background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.3); }
+        .dd-box { padding: 50px; border-radius: 24px; border: 1px solid var(--border); }
+        .dd-box.dos { background: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.2); }
+        .dd-box.donts { background: rgba(239, 68, 68, 0.03); border-color: rgba(239, 68, 68, 0.2); }
 
         /* -----------------------------------------------------------
-           8. CALCULATOR (Base Logic)
+           8. CALCULATOR (Lab Equipment Feel)
            ----------------------------------------------------------- */
         .calc-box { display: grid; grid-template-columns: 1.5fr 1fr; overflow: hidden; }
-        .calc-in { padding: 50px; border-right: 1px solid var(--border); }
-        .calc-out { padding: 50px; background: rgba(20,20,20,0.8); display: flex; flex-direction: column; justify-content: center; }
-        .inp-grp { margin-bottom: 20px; }
-        .inp-grp label { display: block; font-size: 10px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; font-weight: 700; }
-        .inp-grp input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: #fff; border-radius: 12px; outline: none; transition: 0.3s; }
-        .inp-grp input:focus { border-color: #fff; }
-        .shape-btn { flex: 1; padding: 12px; background: transparent; border: 1px solid #333; color: #888; border-radius: 10px; margin-right: 10px; cursor: pointer; text-transform: uppercase; font-size: 10px; font-weight: 700; }
+        .calc-in { padding: 60px; border-right: 1px solid var(--border); }
+        .calc-out { padding: 60px; background: rgba(15,15,15,0.8); display: flex; flex-direction: column; justify-content: center; }
+        
+        .inp-grp { margin-bottom: 25px; }
+        .inp-grp label { 
+            display: block; font-size: 10px; text-transform: uppercase; color: var(--text-dim); 
+            margin-bottom: 10px; font-weight: 700; letter-spacing: 1px;
+        }
+        .inp-grp input { 
+            width: 100%; padding: 18px; background: #030303; border: 1px solid #222; color: #fff; 
+            border-radius: 12px; outline: none; transition: 0.3s; font-size: 16px;
+        }
+        /* High Contrast Focus */
+        .inp-grp input:focus { border-color: #fff; box-shadow: 0 0 0 2px rgba(255,255,255,0.1); }
+        
+        .shape-btn { 
+            flex: 1; padding: 14px; background: transparent; border: 1px solid #333; color: #888; 
+            border-radius: 12px; margin-right: 10px; cursor: pointer; text-transform: uppercase; 
+            font-size: 10px; font-weight: 700; transition: 0.3s;
+        }
         .shape-btn.active { background: #fff; color: #000; border-color: #fff; }
 
         /* -----------------------------------------------------------
-           9. FOOTER (With YOUR Image)
+           9. FOOTER (Stable Image)
            ----------------------------------------------------------- */
         .footer { 
-            position: relative; padding: 120px 0 40px; margin-top: 100px; 
-            /* FILE: last page background.png */
+            position: relative; padding: 140px 0 50px; margin-top: 140px; 
             background: #000 url('last page background.png') no-repeat center bottom; 
             background-size: cover; border-top: 1px solid #1a1a1b;
         }
-        .footer-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.8) 100%); pointer-events: none; }
+        .footer-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.7) 100%); pointer-events: none; }
         .footer-content { position: relative; z-index: 2; }
-        .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
-        .f-head { font-size: 11px; font-weight: 800; color: #fff; margin-bottom: 20px; text-transform: uppercase; }
-        .f-link { display: block; color: #888; margin-bottom: 10px; font-size: 13px; }
-        .f-link:hover { color: #fff; }
+        .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
+        .f-head { font-size: 11px; font-weight: 800; color: #fff; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        .f-link { display: block; color: var(--text-dim); margin-bottom: 12px; font-size: 14px; transition: 0.3s; }
+        .f-link:hover { color: #fff; transform: translateX(5px); }
 
         /* -----------------------------------------------------------
-           10. CART
+           10. CART & MODALS
            ----------------------------------------------------------- */
-        .cart-fab { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2000; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
-        .cart-count { position: absolute; top: 0; right: 0; background: #000; color: #fff; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 1px solid #fff; }
+        .cart-fab { 
+            position: fixed; bottom: 40px; right: 40px; width: 64px; height: 64px; background: #fff; 
+            border-radius: 50%; display: flex; justify-content: center; align-items: center; 
+            cursor: pointer; z-index: 2000; box-shadow: 0 0 40px rgba(255,255,255,0.2); 
+            transition: transform 0.3s var(--ease-elastic);
+        }
+        .cart-fab:hover { transform: scale(1.1); }
+        .cart-count { 
+            position: absolute; top: -2px; right: -2px; background: #000; color: #fff; 
+            font-size: 10px; width: 22px; height: 22px; border-radius: 50%; display: flex; 
+            justify-content: center; align-items: center; border: 2px solid #fff; 
+        }
         
         .cart-sidebar { position: fixed; top: 0; right: 0; width: 100%; height: 100vh; z-index: 3000; pointer-events: none; }
         .cart-overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.8); opacity: 0; transition: 0.3s; }
-        .cart-inner { position: absolute; right: 0; width: 400px; height: 100%; background: #050505; border-left: 1px solid var(--border); transform: translateX(100%); transition: 0.4s; display: flex; flex-direction: column; padding: 40px; }
+        .cart-inner { 
+            position: absolute; right: 0; width: 420px; height: 100%; background: #050505; 
+            border-left: 1px solid var(--border); transform: translateX(100%); 
+            transition: 0.5s var(--ease-elastic); display: flex; flex-direction: column; padding: 50px; 
+        }
         .cart-sidebar.active { pointer-events: all; }
         .cart-sidebar.active .cart-overlay { opacity: 1; }
         .cart-sidebar.active .cart-inner { transform: translateX(0); }
 
         /* -----------------------------------------------------------
-           11. MOBILE MEDIA QUERIES
+           11. MOBILE OPTIMIZATION
            ----------------------------------------------------------- */
         @media (max-width: 900px) {
-            /* Mobile Background: Cover + Full Opacity */
             .bg-layer { 
-                background-size: cover; 
-                background-position: center center; 
-                opacity: 0.5;
-                -webkit-mask-image: none; /* Remove vignette on mobile */
-                mask-image: none;
+                background-size: cover; background-position: center; 
+                opacity: 0.5; -webkit-mask-image: none; mask-image: none; 
             }
             .grid-3, .specs-layout, .gallery-grid, .calc-box, .dos-donts, .f-grid { grid-template-columns: 1fr; }
             .g-item.wide { grid-column: span 1; }
-            .cart-inner { width: 100%; }
+            .cart-inner { width: 100%; padding: 30px; }
             .t-line { left: 20px; }
             .t-step { flex-direction: column !important; align-items: flex-start; margin-left: 50px; }
             .t-dot { left: 20px; transform: translateX(-50%); }
             .t-content { width: 100%; }
             .hero h1 { font-size: 48px; }
+            .container { padding: 0 20px; }
         }
     </style>
 </head>
@@ -245,7 +375,6 @@
                 <a href="#shop" class="nav-link">Shop</a>
                 <a href="#specs" class="nav-link">Specs</a>
                 <a href="#calc" class="nav-link">Calc</a>
-                <a href="#gallery" class="nav-link">Gallery</a>
             </div>
         </div>
     </nav>
@@ -254,7 +383,7 @@
         <div class="reveal active">
             <h1>Molecular Clarity.<br>OLED Contrast.</h1>
             <p>The definitive 3:1 epoxy system. Engineered for professional artisans.</p>
-            <div style="margin-top:30px; display:flex; gap:15px; justify-content:center;">
+            <div style="margin-top:40px; display:flex; gap:15px; justify-content:center;">
                 <button class="btn btn-primary" onclick="document.getElementById('shop').scrollIntoView()">Shop Now</button>
                 <button class="btn btn-outline" onclick="document.getElementById('specs').scrollIntoView()">Data Sheet</button>
             </div>
@@ -263,7 +392,7 @@
 
     <section id="shop" class="section">
         <div class="container">
-            <h2 style="text-align:center; font-size:36px; margin-bottom:60px;">Studio Lineup</h2>
+            <h2 style="text-align:center; font-size:42px; margin-bottom:80px;">Studio Lineup</h2>
             <div class="grid-3">
                 <div class="glass product-card reveal">
                     <div>
@@ -277,10 +406,10 @@
                         <button class="btn btn-primary" style="width:100%;" onclick="addToCart('Starter Kit', 1250)">Add to Cart</button>
                     </div>
                 </div>
-                <div class="glass product-card reveal" style="border-color:#fff;">
+                <div class="glass product-card reveal" style="border-color:rgba(255,255,255,0.3);">
                     <div>
-                        <span class="p-tag" style="background:#fff; color:#000;">Best Seller</span>
-                        <img src="product-1.webp" alt="7.5KG Kit" class="p-img" style="filter:hue-rotate(15deg);">
+                        <span class="p-tag" style="background:#fff; color:#000; border-color:#fff;">Best Seller</span>
+                        <img src="product-1.webp" alt="7.5KG Kit" class="p-img" style="filter:hue-rotate(15deg) contrast(1.1);">
                         <h3>7.5 KG Kit</h3>
                         <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">5.6KG Resin + 1.9KG Hardener.</p>
                     </div>
@@ -292,7 +421,7 @@
                 <div class="glass product-card reveal">
                     <div>
                         <span class="p-tag">Industrial</span>
-                        <img src="product-1.webp" alt="30KG Drum" class="p-img" style="filter:grayscale(100%);">
+                        <img src="product-1.webp" alt="30KG Drum" class="p-img" style="filter:grayscale(100%) brightness(0.8);">
                         <h3>30 KG Drum</h3>
                         <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">Bulk Supply. Requires mechanical mixing.</p>
                     </div>
@@ -308,7 +437,7 @@
     <section id="specs" class="section">
         <div class="container">
             <div class="specs-layout reveal">
-                <div class="glass" style="padding:40px;">
+                <div class="glass" style="padding:50px;">
                     <h3 style="margin-bottom:30px;">Technical Data</h3>
                     <div class="spec-row"><span>Mix Ratio</span><b>3:1 (By Weight)</b></div>
                     <div class="spec-row"><span>Viscosity</span><b>180 mPas</b></div>
@@ -316,7 +445,7 @@
                     <div class="spec-row"><span>Demold Time</span><b>24 Hours</b></div>
                     <div class="spec-row"><span>Full Cure</span><b>7 Days</b></div>
                     
-                    <div style="margin-top:30px; display:flex; gap:15px;">
+                    <div style="margin-top:40px; display:flex; gap:15px;">
                         <a href="tds.pdf" target="_blank" class="btn btn-outline" style="flex:1;">Download TDS</a>
                         <a href="sds.pdf" target="_blank" class="btn btn-outline" style="flex:1;">Download SDS</a>
                     </div>
@@ -330,21 +459,21 @@
                             <div class="t-dot"></div>
                             <div class="t-content">
                                 <h4>01. Measure</h4>
-                                <p style="font-size:13px; color:var(--text-dim);">By weight. 3 Parts A, 1 Part B.</p>
+                                <p style="font-size:13px; color:var(--text-dim); margin-top:5px;">By weight. 3 Parts A, 1 Part B.</p>
                             </div>
                         </div>
                         <div class="t-step">
                             <div class="t-dot"></div>
                             <div class="t-content">
                                 <h4>02. Mix</h4>
-                                <p style="font-size:13px; color:var(--text-dim);">Stir 3 mins. Scrape sides.</p>
+                                <p style="font-size:13px; color:var(--text-dim); margin-top:5px;">Stir 3 mins. Scrape sides.</p>
                             </div>
                         </div>
                         <div class="t-step">
                             <div class="t-dot"></div>
                             <div class="t-content">
                                 <h4>03. Pour</h4>
-                                <p style="font-size:13px; color:var(--text-dim);">Pour. Wait 5 mins. Torch.</p>
+                                <p style="font-size:13px; color:var(--text-dim); margin-top:5px;">Pour. Wait 5 mins. Torch.</p>
                             </div>
                         </div>
                     </div>
@@ -366,10 +495,10 @@
 
     <section id="calc" class="section reveal">
         <div class="container">
-            <h2 style="text-align:center; margin-bottom:40px;">Omni-Calc</h2>
+            <h2 style="text-align:center; margin-bottom:50px;">Omni-Calc</h2>
             <div class="glass calc-box">
                 <div class="calc-in">
-                    <div style="display:flex; gap:10px; margin-bottom:20px;">
+                    <div style="display:flex; gap:10px; margin-bottom:30px;">
                         <button class="shape-btn active" id="btnRect" onclick="setShape('rect')">Rect</button>
                         <button class="shape-btn" id="btnCirc" onclick="setShape('circ')">Circle</button>
                         <button class="shape-btn" id="btnHex" onclick="setShape('hex')">Hex</button>
@@ -391,9 +520,9 @@
                     <div class="inp-grp"><label>Count</label><input type="number" id="Qty" value="1" oninput="runCalc()"></div>
                 </div>
                 <div class="calc-out">
-                    <span style="font-size:12px; color:#888; text-transform:uppercase;">Total Mix</span>
-                    <div style="font-size:48px; font-weight:800; color:#fff;" id="outTotal">0g</div>
-                    <div style="margin-top:20px;">
+                    <span style="font-size:12px; color:#888; text-transform:uppercase; letter-spacing:1px;">Total Mix Required</span>
+                    <div style="font-size:56px; font-weight:800; color:#fff;" id="outTotal">0g</div>
+                    <div style="margin-top:30px;">
                         <div>Part A: <span id="outA" style="font-weight:700;">0g</span></div>
                         <div>Part B: <span id="outB" style="font-weight:700;">0g</span></div>
                     </div>
@@ -405,7 +534,7 @@
 
     <section id="gallery" class="section reveal">
         <div class="container">
-            <h2 style="text-align:center; margin-bottom:40px;">Gallery</h2>
+            <h2 style="text-align:center; margin-bottom:50px;">Gallery</h2>
             <div class="gallery-grid">
                 <div class="g-item wide"><img src="gallery-1.png" class="g-img"></div>
                 <div class="g-item"><img src="gallery-2.png" class="g-img"></div>
