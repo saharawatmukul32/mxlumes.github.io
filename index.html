@@ -2,358 +2,322 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="M-X Lumes: Professional 3:1 Epoxy Resin Systems. Built for Master Artists.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M-X Lumes | Professional Resin Systems</title>
-    
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
-
     <style>
         /* =========================================
-           1. CORE SYSTEM & THEME
+           1. CORE STABILITY & THEME
            ========================================= */
-        :root { 
-            --accent: #6366f1; 
+        :root {
+            --accent: #6366f1;
             --accent-grad: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-            --bg: #050505; 
-            --card-bg: #0c0c0f; 
-            --glass-border: rgba(255, 255, 255, 0.08); 
-            --text: #ffffff; 
-            --text-dim: #94a3b8; 
-            --warning: #fbbf24;
+            --bg: #000000;
+            --card-bg: #0c0c0f;
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+            --text-dim: #94a3b8;
             --success: #10b981;
-            --danger: #ef4444;
-            --ease-fluid: cubic-bezier(0.19, 1, 0.22, 1);
+            --warning: #fbbf24;
         }
+
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg);
+            /* Bulletproof Background */
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), #000), url('product-1.webp');
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 100px 0; border-top: 1px solid var(--border); background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+        .section-title { font-size: 32px; font-weight: 800; text-align: center; margin-bottom: 60px; letter-spacing: -1px; }
+
+        /* =========================================
+           2. HEADER & NAVIGATION
+           ========================================= */
+        .navbar {
+            position: fixed; top: 0; width: 100%; height: 64px;
+            background: rgba(0, 0, 0, 0.85); border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(20px); z-index: 1000;
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .logo { font-weight: 900; font-size: 18px; color: #fff; text-decoration: none; letter-spacing: 2px; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-left: 24px; transition: 0.3s; }
+        .nav-links a:hover { color: #fff; }
+
+        /* =========================================
+           3. HERO
+           ========================================= */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .hero-card { background: rgba(10,10,15,0.75); padding: 60px 40px; border-radius: 32px; border: 1px solid var(--border); max-width: 700px; text-align: center; }
+        h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.1; margin: 0 0 20px 0; font-weight: 800; background: linear-gradient(to right, #fff, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-btn { background: var(--accent-grad); color: #fff; padding: 16px 48px; border-radius: 50px; text-decoration: none; font-weight: 700; display: inline-block; transition: 0.3s; border: none; cursor: pointer; }
+        .hero-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(99,102,241,0.4); }
+
+        /* =========================================
+           4. QUANTUM CALCULATOR V2 (RETAINED)
+           ========================================= */
+        .qc-panel { background: #0a0a0f; border-radius: 24px; border: 1px solid #333; overflow: hidden; }
+        .qc-tabs { display: flex; background: #15151a; border-bottom: 1px solid #333; }
+        .qc-tab { flex: 1; padding: 16px; background: transparent; border: none; color: #666; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 11px; }
+        .qc-tab.active { background: var(--accent); color: #fff; }
         
-        html { scroll-behavior: smooth; height: auto; min-height: 100%; background: #000; }
-        body { 
-            margin: 0; padding: 0; background: var(--bg); color: var(--text); 
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased;
-        }
-        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-
-        /* LENIS STABILITY CONFIG */
-        html.lenis, html.lenis body { height: auto; } 
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
-
-        /* =========================================
-           2. THE BACKGROUND ENGINE (LOCKED)
-           ========================================= */
-        #master-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            z-index: -10; pointer-events: none; overflow: hidden;
-        }
-        .bg-img { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000 url('product-1.webp') no-repeat center bottom; 
-            background-size: cover; /* Mobile Default */
-            filter: saturate(1.1) brightness(0.6);
-            transform: translateZ(0);
-        }
-        @media (min-width: 1024px) { .bg-img { background-size: 65%; } } /* Desktop Optimization */
-
-        .bg-overlay { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 70%, #000000 100%); 
-        }
-
-        /* =========================================
-           3. PREMIUM HEADER
-           ========================================= */
-        .navbar { 
-            position: fixed; top: 0; width: 100%; height: 68px; 
-            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            z-index: 2000; border-bottom: 1px solid var(--glass-border); 
-        }
-        .nav-content { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 100%; padding: 0 24px; }
-        .logo { font-weight: 900; font-size: 19px; color: #fff; text-decoration: none; letter-spacing: 2px; }
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 11px; font-weight: 700; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; }
-        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px var(--accent); }
-        .live-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-        /* =========================================
-           4. MAIN CONTENT & SECTIONS
-           ========================================= */
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
-        .hero-card { background: rgba(10,10,15,0.7); padding: 60px 40px; border-radius: 40px; border: 1px solid var(--glass-border); max-width: 700px; box-shadow: 0 50px 100px rgba(0,0,0,0.8); }
-        h1 { font-size: clamp(38px, 6vw, 72px); line-height: 1; margin-bottom: 24px; background: linear-gradient(to right, #fff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; letter-spacing: -2px; }
+        .qc-body { padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .input-grp { margin-bottom: 20px; }
+        .input-grp label { display: block; font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-bottom: 8px; }
+        .input-field { width: 100%; background: #111; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 8px; font-size: 16px; }
         
-        .main-wrapper { position: relative; background: #000; z-index: 10; border-top: 1px solid var(--glass-border); }
-        .section { padding: 120px 24px; max-width: 1200px; margin: 0 auto; }
-        .section-title { font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 80px; letter-spacing: -1px; }
+        .shape-grid { display: flex; gap: 10px; margin-bottom: 20px; }
+        .shape-btn { flex: 1; padding: 12px; background: #111; border: 1px solid #333; color: #666; border-radius: 8px; cursor: pointer; text-align: center; font-weight: 700; font-size: 11px; }
+        .shape-btn.active { border-color: var(--accent); color: #fff; background: rgba(99,102,241,0.1); }
 
-        /* FEATURE GRIDS */
-        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
-        .card { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 40px 30px; border-radius: 24px; transition: 0.4s var(--ease-fluid); position: relative; overflow: hidden; }
-        .card:hover { border-color: var(--accent); transform: translateY(-10px); }
-        
-        /* SHOP SPECIFICS */
-        .shop-tag { font-size: 10px; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; display: block; letter-spacing: 1.5px; }
-        .shop-price { font-size: 22px; font-weight: 700; color: #fff; display: block; margin-bottom: 24px; }
-        .buy-btn { width: 100%; padding: 16px; background: #fff; color: #000; border: none; border-radius: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
-        .buy-btn:hover { background: var(--accent); color: #fff; }
-
-        /* =========================================
-           5. QUANTUM CALCULATOR V2.1 (FIXED)
-           ========================================= */
-        .qc-container { background: #0a0a0f; border: 1px solid #333; border-radius: 32px; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
-        .qc-tabs { display: flex; background: rgba(0,0,0,0.4); padding: 12px; gap: 8px; border-bottom: 1px solid #222; }
-        .qc-tab { flex: 1; padding: 16px; background: transparent; border: none; color: #666; font-size: 11px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-radius: 12px; }
-        .qc-tab.active { background: #1a1a1f; color: #fff; border: 1px solid #333; }
-
-        .qc-body { display: grid; grid-template-columns: 1.6fr 1fr; }
-        .qc-inputs { padding: 40px; border-right: 1px solid #222; }
-        .qc-results { padding: 40px; background: rgba(255,255,255,0.02); display: flex; flex-direction: column; justify-content: center; }
-
-        .input-row { display: flex; gap: 16px; margin-bottom: 24px; }
-        .input-grp { flex: 1; }
-        .input-grp label { display: block; font-size: 10px; font-weight: 700; color: #666; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-        .input-grp input { width: 100%; background: #000; border: 1px solid #333; padding: 14px; border-radius: 10px; color: #fff; font-size: 16px; transition: 0.3s; }
-        .input-grp input:focus { border-color: var(--accent); }
-
-        .shape-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
-        .shape-btn { background: #000; border: 1px solid #333; padding: 16px 0; border-radius: 14px; text-align: center; cursor: pointer; transition: 0.3s; color: #666; }
-        .shape-btn.active { border-color: var(--accent); background: rgba(99,102,241,0.1); color: #fff; }
-
-        .mix-bar { height: 6px; background: #222; border-radius: 3px; overflow: hidden; display: flex; margin: 24px 0; }
+        .mix-bar { height: 8px; background: #222; border-radius: 4px; overflow: hidden; display: flex; margin: 20px 0; }
         .bar-a { width: 75%; background: var(--accent); transition: 0.5s; }
         .bar-b { width: 25%; background: #fff; transition: 0.5s; }
 
-        .res-val { font-size: 52px; font-weight: 900; color: #fff; letter-spacing: -2px; line-height: 1; }
-        .res-row { display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding: 12px 0; font-size: 14px; color: var(--text-dim); }
+        .res-box { background: #000; padding: 25px; border-radius: 16px; border: 1px solid #333; }
+        .res-val { font-size: 42px; font-weight: 900; line-height: 1; margin-bottom: 10px; }
+        .res-row { display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding: 10px 0; font-size: 14px; color: #888; }
         .res-row b { color: #fff; }
 
         /* =========================================
-           6. TIMELINE & FAQ
+           5. FEATURES, TIMELINE & TABLES
            ========================================= */
-        .timeline { padding-left: 24px; border-left: 1px solid #222; margin: 40px 0; }
-        .t-item { margin-bottom: 48px; position: relative; padding-left: 32px; }
-        .t-item::before { content: ''; position: absolute; left: -31px; top: 8px; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 15px var(--accent); }
-        .t-head { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); padding: 30px; border-radius: 20px; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
 
-        details { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 16px; margin-bottom: 16px; padding: 24px; cursor: pointer; transition: 0.3s; }
-        details:hover { border-color: var(--accent); }
-        summary { font-weight: 700; font-size: 18px; list-style: none; display: flex; justify-content: space-between; }
-        summary::after { content: '+'; color: var(--accent); }
-        details[open] summary::after { content: '-'; }
+        /* Comparison Table */
+        .table-wrap { overflow-x: auto; background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th, td { padding: 20px; text-align: left; border-bottom: 1px solid #222; }
+        th { background: rgba(255,255,255,0.05); color: var(--text-dim); text-transform: uppercase; font-size: 11px; }
+
+        /* Timeline */
+        .timeline { padding-left: 20px; border-left: 2px solid #222; margin: 20px 0; }
+        .t-item { margin-bottom: 40px; position: relative; padding-left: 24px; }
+        .t-item::before { content: ''; position: absolute; left: -31px; top: 5px; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
 
         /* =========================================
-           7. COMMAND CENTER FOOTER
+           6. FOOTER
            ========================================= */
-        .footer { background: #000; border-top: 1px solid #1a1a1f; padding: 100px 24px 60px; }
-        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; }
-        .footer-logo { font-size: 24px; font-weight: 900; margin-bottom: 20px; display: block; color: #fff; text-decoration: none; }
-        .f-col h4 { font-size: 11px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
-        .f-links a { display: block; color: #666; text-decoration: none; margin-bottom: 12px; font-size: 14px; transition: 0.3s; }
-        .f-links a:hover { color: #fff; transform: translateX(5px); }
-        .legal-row { max-width: 1200px; margin: 80px auto 0; padding-top: 40px; border-top: 1px solid #111; display: flex; justify-content: space-between; color: #444; font-size: 12px; }
+        .footer { background: #000; border-top: 1px solid var(--border); padding: 80px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .f-col h4 { font-size: 12px; font-weight: 800; color: #fff; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px; }
+        .f-col a { display: block; color: #666; text-decoration: none; margin-bottom: 10px; font-size: 14px; transition: 0.3s; }
+        .f-col a:hover { color: #fff; }
 
         /* =========================================
-           8. CART & MOBILE FIXES
+           7. CART & MOBILE FIXES
            ========================================= */
-        .cart-fab { position: fixed; bottom: 32px; right: 32px; width: 64px; height: 64px; background: var(--accent-grad); border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1001; cursor: pointer; box-shadow: 0 20px 40px rgba(79, 70, 229, 0.4); }
-        .cart-badge { position: absolute; top: -4px; right: -4px; background: var(--danger); color: white; width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 800; display: flex; justify-content: center; align-items: center; }
-        .cart-modal { position: fixed; top: 0; right: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; opacity: 0; pointer-events: none; transition: 0.4s var(--ease-fluid); display: flex; justify-content: flex-end; }
-        .cart-modal.active { opacity: 1; pointer-events: all; }
-        .cart-panel { width: 450px; max-width: 90%; height: 100%; background: #0a0a0f; border-left: 1px solid #222; padding: 48px; transform: translateX(100%); transition: 0.4s var(--ease-fluid); }
-        .cart-modal.active .cart-panel { transform: translateX(0); }
+        .cart-fab { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--accent); border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1001; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        .cart-badge { position: absolute; top: -5px; right: -5px; background: #ef4444; color: #fff; width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 800; display: flex; justify-content: center; align-items: center; }
+        .modal { position: fixed; top: 0; right: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; visibility: hidden; opacity: 0; transition: 0.3s; }
+        .modal.active { visibility: visible; opacity: 1; }
+        .modal-content { position: absolute; right: 0; width: 400px; max-width: 90%; height: 100%; background: #0f0f12; padding: 40px; transform: translateX(100%); transition: 0.3s; }
+        .modal.active .modal-content { transform: translateX(0); }
 
-        @media (max-width: 900px) { 
+        @media (max-width: 768px) {
+            .qc-body { grid-template-columns: 1fr; }
             .nav-links { display: none; }
-            .qc-body, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-            .qc-inputs { border-right: none; border-bottom: 1px solid #222; }
-            .section { padding: 80px 24px; }
-            h1 { font-size: 48px; }
+            h1 { font-size: 42px; }
+            .section { padding: 60px 0; }
         }
     </style>
 </head>
 <body>
 
-    <div id="master-bg">
-        <div class="bg-img"></div>
-        <div class="bg-overlay"></div>
-    </div>
-
     <nav class="navbar">
-        <div class="nav-content">
-            <a href="#" class="logo"><span class="live-dot"></span>M-X LUMES</a>
+        <div class="nav-inner">
+            <a href="#" class="logo">M-X LUMES</a>
             <div class="nav-links">
                 <a href="#inventory">Inventory</a>
+                <a href="#specs">Specs</a>
                 <a href="#calc">Calculator</a>
-                <a href="#docs">TDS/SDS</a>
                 <a href="#faq">FAQ</a>
             </div>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-card reveal">
+        <div class="hero-card">
             <h1>Stoichiometric Precision.</h1>
-            <p class="tagline" style="color:var(--text-dim); margin-bottom:40px;">Professional 3:1 Epoxy Resin Systems for Master Artists.</p>
-            <a href="#inventory" class="cta-btn">Acquire Kit</a>
+            <p class="tagline">Professional 3:1 Epoxy Resin Systems for Master Artists.</p>
+            <a href="#inventory" class="hero-btn">Explore Inventory</a>
         </div>
     </section>
 
-    <div class="marquee">
-        <div class="marquee-track">
-            <span class="marquee-item">ISO 9001 CERTIFIED</span>
-            <span class="marquee-item">ZERO VOC EMISSIONS</span>
-            <span class="marquee-item">180 mPas VISCOSITY</span>
-            <span class="marquee-item">TRIPLE HALS UV-SHIELD</span>
-            <span class="marquee-item">ISO 9001 CERTIFIED</span>
-            <span class="marquee-item">ZERO VOC EMISSIONS</span>
-        </div>
-    </div>
-
-    <div class="main-wrapper">
-        
-        <section class="section">
-            <h2 class="section-title">Performance Metrics</h2>
-            <div class="grid-4">
-                <div class="card"><span class="spec-val">82D</span><span class="spec-lbl">Hardness</span></div>
-                <div class="spec-card card"><span class="spec-val">180</span><span class="spec-lbl">Viscosity (mPas)</span></div>
-                <div class="spec-card card"><span class="spec-val">0%</span><span class="spec-lbl">VOC Emissions</span></div>
-                <div class="spec-card card"><span class="spec-val">45m</span><span class="spec-lbl">Pot Life</span></div>
+    <div class="main-content">
+        <section id="specs" class="section">
+            <div class="container">
+                <h2 class="section-title">Core Specifications</h2>
+                <div class="grid-4">
+                    <div class="card"><span class="spec-val">82D</span><span class="spec-lbl">Hardness (Shore)</span></div>
+                    <div class="card"><span class="spec-val">180</span><span class="spec-lbl">Viscosity (mPas)</span></div>
+                    <div class="card"><span class="spec-val">0%</span><span class="spec-lbl">VOC Emissions</span></div>
+                    <div class="card"><span class="spec-val">45m</span><span class="spec-lbl">Work Time</span></div>
+                </div>
             </div>
         </section>
 
         <section id="inventory" class="section">
-            <h2 class="section-title">System Inventory</h2>
-            <div class="grid-4">
-                <div class="shop-card card">
-                    <div><span class="shop-tag">Starter</span><div class="shop-title">1.2 KG</div><span class="shop-price">₹1,250</span></div>
-                    <button class="buy-btn" onclick="addToCart('Starter Kit (1.2KG)', 1250)">Add to Cart</button>
-                </div>
-                <div class="shop-card card" style="border-color:var(--accent);">
-                    <div><span class="shop-tag" style="color:#fff;">Master Studio</span><div class="shop-title">4.8 KG</div><span class="shop-price" style="color:var(--accent);">₹4,750</span></div>
-                    <button class="buy-btn" style="background:var(--accent); color:#fff;" onclick="addToCart('Studio Kit (4.8KG)', 4750)">Add to Cart</button>
-                </div>
-                <div class="shop-card card">
-                    <div><span class="shop-tag">Professional</span><div class="shop-title">12 KG</div><span class="shop-price">₹11,250</span></div>
-                    <button class="buy-btn" onclick="addToCart('Pro Pack (12KG)', 11250)">Add to Cart</button>
-                </div>
-                <div class="shop-card card">
-                    <div><span class="shop-tag">Industrial</span><div class="shop-title">24 KG</div><span class="shop-price">₹21,250</span></div>
-                    <button class="buy-btn" onclick="addToCart('Industrial Pack (24KG)', 21250)">Add to Cart</button>
+            <div class="container">
+                <h2 class="section-title">System Inventory</h2>
+                <div class="grid-4">
+                    <div class="card">
+                        <span class="shop-tag">Starter Kit</span>
+                        <div class="shop-title">1.2 KG</div>
+                        <span class="shop-price">₹1,250</span>
+                        <button class="hero-btn" style="width:100%; padding:12px;" onclick="addToCart('Starter Kit (1.2KG)', 1250)">Buy Now</button>
+                    </div>
+                    <div class="card" style="border-color:var(--accent);">
+                        <span class="shop-tag" style="color:#fff;">Popular</span>
+                        <div class="shop-title">4.8 KG</div>
+                        <span class="shop-price">₹4,750</span>
+                        <button class="hero-btn" style="width:100%; padding:12px;" onclick="addToCart('Studio Kit (4.8KG)', 4750)">Buy Now</button>
+                    </div>
+                    <div class="card">
+                        <span class="shop-tag">Pro Pack</span>
+                        <div class="shop-title">12 KG</div>
+                        <span class="shop-price">₹11,250</span>
+                        <button class="hero-btn" style="width:100%; padding:12px;" onclick="addToCart('Pro Pack (12KG)', 11250)">Buy Now</button>
+                    </div>
+                    <div class="card">
+                        <span class="shop-tag">Industrial</span>
+                        <div class="shop-title">24 KG</div>
+                        <span class="shop-price">₹21,250</span>
+                        <button class="hero-btn" style="width:100%; padding:12px;" onclick="addToCart('Industrial Pack (24KG)', 21250)">Buy Now</button>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="calc" class="section">
-            <h2 class="section-title">Quantum Calculator</h2>
-            <div class="qc-container">
-                <div class="qc-tabs">
-                    <button class="qc-tab active" onclick="setSystem(3, 1.13, this)">Art (3:1)</button>
-                    <button class="qc-tab" onclick="setSystem(2, 1.09, this)">Deep Pour (2:1)</button>
-                    <button class="qc-tab" onclick="setSystem(1, 1.15, this)">Top Coat (1:1)</button>
-                </div>
-                <div class="qc-body">
-                    <div class="qc-inputs">
-                        <div class="shape-grid">
-                            <div class="shape-btn active" onclick="setShape('rect', this)">Rect</div>
-                            <div class="shape-btn" onclick="setShape('circ', this)">Round</div>
-                        </div>
-                        <div id="inp-rect">
-                            <div class="input-row">
-                                <div class="input-grp"><label>Length (cm)</label><input type="number" id="L" oninput="calc()"></div>
-                                <div class="input-grp"><label>Width (cm)</label><input type="number" id="W" oninput="calc()"></div>
+            <div class="container">
+                <h2 class="section-title">Quantum Calculator</h2>
+                <div class="qc-panel">
+                    <div class="qc-tabs">
+                        <button class="qc-tab active" onclick="setSystem(3, 1.13, this)">Art (3:1)</button>
+                        <button class="qc-tab" onclick="setSystem(2, 1.09, this)">Deep (2:1)</button>
+                        <button class="qc-tab" onclick="setSystem(1, 1.15, this)">Coat (1:1)</button>
+                    </div>
+                    <div class="qc-body">
+                        <div>
+                            <div class="shape-grid">
+                                <div class="shape-btn active" onclick="setShape('rect', this)">Rect</div>
+                                <div class="shape-btn" onclick="setShape('circ', this)">Round</div>
                             </div>
+                            <div id="inp-rect">
+                                <div class="input-grp"><label>Length (cm)</label><input type="number" id="L" class="input-field" oninput="runCalc()"></div>
+                                <div class="input-grp"><label>Width (cm)</label><input type="number" id="W" class="input-field" oninput="runCalc()"></div>
+                            </div>
+                            <div id="inp-circ" style="display:none;">
+                                <div class="input-grp"><label>Diameter (cm)</label><input type="number" id="Dia" class="input-field" oninput="runCalc()"></div>
+                            </div>
+                            <div class="input-grp"><label>Depth (cm)</label><input type="number" id="D" class="input-field" oninput="runCalc()"></div>
+                            <div class="input-grp"><label>Resin Price (₹ per KG) - Optional</label><input type="number" id="Price" class="input-field" oninput="runCalc()"></div>
                         </div>
-                        <div id="inp-circ" style="display:none;">
-                            <div class="form-group input-grp"><label>Diameter (cm)</label><input type="number" id="Dia" oninput="calc()"></div>
-                        </div>
-                        <div class="input-row">
-                            <div class="input-grp"><label>Depth (cm)</label><input type="number" id="D" oninput="calc()"></div>
-                            <div class="input-grp"><label>Wastage Buffer</label><input type="number" id="Waste" value="5" oninput="calc()"></div>
+                        <div class="res-box">
+                            <span class="spec-lbl" style="margin-bottom:10px; display:block;">Total Required</span>
+                            <div class="res-val" id="resTotal">0g</div>
+                            <div class="mix-bar"><div id="barA" class="bar-a"></div><div id="barB" class="bar-b"></div></div>
+                            <div class="res-row"><span>Part A (Resin)</span><b id="resA">0g</b></div>
+                            <div class="res-row"><span>Part B (Hardener)</span><b id="resB">0g</b></div>
+                            <div class="res-row" style="color:var(--warning);"><span>Pigment Load</span><b id="resPig">0g</b></div>
+                            <div class="res-row" style="color:var(--success); border:none;"><span>Est. Project Cost</span><b id="resCost">₹0</b></div>
                         </div>
                     </div>
-                    <div class="qc-results">
-                        <span class="res-sub">Total Batch Required</span>
-                        <div class="res-val" id="resTotal">0g</div>
-                        <div class="mix-bar"><div id="barA" class="bar-a"></div><div id="barB" class="bar-b"></div></div>
-                        <div class="res-row"><span>Part A (Resin)</span><b id="resA">0g</b></div>
-                        <div class="res-row"><span>Part B (Hardener)</span><b id="resB">0g</b></div>
-                        <div class="res-row" style="color:var(--warning);"><span>Pigment Est.</span><b id="resPig">0g</b></div>
-                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Market Analysis</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Feature</th><th>M-X Lumes</th><th>Generic Resin</th></tr></thead>
+                        <tbody>
+                            <tr><td>Bubble Release</td><td>Auto (180 mPas)</td><td>Manual (Torch/Vacuum)</td></tr>
+                            <tr><td>UV Resistance</td><td>Triple HALS Shield</td><td>Basic (Yellows in 6 months)</td></tr>
+                            <tr><td>Clarity</td><td>Optical Grade Crystal</td><td>Industrial Tint</td></tr>
+                            <tr><td>Shore Hardness</td><td>82D (Rock Hard)</td><td>65D-70D (Soft/Scratches)</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
         <section id="faq" class="section">
-            <div class="grid-4" style="grid-template-columns: 1.5fr 1fr;">
-                <div>
-                    <h3 style="margin-bottom:40px;">Professional Protocol</h3>
-                    <div class="timeline">
-                        <div class="t-item"><div class="t-head">01. Ambient Prep</div><p class="t-txt">Ensure room temp is 24-26°C. Level your surface precisely.</p></div>
-                        <div class="t-item"><div class="t-head">02. Gravimetric Measure</div><p class="t-txt">Weigh Part A and B into separate cups. 3:1 by weight only.</p></div>
-                        <div class="t-item"><div class="t-head">03. Dual-Cup Mix</div><p class="t-txt">Mix for 3 mins. Transfer to a fresh cup. Mix for 1 more min.</p></div>
+            <div class="container">
+                <div class="grid-4" style="grid-template-columns: 1.5fr 1fr;">
+                    <div>
+                        <h3 style="margin-bottom:30px;">Process Protocol</h3>
+                        <div class="timeline">
+                            <div class="t-item"><div class="t-head">01. Surface Prep</div><p class="t-txt">Clean all dust. Level surface. Temperature 24-26°C.</p></div>
+                            <div class="t-item"><div class="t-head">02. Weight Precision</div><p class="t-txt">Weigh 3:1 ratio by weight using a digital scale.</p></div>
+                            <div class="t-item"><div class="t-head">03. Dual-Cup Mix</div><p class="t-txt">Mix 3 mins. Transfer to fresh cup. Mix 1 more min.</p></div>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <h3 style="margin-bottom:40px;">FAQ</h3>
-                    <details><summary>Is it Food Safe?</summary><p style="margin-top:15px; color:#888;">Yes, once fully cured (7 days), the resin is FDA inert.</p></details>
-                    <details><summary>VOC Emissions?</summary><p style="margin-top:15px; color:#888;">M-X Lumes contains zero solvents and zero VOC emissions.</p></details>
-                    <details id="docs"><summary>Downloads</summary><p style="margin-top:15px;"><a href="#" style="color:#fff;">Technical Data Sheet (TDS)</a><br><a href="#" style="color:#fff;">Safety Data Sheet (SDS)</a></p></details>
+                    <div>
+                        <h3 style="margin-bottom:30px;">Technical FAQ</h3>
+                        <details><summary>Is it Food Safe?</summary><p class="faq-ans">Yes, fully cured after 7 days, it is FDA inert.</p></details>
+                        <details><summary>Maximum pour depth?</summary><p class="faq-ans">20-25mm per layer for the Art system.</p></details>
+                        <details><summary>VOC Emissions?</summary><p class="faq-ans">Zero solvents, zero VOCs, and minimal odor.</p></details>
+                    </div>
                 </div>
             </div>
         </section>
-
     </div>
 
     <footer class="footer">
-        <div class="footer-grid">
-            <div class="f-col">
-                <a href="#" class="footer-logo">M-X LUMES</a>
-                <p style="color:#555; font-size:14px; max-width:250px;">Engineering premium resin systems for artists who demand stoichiometric perfection.</p>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="f-col">
+                    <a href="#" class="logo">M-X LUMES</a>
+                    <p style="color:#444; font-size:14px; margin-top:15px;">Engineering stoichiometric resin systems for professional master artists.</p>
+                </div>
+                <div class="f-col">
+                    <h4>Support</h4>
+                    <a href="#">Technical Data (TDS)</a>
+                    <a href="#">Safety Data (SDS)</a>
+                    <a href="#">WhatsApp Support</a>
+                </div>
+                <div class="f-col">
+                    <h4>Company</h4>
+                    <a href="#">Bulk Orders</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Refund Policy</a>
+                </div>
             </div>
-            <div class="f-col f-links">
-                <h4>Product</h4>
-                <a href="#">Art Resin</a><a href="#">Deep Pour</a><a href="#">Pigments</a>
+            <div style="margin-top:60px; padding-top:20px; border-top:1px solid #111; color:#333; font-size:12px; display:flex; justify-content:space-between;">
+                <span>© 2026 M-X LUMES. India.</span>
+                <span>ISO 9001:2015 CERTIFIED</span>
             </div>
-            <div class="f-col f-links">
-                <h4>Support</h4>
-                <a href="#calc">Calculator</a><a href="#guide">Guide</a><a href="#">Contact</a>
-            </div>
-            <div class="f-col f-links">
-                <h4>Connect</h4>
-                <a href="#">Instagram</a><a href="#">WhatsApp</a><a href="#">Youtube</a>
-            </div>
-        </div>
-        <div class="legal-row">
-            <span>© 2026 M-X LUMES. INDIA.</span>
-            <span>PRIVACY POLICY / TERMS OF SERVICE</span>
         </div>
     </footer>
 
     <div class="cart-fab" onclick="toggleCart()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg><div class="cart-badge" id="cartCount">0</div></div>
-    <div class="cart-modal" id="cartModal"><div class="cart-panel">
-        <h2 style="margin-bottom:30px;">Your Batch</h2>
-        <div id="cartItems" style="flex:1; overflow-y:auto; border-top:1px solid #222; padding-top:20px;"></div>
-        <div style="margin-top:30px; border-top:1px solid #222; padding-top:20px;">
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <h2>Batch Cart</h2>
+            <div id="cartItems" style="margin:20px 0; border-top:1px solid #222; padding-top:20px;"></div>
             <div style="display:flex; justify-content:space-between; font-size:24px; font-weight:800;"><span>Total</span><span id="cartTotal">₹0</span></div>
-            <button class="buy-btn" style="margin-top:20px; background:var(--accent-grad); color:#fff;" onclick="payNow()">Secure Checkout</button>
-            <button class="buy-btn" style="margin-top:10px; background:transparent; color:#666; border:1px solid #222;" onclick="toggleCart()">Close</button>
+            <button class="hero-btn" style="width:100%; margin-top:20px;" onclick="checkout()">Secure Checkout</button>
+            <button class="hero-btn" style="width:100%; margin-top:10px; background:transparent; border:1px solid #333; color:#666;" onclick="toggleCart()">Close</button>
         </div>
-    </div></div>
+    </div>
 
     <script>
-        // 1. LENIS SMOOTH SCROLL (With Mobile Guard)
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true,
-            smoothTouch: false // STABILITY FIX: Native scroll for touch devices
-        });
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-        requestAnimationFrame(raf);
-
-        // 2. CALCULATOR LOGIC
+        // 1. CALCULATOR
         let ratioA = 3, density = 1.13, shape = 'rect';
         function setSystem(r, d, el) {
             ratioA = r; density = d;
@@ -362,7 +326,7 @@
             let pct = (r / (r+1)) * 100;
             document.getElementById('barA').style.width = pct + '%';
             document.getElementById('barB').style.width = (100-pct) + '%';
-            calc();
+            runCalc();
         }
         function setShape(s, el) {
             shape = s;
@@ -370,47 +334,38 @@
             el.classList.add('active');
             document.getElementById('inp-rect').style.display = s === 'rect' ? 'block' : 'none';
             document.getElementById('inp-circ').style.display = s === 'circ' ? 'block' : 'none';
-            calc();
+            runCalc();
         }
-        function calc() {
+        function runCalc() {
             let area = 0;
             let D = parseFloat(document.getElementById('D').value) || 0;
-            let Wst = parseFloat(document.getElementById('Waste').value) || 0;
             if (shape === 'rect') {
                 area = (parseFloat(document.getElementById('L').value) || 0) * (parseFloat(document.getElementById('W').value) || 0);
             } else {
                 area = Math.PI * Math.pow((parseFloat(document.getElementById('Dia').value) || 0)/2, 2);
             }
-            let weight = area * D * density;
-            weight = weight * (1 + (Wst/100));
+            let weight = area * D * density * 1.05; // 5% waste
             let partB = weight / (ratioA + 1);
             let partA = weight - partB;
             document.getElementById('resTotal').innerText = Math.round(weight) + 'g';
             document.getElementById('resA').innerText = Math.round(partA) + 'g';
             document.getElementById('resB').innerText = Math.round(partB) + 'g';
             document.getElementById('resPig').innerText = (weight * 0.02).toFixed(1) + 'g';
+            let p = parseFloat(document.getElementById('Price').value) || 0;
+            document.getElementById('resCost').innerText = '₹' + Math.round((weight/1000) * p).toLocaleString();
         }
 
-        // 3. COMMERCE
+        // 2. COMMERCE
         let cart = [];
         function addToCart(item, price) { cart.push({item, price}); updateCart(); toggleCart(); }
         function updateCart() {
             const list = document.getElementById('cartItems'); list.innerHTML = ''; let total = 0;
-            cart.forEach(i => { total += i.price; list.innerHTML += `<div style="padding:15px 0; border-bottom:1px solid #111; display:flex; justify-content:space-between;"><span>${i.item}</span><b>₹${i.price}</b></div>`; });
+            cart.forEach(i => { total += i.price; list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>${i.item}</span><b>₹${i.price}</b></div>`; });
             document.getElementById('cartTotal').innerText = '₹' + total.toLocaleString();
             document.getElementById('cartCount').innerText = cart.length;
         }
         function toggleCart() { document.getElementById('cartModal').classList.toggle('active'); }
-        function payNow() { 
-            let amt = document.getElementById('cartTotal').innerText.replace(/[^0-9]/g, '');
-            if(amt == '0') return;
-            var options = { "key": "rzp_test_YOUR_KEY", "amount": amt*100, "name": "M-X LUMES", "handler": function(res){ alert("Order Success: " + res.razorpay_payment_id); } };
-            new Razorpay(options).open();
-        }
-
-        // 4. ANIMATION REVEAL
-        const obs = new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); }, {threshold: 0.1});
-        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        function checkout() { alert('Connecting to Secure Gateway...'); }
     </script>
 </body>
 </html>
