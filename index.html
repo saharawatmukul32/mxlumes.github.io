@@ -179,6 +179,7 @@
         .bento-lbl { font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 1px; }
 
         .specs-layout { display: grid; grid-template-columns: 1fr; gap: 60px; }
+        
         .comp-wrapper { overflow-x: auto; margin-bottom: 50px; }
         .comp-table { width: 100%; min-width: 700px; border-collapse: collapse; background: var(--glass); border-radius: 24px; }
         .comp-table th { padding: 25px; text-align: left; font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 1px; border-bottom: 1px solid var(--border); }
@@ -201,7 +202,7 @@
         .chem-warn { padding: 20px; border: 1px solid var(--warning); border-radius: 12px; background: rgba(245,158,11,0.05); color: var(--text-dim); font-size: 13px; display: flex; gap: 15px; align-items: center; margin-top: 40px; }
 
         /* -----------------------------------------------------------
-           8. CHEMIST CALCULATOR V5.0 (ENV + RISK + MM)
+           8. OMNI-CHEMIST CALCULATOR
            ----------------------------------------------------------- */
         .zenith-calc {
             background: var(--bg-panel); border: 1px solid var(--border);
@@ -212,9 +213,9 @@
         .z-controls { padding: 60px; border-right: 1px solid var(--border); }
         .z-display { padding: 60px; background: rgba(15,15,15,0.95); display: flex; flex-direction: column; justify-content: space-between; position: relative; }
         
-        /* Unit Wrap */
+        /* Unit Switch */
         .unit-wrap { display: flex; gap: 5px; }
-        .unit-btn { padding: 8px 16px; border-radius: 12px; font-size: 10px; font-weight: 800; color: #666; background: rgba(255,255,255,0.05); transition: 0.3s; }
+        .unit-btn { padding: 8px 16px; border-radius: 12px; font-size: 10px; font-weight: 800; color: #666; background: rgba(255,255,255,0.05); transition: 0.3s; cursor:pointer; }
         .unit-btn.active { background: #fff; color: #000; }
 
         /* Shapes */
@@ -240,17 +241,25 @@
         .z-slider { -webkit-appearance: none; flex: 1; height: 6px; background: #222; border-radius: 3px; outline: none; }
         .z-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; background: #fff; border-radius: 50%; cursor: grab; transition: 0.2s; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
         
+        /* Presets */
         .preset-row { display: flex; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
         .preset-btn { padding: 10px 20px; border: 1px solid var(--border); border-radius: 30px; font-size: 11px; color: #888; background: transparent; white-space: nowrap; transition: 0.3s; cursor: pointer; }
         .preset-btn:active { transform: scale(0.95); } 
         .preset-btn:hover { color: #fff; border-color: #fff; }
 
-        /* Chemist Panel */
+        /* Chemist Panel (Environment) */
         .chem-panel { background: rgba(99,102,241,0.03); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-top: 30px; }
         .chem-head { font-size: 11px; font-weight: 700; color: #6366f1; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
         .chem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-        
-        /* Results */
+
+        /* Restored Engineer Panel (Advanced) */
+        .eng-mode { margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px; }
+        .eng-toggle { font-size: 11px; font-weight: 700; color: #6366f1; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .eng-panel { display: none; margin-top: 20px; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .eng-panel.show { display: grid; animation: fadeIn 0.3s; }
+        .eng-inp { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 10px; border-radius: 8px; color: #fff; font-family: inherit; font-size: 12px; }
+
+        /* Results Display */
         .z-res-title { font-size: 12px; font-weight: 700; text-transform: uppercase; color: #666; letter-spacing: 2px; }
         .z-res-val { font-size: 84px; font-weight: 800; color: #fff; line-height: 1; margin: 10px 0 20px; letter-spacing: -3px; }
         .z-res-sub { font-size: 14px; color: #888; font-family: 'Space Grotesk'; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 15px; }
@@ -264,6 +273,11 @@
         .z-advisor.warn { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); }
         .z-adv-text { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.4; }
         
+        .z-cost { margin-top: auto; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 16px; display: flex; justify-content: space-between; align-items: center; }
+        .cost-inp { background: transparent; border: none; border-bottom: 1px solid #444; width: 60px; color: #fff; text-align: right; font-weight: 700; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
         /* -----------------------------------------------------------
            9. FOOTER
            ----------------------------------------------------------- */
@@ -425,7 +439,7 @@
 
     <section id="calc" class="section reveal">
         <div class="container">
-            <h2 style="text-align:center; margin-bottom:50px;">Chemist Calculator</h2>
+            <h2 style="text-align:center; margin-bottom:50px;">Project Calculator</h2>
             
             <div class="zenith-calc">
                 <div class="z-controls">
@@ -494,9 +508,16 @@
                             <div><div class="z-label" style="font-size:9px;">Temp (°C)</div><input type="range" class="z-slider" id="env-temp" min="10" max="40" value="25" oninput="runCalc(); document.getElementById('val-temp').innerText = this.value + '°C'"><div id="val-temp" style="font-size:11px; color:#fff; margin-top:5px; text-align:right;">25°C</div></div>
                             <div><div class="z-label" style="font-size:9px;">Humidity (%)</div><input type="range" class="z-slider" id="env-hum" min="20" max="90" value="50" oninput="runCalc(); document.getElementById('val-hum').innerText = this.value + '%'"><div id="val-hum" style="font-size:11px; color:#fff; margin-top:5px; text-align:right;">50%</div></div>
                         </div>
-                        <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
-                            <div class="z-label" style="font-size:9px;">Brand Limit (MM)</div>
-                            <input type="number" id="brandLimitMM" class="z-number" value="25" style="width:100%; text-align:left; font-size:18px;" oninput="runCalc()">
+                    </div>
+
+                    <div class="eng-mode">
+                        <div class="eng-toggle" onclick="document.getElementById('eng-panel').classList.toggle('show')">⚙️ Advanced Engineer Mode</div>
+                        <div id="eng-panel" class="eng-panel">
+                            <div><label class="z-label" style="font-size:9px;">Ratio A</label><input type="number" id="ratioA" class="eng-inp" value="3" oninput="runCalc()"></div>
+                            <div><label class="z-label" style="font-size:9px;">Ratio B</label><input type="number" id="ratioB" class="eng-inp" value="1" oninput="runCalc()"></div>
+                            <div><label class="z-label" style="font-size:9px;">Density</label><input type="number" id="density" class="eng-inp" value="1.13" step="0.01" oninput="runCalc()"></div>
+                            <div><label class="z-label" style="font-size:9px;">Brand Limit (MM)</label><input type="number" id="brandLimitMM" class="eng-inp" value="25" oninput="runCalc()"></div>
+                            <div><label class="z-label" style="font-size:9px;">Pigment %</label><input type="number" id="pigment" class="eng-inp" value="0" oninput="runCalc()"></div>
                         </div>
                     </div>
                 </div>
@@ -506,6 +527,7 @@
                         <span class="z-res-title">Total Mix</span>
                         <div class="z-res-val" id="res-total">0g</div>
                         <div class="z-res-sub">A: <span style="color:#fff;" id="res-a">0g</span> | B: <span style="color:#fff;" id="res-b">0g</span></div>
+                        <div class="z-res-sub" style="margin-top:10px;">Pigment: <span style="color:#fff;" id="res-pig">0g</span></div>
                         
                         <div class="time-box">
                             <div class="t-card"><span class="t-val" id="time-pot">45m</span><span class="t-lbl">Pot Life</span></div>
@@ -517,6 +539,12 @@
                     <div class="z-advisor" id="advisor-box">
                         <div class="z-adv-icon">✅</div>
                         <div class="z-adv-text" id="advisor-text">Safe Conditions</div>
+                    </div>
+
+                    <div class="z-cost">
+                        <div style="font-size:10px; color:#888; text-transform:uppercase; font-weight:700;">Est. Cost <br><span style="font-size:9px; color:#555;">(Input ₹/kg)</span></div>
+                        <input type="number" id="costInput" class="cost-inp" placeholder="1000" oninput="runCalc()">
+                        <div style="font-size:24px; font-weight:700; color:#fff;" id="est-cost">₹0</div>
                     </div>
                 </div>
             </div>
@@ -570,7 +598,7 @@
             const timer = setInterval(() => { count += inc; if(count >= target) { count = target; clearInterval(timer); } el.innerText = Math.floor(count) + (el.innerText.includes('%') ? '%' : ''); }, 30);
         }
 
-        // --- CHEMIST CALCULATOR LOGIC ---
+        // --- TITAN OMNI-CHEMIST CALCULATOR ---
         let shape = 'rect';
         let unitMult = 1; 
         
@@ -628,18 +656,30 @@
                 area = 2.598 * Math.pow(s, 2);
             }
 
-            const density = 1.13;
+            // 2. ADVANCED PARAMS
+            const rA = parseFloat(document.getElementById('ratioA').value) || 3;
+            const rB = parseFloat(document.getElementById('ratioB').value) || 1;
+            const density = parseFloat(document.getElementById('density').value) || 1.13;
             const limitMM = parseFloat(document.getElementById('brandLimitMM').value) || 25;
             const limit = limitMM / 10; // Convert to CM for logic
+            const pigPct = parseFloat(document.getElementById('pigment').value) || 0;
+            const costPerKg = parseFloat(document.getElementById('costInput').value) || 0;
 
             const vol = area * h;
             const mass = vol * density;
+            const totalParts = rA + rB;
+            const massA = (mass * rA) / totalParts;
+            const massB = (mass * rB) / totalParts;
+            const pigMass = mass * (pigPct/100);
             
             document.getElementById('res-total').innerText = Math.round(mass) + 'g';
-            document.getElementById('res-a').innerText = Math.round(mass * 0.75) + 'g';
-            document.getElementById('res-b').innerText = Math.round(mass * 0.25) + 'g';
+            document.getElementById('res-a').innerText = Math.round(massA) + 'g';
+            document.getElementById('res-b').innerText = Math.round(massB) + 'g';
+            document.getElementById('res-pig').innerText = pigMass.toFixed(1) + 'g';
 
-            // 2. ENVIRONMENT LOGIC
+            if(costPerKg > 0) document.getElementById('est-cost').innerText = '₹' + Math.round((mass/1000)*costPerKg).toLocaleString();
+
+            // 3. ENVIRONMENT LOGIC
             const temp = parseFloat(document.getElementById('env-temp').value) || 25;
             const hum = parseFloat(document.getElementById('env-hum').value) || 50;
             
@@ -659,7 +699,7 @@
             document.getElementById('time-demold').innerText = demold + "h";
             document.getElementById('time-cure').innerText = cure + "d";
 
-            // 3. RISK ANALYSIS
+            // 4. RISK ANALYSIS
             const advBox = document.getElementById('advisor-box');
             const advTxt = document.getElementById('advisor-text');
             const advIcon = document.querySelector('.z-adv-icon');
