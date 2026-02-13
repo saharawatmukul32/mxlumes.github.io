@@ -27,7 +27,6 @@
             /* Accents */
             --accent: #ffffff;
             --brand-glow: rgba(99, 102, 241, 0.4);
-            --brand-solid: #6366f1;
             
             /* Glass Engine */
             --border: rgba(255, 255, 255, 0.08);
@@ -200,7 +199,7 @@
         .chem-warn { padding: 20px; border: 1px solid var(--warning); border-radius: 12px; background: rgba(245,158,11,0.05); color: var(--text-dim); font-size: 13px; display: flex; gap: 15px; align-items: center; margin-top: 40px; }
 
         /* -----------------------------------------------------------
-           8. ZENITH PRIME CALCULATOR (RE-ARCHITECTED)
+           8. TITAN USER-CENTRIC CALCULATOR
            ----------------------------------------------------------- */
         .zenith-calc {
             background: var(--bg-panel); border: 1px solid var(--border);
@@ -211,28 +210,26 @@
         .z-controls { padding: 60px; border-right: 1px solid var(--border); }
         .z-display { padding: 60px; background: rgba(15,15,15,0.95); display: flex; flex-direction: column; justify-content: space-between; position: relative; }
         
-        /* Step Cards */
+        /* Step Card */
         .step-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
         .step-head { font-size: 11px; font-weight: 800; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; }
         .step-num { width: 20px; height: 20px; background: #6366f1; border-radius: 50%; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 10px; margin-right: 10px; }
 
-        /* Ratio Buttons */
+        /* Unit & Ratio */
+        .unit-wrap { display: flex; gap: 5px; }
+        .unit-btn { padding: 6px 12px; border-radius: 8px; font-size: 10px; font-weight: 800; color: #666; background: rgba(255,255,255,0.05); transition: 0.3s; cursor:pointer; }
+        .unit-btn.active { background: #fff; color: #000; }
+
         .ratio-grid { display: flex; gap: 10px; margin-bottom: 20px; }
         .ratio-btn { flex: 1; padding: 12px; border: 1px solid var(--border); border-radius: 12px; font-size: 12px; font-weight: 700; color: #888; background: transparent; transition: 0.3s; cursor: pointer; text-align: center; }
-        .ratio-btn:hover { background: rgba(255,255,255,0.05); }
         .ratio-btn.active { border-color: #6366f1; color: #fff; background: rgba(99,102,241,0.1); }
-
-        /* Toggle Switch (Coating/Casting) */
-        .mode-toggle { display: flex; background: #000; border-radius: 12px; padding: 4px; border: 1px solid var(--border); }
-        .mode-opt { flex: 1; text-align: center; padding: 10px; font-size: 11px; font-weight: 700; color: #666; cursor: pointer; border-radius: 8px; transition: 0.3s; }
-        .mode-opt.active { background: #fff; color: #000; }
 
         /* Shapes */
         .z-shapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
         .z-shape {
             padding: 20px; border: 1px solid var(--border); border-radius: 16px;
             display: flex; flex-direction: column; align-items: center; gap: 10px;
-            cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.01);
+            cursor: pointer; transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); background: rgba(255,255,255,0.01);
         }
         .z-shape.active { border-color: #fff; background: rgba(255,255,255,0.08); }
         .z-shape svg { width: 28px; height: 28px; stroke: #888; stroke-width: 1.5; fill: none; }
@@ -240,7 +237,6 @@
         .z-shape span { font-size: 10px; font-weight: 700; text-transform: uppercase; color: #666; }
         .z-shape.active span { color: #fff; }
 
-        /* Inputs */
         .z-group { margin-bottom: 25px; }
         .z-label { font-size: 10px; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 10px; display: block; }
         .z-input-row { display: flex; align-items: center; gap: 15px; }
@@ -249,27 +245,39 @@
         .z-slider { -webkit-appearance: none; flex: 1; height: 6px; background: #222; border-radius: 3px; outline: none; }
         .z-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; background: #fff; border-radius: 50%; cursor: grab; transition: 0.2s; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
 
-        /* Unit Switch */
-        .unit-wrap { display: flex; gap: 5px; }
-        .unit-btn { padding: 6px 12px; border-radius: 8px; font-size: 10px; font-weight: 800; color: #666; background: rgba(255,255,255,0.05); transition: 0.3s; cursor:pointer; }
-        .unit-btn.active { background: #fff; color: #000; }
+        .preset-row { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+        .preset-btn { padding: 8px 16px; border: 1px solid var(--border); border-radius: 20px; font-size: 11px; color: #888; background: transparent; white-space: nowrap; transition: 0.3s; cursor: pointer; }
+        .preset-btn:hover { color: #fff; border-color: #fff; }
 
+        /* Env Panel */
+        .chem-panel { background: rgba(99,102,241,0.03); border: 1px solid var(--border); border-radius: 20px; padding: 20px; }
+        .chem-head { font-size: 11px; font-weight: 700; color: #6366f1; margin-bottom: 15px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+        
+        /* Refine Panel (Collapsible) */
+        .refine-toggle { margin-top: 20px; font-size: 11px; font-weight: 700; color: #888; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .refine-toggle:hover { color: #fff; }
+        .refine-panel { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border); }
+        .refine-panel.show { display: block; animation: fadeIn 0.3s; }
+        
         /* Results */
         .z-res-title { font-size: 12px; font-weight: 700; text-transform: uppercase; color: #666; letter-spacing: 2px; }
         .z-res-val { font-size: 72px; font-weight: 800; color: #fff; line-height: 1; margin: 10px 0 20px; letter-spacing: -2px; text-shadow: 0 0 30px rgba(99,102,241,0.2); }
-        .z-res-sub { font-size: 14px; color: #888; font-family: 'Space Grotesk'; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 15px; }
         
-        .time-box { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
-        .t-card { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 12px; text-align: center; }
-        .t-val { font-size: 14px; font-weight: 700; color: #fff; display: block; }
-        .t-lbl { font-size: 9px; color: #666; text-transform: uppercase; }
+        .parts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 25px; }
+        .part-box div { font-size: 10px; color: #666; text-transform: uppercase; margin-bottom: 5px; font-weight: 700; }
+        .part-box span { font-size: 20px; font-weight: 700; color: #fff; }
 
-        .z-advisor { padding: 20px; border-radius: 16px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); display: flex; align-items: center; gap: 15px; }
+        .z-advisor { padding: 15px; border-radius: 12px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
         .z-advisor.warn { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); }
         .z-adv-text { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.4; }
-        
-        .z-cost { margin-top: auto; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 16px; display: flex; justify-content: space-between; align-items: center; }
-        .cost-inp { background: transparent; border: none; border-bottom: 1px solid #444; width: 60px; color: #fff; text-align: right; font-weight: 700; }
+
+        .z-cost-card { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 16px; border: 1px solid var(--border); }
+        .cost-input-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .cost-lbl { font-size: 11px; color: #888; }
+        .cost-inp { background: transparent; border: none; border-bottom: 1px solid #444; width: 80px; color: #fff; text-align: right; font-weight: 700; font-size: 14px; }
+        .final-cost { font-size: 24px; font-weight: 700; color: #fff; text-align: right; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* -----------------------------------------------------------
            9. FOOTER
@@ -447,9 +455,9 @@
                             </div>
                         </div>
                         
-                        <div class="z-label">Mixing Ratio (A:B)</div>
+                        <div class="z-label">Mixing Ratio</div>
                         <div class="ratio-grid">
-                            <button class="ratio-btn active" onclick="setRatio(3,1)">3:1</button>
+                            <button class="ratio-btn active" onclick="setRatio(3,1)">3:1 (Standard)</button>
                             <button class="ratio-btn" onclick="setRatio(2,1)">2:1</button>
                             <button class="ratio-btn" onclick="setRatio(1,1)">1:1</button>
                             <button class="ratio-btn" onclick="toggleCustomRatio()">Custom</button>
@@ -457,12 +465,6 @@
                         <div id="custom-ratio" style="display:none; gap:10px; margin-bottom:15px;">
                             <input type="number" id="ratioA" class="z-number" value="3" style="width:100%; font-size:16px; border:1px solid #333; padding:5px; border-radius:5px;" oninput="runCalc()">
                             <input type="number" id="ratioB" class="z-number" value="1" style="width:100%; font-size:16px; border:1px solid #333; padding:5px; border-radius:5px;" oninput="runCalc()">
-                        </div>
-
-                        <div class="z-label">Application Type</div>
-                        <div class="mode-toggle">
-                            <div class="mode-opt active" id="mode-cast" onclick="setMode('cast')">Casting (Deep)</div>
-                            <div class="mode-opt" id="mode-coat" onclick="setMode('coat')">Coating (Thin)</div>
                         </div>
                     </div>
 
@@ -504,39 +506,52 @@
                         </div>
                     </div>
                     
-                    <div style="font-size:11px; color:#6366f1; cursor:pointer; margin-top:10px;" onclick="document.getElementById('adv-panel').style.display = document.getElementById('adv-panel').style.display === 'block' ? 'none' : 'block'">⚙️ Advanced (Density / Pigment)</div>
-                    <div id="adv-panel" style="display:none; margin-top:15px;">
-                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                            <div><label class="z-label" style="font-size:9px;">Density</label><input type="number" id="density" class="z-number" value="1.13" step="0.01" style="font-size:16px; width:100%; border:1px solid #333; padding:5px; border-radius:5px;" oninput="runCalc()"></div>
-                            <div><label class="z-label" style="font-size:9px;">Pigment %</label><input type="number" id="pigment" class="z-number" value="0" style="font-size:16px; width:100%; border:1px solid #333; padding:5px; border-radius:5px;" oninput="runCalc()"></div>
-                        </div>
+                    <div class="refine-toggle" onclick="document.getElementById('refine-panel').classList.toggle('show')">
+                        <span>⚡ Optional: Refine Calculation</span>
+                    </div>
+                    <div id="refine-panel" class="refine-panel">
+                        <div class="z-label">Density (g/cm³)</div>
+                        <select id="densitySelect" onchange="updateDensity()" style="width:100%; background:#111; color:#fff; padding:10px; border:1px solid #333; border-radius:8px; margin-bottom:15px;">
+                            <option value="1.13">Standard Epoxy (1.13)</option>
+                            <option value="1.05">Low Viscosity (1.05)</option>
+                            <option value="1.20">Heavy Casting (1.20)</option>
+                        </select>
+                        <input type="hidden" id="density" value="1.13">
+                        
+                        <div class="z-label">Pigment Loading (%)</div>
+                        <input type="range" class="z-slider" id="pigment" min="0" max="5" step="0.5" value="0" oninput="runCalc(); document.getElementById('pig-val').innerText = this.value + '%'">
+                        <div id="pig-val" style="font-size:11px; color:#888; text-align:right; margin-top:5px;">0%</div>
                     </div>
 
                 </div>
 
                 <div class="z-display">
                     <div>
-                        <span class="z-res-title">Total Mix</span>
+                        <span class="z-res-title">Total Mix Required</span>
                         <div class="z-res-val" id="res-total">0g</div>
-                        <div class="z-res-sub">A: <span style="color:#fff;" id="res-a">0g</span> | B: <span style="color:#fff;" id="res-b">0g</span></div>
-                        <div class="z-res-sub" style="margin-top:10px;">Pigment: <span style="color:#fff;" id="res-pig">0g</span></div>
                         
-                        <div class="time-box">
-                            <div class="t-card"><span class="t-val" id="time-pot">45m</span><span class="t-lbl">Pot Life</span></div>
-                            <div class="t-card"><span class="t-val" id="time-demold">24h</span><span class="t-lbl">Demold</span></div>
-                            <div class="t-card"><span class="t-val" id="time-cure">7d</span><span class="t-lbl">Full Cure</span></div>
+                        <div class="parts-grid">
+                            <div class="part-box"><div>RESIN</div><span id="res-a">0g</span></div>
+                            <div class="part-box"><div>HARDENER</div><span id="res-b">0g</span></div>
                         </div>
+                        
+                        <div class="z-res-sub" style="margin-top:10px;">Pigment Need: <span style="color:#fff;" id="res-pig">0g</span></div>
                     </div>
 
                     <div class="z-advisor" id="advisor-box">
-                        <div class="z-adv-icon">✅</div>
-                        <div class="z-adv-text" id="advisor-text">Safe Conditions</div>
+                        <div class="z-adv-text" id="advisor-text">Ready to Calculate</div>
                     </div>
 
-                    <div class="z-cost">
-                        <div style="font-size:10px; color:#888; text-transform:uppercase; font-weight:700;">Est. Cost <br><span style="font-size:9px; color:#555;">(Input ₹/kg)</span></div>
-                        <input type="number" id="costInput" class="cost-inp" placeholder="1000" oninput="runCalc()">
-                        <div style="font-size:24px; font-weight:700; color:#fff;" id="est-cost">₹0</div>
+                    <div class="z-cost-card">
+                        <div class="cost-input-row">
+                            <span class="cost-lbl">Price of Resin Kit (₹/kg)</span>
+                            <input type="number" id="costInput" class="cost-inp" placeholder="1000" oninput="runCalc()">
+                        </div>
+                        <div style="border-top:1px solid rgba(255,255,255,0.1); margin:10px 0;"></div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span class="cost-lbl" style="color:#fff; font-weight:700;">PROJECT ESTIMATE</span>
+                            <span class="final-cost" id="est-cost">₹0</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -590,10 +605,9 @@
             const timer = setInterval(() => { count += inc; if(count >= target) { count = target; clearInterval(timer); } el.innerText = Math.floor(count) + (el.innerText.includes('%') ? '%' : ''); }, 30);
         }
 
-        // --- ZENITH PRIME CALCULATOR ---
+        // --- TITAN CALCULATOR V6 ---
         let shape = 'rect';
         let unitMult = 1; 
-        let limit = 2.5; // Brand limit (default casting)
         
         function setUnit(u) {
             document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
@@ -620,8 +634,11 @@
         function setMode(mode) {
             document.querySelectorAll('.mode-opt').forEach(opt => opt.classList.remove('active'));
             document.getElementById('mode-'+mode).classList.add('active');
-            // Coating = 0.5cm limit, Casting = 2.5cm limit (default)
-            limit = mode === 'coat' ? 0.5 : 2.5;
+            runCalc();
+        }
+
+        function updateDensity() {
+            document.getElementById('density').value = document.getElementById('densitySelect').value;
             runCalc();
         }
 
@@ -679,12 +696,17 @@
             const costPerKg = parseFloat(document.getElementById('costInput').value) || 0;
 
             const vol = area * h;
-            const mass = vol * density;
+            // Quantity multiplier
+            const q = parseFloat(document.getElementById('input-Qty').value) || 1;
+            const totalVol = vol * q;
+            const mass = totalVol * density;
+            
             const totalParts = rA + rB;
             const massA = (mass * rA) / totalParts;
             const massB = (mass * rB) / totalParts;
             const pigMass = mass * (pigPct/100);
             
+            // UI Updates
             document.getElementById('res-total').innerText = Math.round(mass) + 'g';
             document.getElementById('res-a').innerText = Math.round(massA) + 'g';
             document.getElementById('res-b').innerText = Math.round(massB) + 'g';
@@ -692,41 +714,32 @@
 
             if(costPerKg > 0) document.getElementById('est-cost').innerText = '₹' + Math.round((mass/1000)*costPerKg).toLocaleString();
 
-            // 2. ENV & RISK
+            // 2. ENV & ADVISOR
             const temp = parseFloat(document.getElementById('env-temp').value) || 25;
             const hum = parseFloat(document.getElementById('env-hum').value) || 50;
-            
-            // Times
-            let potLife = 45; let demold = 24; let cure = 7;
-            const rateFactor = Math.pow(2, (temp - 25) / 10);
-            potLife = Math.round(potLife / rateFactor);
-            demold = Math.max(12, Math.round(demold / rateFactor));
-            cure = Math.max(3, Math.round(cure / rateFactor));
-
-            document.getElementById('time-pot').innerText = potLife + "m";
-            document.getElementById('time-demold').innerText = demold + "h";
-            document.getElementById('time-cure').innerText = cure + "d";
-
-            // Advisor
             const advBox = document.getElementById('advisor-box');
             const advTxt = document.getElementById('advisor-text');
-            const advIcon = document.querySelector('.z-adv-icon');
             
             let warnings = [];
-            
+            // Coating/Casting Logic
+            const isCasting = document.querySelector('#mode-cast').classList.contains('active');
+            const limit = isCasting ? 2.5 : 0.5; // cm
+
             if (h > limit) {
                 const layers = Math.ceil(h / limit);
-                warnings.push(`EXOTHERM RISK! Depth (${h.toFixed(1)}cm) exceeds limit (${limit}cm). Pour ${layers} layers.`);
+                warnings.push(`EXOTHERM RISK! Depth exceeds limit. Pour ${layers} layers.`);
             }
-            if (hum > 70) warnings.push("HIGH HUMIDITY: Amine Blush Risk.");
+            if (hum > 70) warnings.push("HIGH HUMIDITY: Risk of Amine Blush.");
             if (temp > 30 && h > 2) warnings.push("HIGH TEMP: Flash Cure Risk!");
 
             if (warnings.length > 0) {
-                advBox.classList.add('warn'); advIcon.innerText = '⚠️';
-                advTxt.innerHTML = warnings.join("<br>"); advTxt.style.color = "#ef4444";
+                advBox.classList.add('warn');
+                advTxt.innerHTML = warnings.join("<br>");
+                advTxt.style.color = "#ef4444";
             } else {
-                advBox.classList.remove('warn'); advIcon.innerText = '✅';
-                advTxt.innerHTML = "Conditions Optimal"; advTxt.style.color = "#10b981";
+                advBox.classList.remove('warn');
+                advTxt.innerHTML = "Conditions Optimal for Pouring.";
+                advTxt.style.color = "#10b981";
             }
         }
 
