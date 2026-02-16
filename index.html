@@ -1,184 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M-X Lumes | Professional Resin Systems</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#000000">
+
+<title>M-X Lumes | TITAN ENGINE</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;500;600;700&display=swap"
+rel="stylesheet">
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
+
 <style>
 
-/* ============================
-   CORE DESIGN SYSTEM
-============================ */
+/* ===============================
+TITAN CORE DESIGN SYSTEM
+=============================== */
 
 :root{
+
 --bg:#000;
 --panel:#050505;
---glass:rgba(20,20,20,.85);
+--glass:rgba(18,18,18,.85);
 --border:rgba(255,255,255,.12);
+
 --text:#fff;
---text-dim:#aaa;
---accent:#fff;
+--text-dim:#9ca3af;
+
+--accent:#6366f1;
+
+--radius:28px;
+
 }
 
 body{
+
 margin:0;
 background:#000;
 color:#fff;
 font-family:Manrope,sans-serif;
+
 }
 
-.container{
-max-width:1100px;
-margin:auto;
-padding:30px;
-}
+/* ===============================
+NAVBAR
+=============================== */
 
-.section{
-padding:100px 0;
-}
+.navbar{
 
-h1,h2,h3{
-margin:0 0 20px 0;
-}
-
-/* ============================
-   BUTTONS
-============================ */
-
-.btn{
-padding:14px 28px;
-border-radius:40px;
-border:none;
-cursor:pointer;
-font-weight:700;
-}
-
-.btn-primary{
-background:#fff;
-color:#000;
-}
-
-/* ============================
-   PRODUCTS
-============================ */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-}
-
-.product-card{
-background:var(--glass);
-border:1px solid var(--border);
-border-radius:20px;
-padding:30px;
-}
-
-.product-card img{
-width:100%;
-border-radius:14px;
-margin-bottom:15px;
-}
-
-/* ============================
-   CART
-============================ */
-
-.cart-fab{
 position:fixed;
-bottom:30px;
-right:30px;
-background:#fff;
-color:#000;
-width:60px;
-height:60px;
-border-radius:50%;
+top:0;
+width:100%;
+height:80px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 40px;
+
+background:rgba(0,0,0,.7);
+backdrop-filter:blur(20px);
+
+z-index:1000;
+
+}
+
+/* ===============================
+HERO
+=============================== */
+
+.hero{
+
+height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:clamp(48px,6vw,100px);
+
+}
+
+/* ===============================
+BUTTON
+=============================== */
+
+.btn{
+
+padding:16px 32px;
+border-radius:60px;
+font-weight:700;
+border:none;
 cursor:pointer;
-z-index:1000;
+
 }
 
-.cart-sidebar{
-position:fixed;
-top:0;
-right:0;
-width:400px;
-height:100%;
-background:#050505;
-transform:translateX(100%);
-transition:.4s;
+.btn-primary{
+
+background:#fff;
+color:#000;
+
+}
+
+/* ===============================
+PRODUCT GRID
+=============================== */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+padding:120px 40px;
+
+}
+
+.product{
+
+background:var(--glass);
+border:1px solid var(--border);
+border-radius:var(--radius);
 padding:30px;
-z-index:2000;
+
 }
 
-.cart-sidebar.active{
-transform:translateX(0);
-}
-
-.cart-item{
-margin-bottom:15px;
-border-bottom:1px solid #222;
-padding-bottom:10px;
-}
-
-/* ============================
-   CALCULATOR
-============================ */
+/* ===============================
+CALCULATOR
+=============================== */
 
 .calc{
-background:#050505;
-padding:30px;
-border-radius:20px;
-border:1px solid var(--border);
+
+margin:100px auto;
+max-width:600px;
+background:var(--panel);
+padding:40px;
+border-radius:var(--radius);
+
 }
 
-input{
+.calc input{
+
 width:100%;
-padding:10px;
-margin-bottom:15px;
+padding:12px;
+margin-bottom:10px;
 background:#111;
 border:1px solid var(--border);
 color:#fff;
+
+}
+
+/* ===============================
+GALLERY
+=============================== */
+
+.gallery{
+
+column-count:3;
+column-gap:20px;
+padding:40px;
+
+}
+
+.gallery img{
+
+width:100%;
+margin-bottom:20px;
+border-radius:20px;
+
+}
+
+/* ===============================
+CART
+=============================== */
+
+.cart-fab{
+
+position:fixed;
+bottom:40px;
+right:40px;
+
+width:70px;
+height:70px;
+
+background:#fff;
+color:#000;
+
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+cursor:pointer;
+
+z-index:2000;
+
+}
+
+.cart-sidebar{
+
+position:fixed;
+right:0;
+top:0;
+
+width:420px;
+height:100%;
+
+background:#050505;
+
+transform:translateX(100%);
+transition:.4s;
+
+padding:40px;
+
+z-index:3000;
+
+}
+
+.cart-sidebar.active{
+
+transform:translateX(0);
+
 }
 
 </style>
+
 </head>
+
+
 <body>
 
-<!-- ============================
-HERO
-============================ -->
 
-<section class="section container">
+<div class="navbar">
 
-<h1>M-X Lumes Resin Systems</h1>
+M-X LUMES
 
-<p class="text-dim">
-Professional epoxy for artists and studios.
-</p>
+</div>
+
+
+<section class="hero">
+
+<div>
+
+<h1>
+Molecular Clarity
+</h1>
+
+<button class="btn btn-primary"
+onclick="document.getElementById('shop').scrollIntoView()">
+
+Shop Now
+
+</button>
+
+</div>
 
 </section>
 
 
-<!-- ============================
-PRODUCTS
-============================ -->
+<section id="shop"
+class="grid">
 
-<section class="section container">
 
-<h2>Products</h2>
-
-<div class="grid">
-
-<div class="product-card">
-
-<img src="product-1.webp">
+<div class="product">
 
 <h3>Starter Kit</h3>
 
@@ -197,9 +297,7 @@ Buy Now
 </div>
 
 
-<div class="product-card">
-
-<img src="7.5kg.png">
+<div class="product">
 
 <h3>Studio Kit</h3>
 
@@ -217,52 +315,56 @@ Buy Now
 
 </div>
 
-</div>
 
 </section>
 
 
-<!-- ============================
-CALCULATOR
-============================ -->
-
-<section class="section container">
+<section class="calc">
 
 <h2>Resin Calculator</h2>
 
-<div class="calc">
+<input id="length"
+placeholder="Length cm">
 
-<input id="length" placeholder="Length cm">
+<input id="width"
+placeholder="Width cm">
 
-<input id="width" placeholder="Width cm">
-
-<input id="depth" placeholder="Depth cm">
+<input id="depth"
+placeholder="Depth cm">
 
 <button class="btn btn-primary"
 onclick="calculateResin()">
+
 Calculate
+
 </button>
 
-<h3 id="calcResult">0 g</h3>
+<h3 id="calcResult">
 
-</div>
+0 g
+
+</h3>
 
 </section>
 
 
-<!-- ============================
-CART FAB
-============================ -->
+<section class="gallery">
+
+<img src="at1.png">
+<img src="at2.png">
+<img src="at3.png">
+
+</section>
+
 
 <div class="cart-fab"
 onclick="toggleCart()">
-🛒 <span id="cartCount">0</span>
+
+🛒
+<span id="cartCount">0</span>
+
 </div>
 
-
-<!-- ============================
-CART SIDEBAR
-============================ -->
 
 <div class="cart-sidebar"
 id="cartSidebar">
@@ -275,31 +377,28 @@ id="cartSidebar">
 
 <button class="btn btn-primary"
 onclick="checkoutSelector()">
+
 Checkout
+
 </button>
 
 </div>
 
 
-<!-- ============================
-MASTER SCRIPT ENGINE
-============================ -->
-
 <script>
 
-/* ============================
-CONFIG
-============================ */
+/* ===============================
+TITAN MASTER ENGINE
+=============================== */
 
 const RAZORPAY_KEY="YOUR_RAZORPAY_KEY_HERE";
+
 const WHATSAPP="919876543210";
 
-/* ============================
-CART STORAGE
-============================ */
 
 let cart=
 JSON.parse(localStorage.getItem("mx_cart"))||[];
+
 
 function saveCart(){
 
@@ -311,17 +410,13 @@ JSON.stringify(cart)
 }
 
 
-/* ============================
-ADD TO CART
-============================ */
-
 function addToCart(name,price){
 
-let item=
-cart.find(i=>i.name==name);
+let existing=
+cart.find(i=>i.name===name);
 
-if(item)
-item.qty++;
+if(existing)
+existing.qty++;
 
 else
 cart.push({
@@ -336,10 +431,6 @@ renderCart();
 
 }
 
-
-/* ============================
-BUY NOW
-============================ */
 
 function buyNow(name,price){
 
@@ -358,10 +449,6 @@ checkoutSelector();
 }
 
 
-/* ============================
-RENDER CART
-============================ */
-
 function renderCart(){
 
 let html="";
@@ -376,31 +463,33 @@ total+=t;
 count+=item.qty;
 
 html+=`
-<div class="cart-item">
+
+<div>
 
 ${item.name}
-<br>
 
 ₹${item.price} × ${item.qty}
-
-<br>
 
 <button onclick="removeItem(${i})">
 Remove
 </button>
 
 </div>
+
 `;
 
 });
+
 
 document.getElementById(
 "cartItems"
 ).innerHTML=html;
 
+
 document.getElementById(
 "cartTotal"
 ).innerText="₹"+total;
+
 
 document.getElementById(
 "cartCount"
@@ -408,10 +497,6 @@ document.getElementById(
 
 }
 
-
-/* ============================
-REMOVE ITEM
-============================ */
 
 function removeItem(i){
 
@@ -424,10 +509,6 @@ renderCart();
 }
 
 
-/* ============================
-TOGGLE CART
-============================ */
-
 function toggleCart(){
 
 document.getElementById(
@@ -437,29 +518,18 @@ document.getElementById(
 }
 
 
-/* ============================
-CHECKOUT SELECTOR
-============================ */
-
 function checkoutSelector(){
 
-let choice=
-confirm(
-"OK=Pay via Razorpay\nCancel=WhatsApp"
-);
+if(confirm("OK=Razorpay Cancel=WhatsApp"))
 
-if(choice)
 checkoutRazorpay();
 
 else
+
 checkoutWhatsApp();
 
 }
 
-
-/* ============================
-WHATSAPP CHECKOUT
-============================ */
 
 function checkoutWhatsApp(){
 
@@ -484,15 +554,11 @@ window.open(
 }
 
 
-/* ============================
-RAZORPAY CHECKOUT
-============================ */
-
 function checkoutRazorpay(){
 
 if(RAZORPAY_KEY==="YOUR_RAZORPAY_KEY_HERE"){
 
-alert("Add Razorpay key");
+alert("Add Razorpay key later");
 
 return;
 
@@ -506,7 +572,6 @@ total+=i.price*i.qty;
 
 });
 
-let rzp=
 new Razorpay({
 
 key:RAZORPAY_KEY,
@@ -529,32 +594,20 @@ renderCart();
 
 }
 
-});
-
-rzp.open();
+}).open();
 
 }
 
 
-/* ============================
-CALCULATOR
-============================ */
-
 function calculateResin(){
 
-let l=
-parseFloat(length.value)||0;
-
-let w=
-parseFloat(width.value)||0;
-
-let d=
-parseFloat(depth.value)||0;
+let l=parseFloat(length.value)||0;
+let w=parseFloat(width.value)||0;
+let d=parseFloat(depth.value)||0;
 
 let volume=l*w*d;
 
-let grams=
-volume*1.13;
+let grams=volume*1.13;
 
 calcResult.innerText=
 Math.round(grams)+" g";
@@ -562,13 +615,11 @@ Math.round(grams)+" g";
 }
 
 
-/* ============================
-INIT
-============================ */
-
 renderCart();
 
 </script>
 
+
 </body>
+
 </html>
