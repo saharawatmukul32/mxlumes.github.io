@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>M-X Lumes | The Professional Standard</title>
+    <title>M-X Lumes | Transparent Plus</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,23 +72,23 @@
         .bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -5;
             background-color: #000;
-            background-image: url('product-1.webp');
+            background-image: url('product-1.webp'); /* Fallback image */
             background-position: center bottom;
             background-repeat: no-repeat;
             background-size: 65%;
-            opacity: 0.6;
+            opacity: 0.4;
             mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
             -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
             will-change: transform;
         }
 
         @media (max-width: 900px) {
-            .bg-layer { background-size: cover; opacity: 0.4; }
+            .bg-layer { background-size: cover; opacity: 0.2; }
         }
 
         .bg-gradient {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -4;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 60%, #000 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%);
             pointer-events: none;
         }
 
@@ -151,7 +151,7 @@
         .toast.show { transform: translateX(-50%) translateY(0); }
 
         /* -----------------------------------------------------------
-           4. NAV & HERO
+           4. NAV & HEADER
            ----------------------------------------------------------- */
         .navbar { 
             position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; 
@@ -179,19 +179,66 @@
         .nav-link { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-dim); letter-spacing: 1px; white-space: nowrap; }
         .nav-link:hover { color: #fff; }
 
+        /* -----------------------------------------------------------
+           NEW PREMIUM HERO (FLAGSHIP APPEARANCE)
+           ----------------------------------------------------------- */
         .hero { 
             min-height: 100vh; min-height: 100dvh;
             display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            text-align: center; z-index: 10; padding-top: 80px; padding-bottom: 60px; 
+            text-align: center; z-index: 10; padding: 120px 20px 60px; 
+            position: relative; overflow: hidden;
         }
+        
+        /* The "Spotlight" Effect */
+        .hero::before {
+            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80%; height: 60%; 
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+            filter: blur(60px); pointer-events: none; z-index: -1;
+        }
+
+        .hero-badge {
+            border: 1px solid var(--accent); padding: 6px 16px; border-radius: 30px;
+            color: var(--accent); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            margin-bottom: 30px; background: rgba(99,102,241,0.05); backdrop-filter: blur(5px);
+            animation: fadeIn 1s ease forwards;
+        }
+
         .hero h1 { 
-            font-size: clamp(42px, 10vw, 100px); 
-            margin-bottom: 24px; font-weight: 800; 
-            background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            line-height: 1.1;
+            font-size: clamp(48px, 12vw, 110px); 
+            font-weight: 800; line-height: 0.95; letter-spacing: -0.04em;
+            margin-bottom: 25px;
+            background: linear-gradient(180deg, #fff 20%, #888 100%); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 80px rgba(255,255,255,0.1);
         }
-        .hero p { color: var(--text-dim); font-size: 18px; max-width: 500px; margin-bottom: 40px; padding: 0 20px; }
+        .hero h1 span { font-weight: 300; display: block; font-size: 0.4em; letter-spacing: 0.2em; color: var(--text-dim); margin-top: 10px; -webkit-text-fill-color: var(--text-dim); }
+
+        .hero p { 
+            color: var(--text-dim); font-size: 16px; max-width: 450px; margin: 0 auto 50px; 
+            line-height: 1.7; opacity: 0.9;
+        }
+
+        /* Floating Specs Chips */
+        .hero-chips {
+            display: flex; gap: 15px; margin-bottom: 50px; justify-content: center; flex-wrap: wrap;
+        }
+        .chip {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 20px; border-radius: 12px; font-size: 11px; font-weight: 600; color: #ccc;
+            backdrop-filter: blur(10px); display: flex; align-items: center; gap: 8px;
+        }
+        .chip span { color: var(--accent); font-size: 14px; }
+
+        .hero-actions { display: flex; gap: 15px; justify-content: center; }
+
+        .scroll-hint {
+            position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px;
+            animation: bounce 2s infinite; opacity: 0.7;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);} 40% {transform: translateX(-50%) translateY(-5px);} 60% {transform: translateX(-50%) translateY(-3px);} }
 
         .marquee { position: absolute; bottom: 0; width: 100%; background: #000; border-top: 1px solid var(--border); padding: 16px 0; overflow: hidden; white-space: nowrap; user-select: none; }
         .marquee-content { display: inline-block; animation: scroll 40s linear infinite; }
@@ -216,20 +263,15 @@
            ----------------------------------------------------------- */
         .tech-card { padding: 40px; border-top: 1px solid rgba(255,255,255,0.15); transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
         .tech-card:hover { background: rgba(255,255,255,0.03); border-color: var(--accent); transform: translateY(-5px); }
-        
         .tech-icon { font-size: 40px; margin-bottom: 20px; }
         .tech-sub { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 15px; font-weight: 700; }
-        
         .tech-list { margin-top: 30px; list-style: none; padding: 0; }
-        .tech-list li { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: var(--text-dim);
-        }
+        .tech-list li { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: var(--text-dim); }
         .tech-list li span { color: #fff; font-weight: 700; font-size: 16px; font-family: 'Space Grotesk', sans-serif; }
         .tech-list li:last-child { border-bottom: none; }
 
         /* -----------------------------------------------------------
-           7. GALLERY (MASONRY)
+           7. GALLERY
            ----------------------------------------------------------- */
         .gallery-masonry { column-count: 3; column-gap: 20px; }
         .g-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: #0a0a0a; }
@@ -248,16 +290,12 @@
         .specs-header h2 { font-size: 36px; margin-bottom: 10px; }
         .specs-header p { color: var(--text-dim); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
 
-        .comp-container { 
-            background: #050505; border: 1px solid var(--border); border-radius: 30px; 
-            padding: 40px; overflow: hidden; position: relative; 
-        }
+        .comp-container { background: #050505; border: 1px solid var(--border); border-radius: 30px; padding: 40px; overflow: hidden; position: relative; }
         .comp-container::before { content:''; position: absolute; top:0; right:0; width: 50%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent)); }
 
         .comp-table { width: 100%; border-collapse: collapse; min-width: 600px; }
         .comp-table th { text-align: left; padding: 20px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .comp-table th.col-mx, .comp-table td.col-mx { width: 40%; background: rgba(99,102,241,0.03); border-right: 1px solid rgba(99,102,241,0.1); border-left: 1px solid rgba(99,102,241,0.1); }
-        
         .comp-row { transition: 0.2s; }
         .comp-row:hover { background: rgba(255,255,255,0.02); }
         .comp-cell { padding: 25px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; color: #fff; }
@@ -350,7 +388,8 @@
         .refine-inp { width: 100%; background: #111; border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: #fff; font-size: 12px; outline: none; }
 
         #weather-intelligence {
-            font-family: 'Space Grotesk', monospace; font-size: 11px; color: var(--text-dim);
+            font-family: 'Space Grotesk', monospace;
+            font-size: 11px; color: var(--text-dim);
             background: rgba(0,0,0,0.4); border-radius: 8px; padding: 12px; margin-top: 15px;
             display: none; border: 1px dashed var(--border); text-align: center; line-height: 1.6;
         }
@@ -429,6 +468,7 @@
             .gallery-masonry { column-count: 2; column-gap: 10px; }
             .cart-inner { width: 100%; max-width: 100%; padding: 25px; }
             .z-controls, .z-display { padding: 30px; }
+            .hero { padding-top: 140px; }
             .hero h1 { font-size: 48px; }
             .bento-item.wide { grid-column: span 1; }
             .nav-inner { justify-content: flex-start; gap: 20px; }
@@ -463,25 +503,36 @@
     </nav>
 
     <header class="hero">
+        <div class="hero-badge">Series 3:1 // New Arrival</div>
         <div class="reveal active">
-            <h1>Molecular Clarity.<br>OLED Contrast.</h1>
-            <p>The definitive 3:1 epoxy system. Engineered for professional artisans.</p>
-            <div style="margin-top:40px; display:flex; gap:15px; justify-content:center;">
+            <h1>TRANSPARENT<br>PLUS<span>™</span><span>SYSTEM 3:1</span></h1>
+            <p>The definitive epoxy system. Engineered for professional artisans who demand absolute clarity and zero compromise.</p>
+            <div class="hero-chips">
+                <div class="chip"><span>1.56</span> Refractive Index</div>
+                <div class="chip"><span>85D</span> Shore Hardness</div>
+                <div class="chip"><span>0%</span> Micro Bubbles</div>
+            </div>
+            <div class="hero-actions">
                 <button class="btn btn-primary" onclick="smoothScroll('shop')">Shop Now</button>
                 <button class="btn btn-outline" onclick="smoothScroll('calc')">Calculator</button>
             </div>
         </div>
-        <div class="marquee">
-            <div class="marquee-content">
-                <span class="marquee-item"><span>✦</span> ISO 9001</span>
-                <span class="marquee-item"><span>✦</span> Zero VOC</span>
-                <span class="marquee-item"><span>✦</span> 85 Shore D</span>
-                <span class="marquee-item"><span>✦</span> 120m Pot Life</span>
-                <span class="marquee-item"><span>✦</span> ISO 9001</span>
-                <span class="marquee-item"><span>✦</span> Zero VOC</span>
-            </div>
+        <div class="scroll-hint">
+            <div>Scroll to Explore</div>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
         </div>
     </header>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            <span class="marquee-item"><span>✦</span> ISO 9001</span>
+            <span class="marquee-item"><span>✦</span> Zero VOC</span>
+            <span class="marquee-item"><span>✦</span> 85 Shore D</span>
+            <span class="marquee-item"><span>✦</span> 120m Pot Life</span>
+            <span class="marquee-item"><span>✦</span> ISO 9001</span>
+            <span class="marquee-item"><span>✦</span> Zero VOC</span>
+        </div>
+    </div>
 
     <section id="shop" class="section">
         <div class="container">
