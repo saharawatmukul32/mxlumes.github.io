@@ -37,6 +37,11 @@
             /* iPhone Notch Safety Variables */
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
+            
+            /* Success, Warning, Danger colors */
+            --success: #10b981; 
+            --warning: #f59e0b; 
+            --danger: #ef4444; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -68,48 +73,41 @@
         input[type=number] { -moz-appearance: textfield; }
 
         /* -----------------------------------------------------------
-           2. BACKGROUND ENGINE (RESTORED FROM FIRST CODE)
+           2. BACKGROUND ENGINE
            ----------------------------------------------------------- */
         .bg-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -5;
             background-color: #000;
-            
-            /* RESTORED: Your File */
-            background-image: url('product-1.webp'); 
-            
-            /* RESTORED: 65% Scale & Bottom Position */
+            background-image: url('product-1.webp');
             background-position: center bottom;
             background-repeat: no-repeat;
             background-size: 65%;
-            
-            /* RESTORED: Radial Mask for Fade */
-            -webkit-mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
-            mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
-            
-            /* RESTORED: Opacity */
-            opacity: 0.85;
-            
-            will-change: opacity; transition: opacity 1s var(--ease-fluid);
+            opacity: 0.6;
+            mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+            will-change: transform;
+        }
+
+        @media (max-width: 900px) {
+            .bg-layer { background-size: cover; opacity: 0.4; }
         }
 
         .bg-gradient {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 60%, #000 95%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -4;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 60%, #000 100%);
             pointer-events: none;
+        }
+
+        .grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; opacity: 0.04; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* -----------------------------------------------------------
            3. UI COMPONENTS
            ----------------------------------------------------------- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* RESTORED: Solid Background for Sections (Slide Over Effect) */
-        .section { 
-            padding: 100px 0; 
-            position: relative; 
-            z-index: 2; 
-            background-color: #000; /* Covers the fixed image */
-        }
+        .section { padding: 100px 0; position: relative; z-index: 2; }
         
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease-fluid); }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -210,11 +208,11 @@
             margin-bottom: 25px;
             background: linear-gradient(180deg, #fff 20%, #888 100%); 
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            text-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
         .hero h1 span { 
             font-weight: 300; display: block; font-size: 0.4em; letter-spacing: 0.2em; 
-            color: rgba(255,255,255,0.7); margin-top: 10px; -webkit-text-fill-color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8); margin-top: 10px; -webkit-text-fill-color: rgba(255,255,255,0.8);
         }
 
         .hero p { 
@@ -240,7 +238,7 @@
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* -----------------------------------------------------------
-           5. STATS & SHOP
+           5. STATS & SHOP (HAS BACKGROUND TO COVER IMAGE)
            ----------------------------------------------------------- */
         .stats-bar { border-bottom: 1px solid var(--border); padding: 40px 0; margin-top: -1px; background: #000; }
         .stats-grid { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; text-align: center; }
@@ -253,7 +251,7 @@
         .p-tag { font-size: 10px; border: 1px solid var(--border); padding: 6px 12px; border-radius: 20px; color: var(--text-dim); text-transform: uppercase; display: inline-block; margin-bottom: 15px; letter-spacing: 1px; }
 
         /* -----------------------------------------------------------
-           6. TECHNOLOGY DEEP DIVE (TITAN SCIENCE)
+           6. TECHNOLOGY DEEP DIVE
            ----------------------------------------------------------- */
         .tech-card { padding: 40px; border-top: 1px solid rgba(255,255,255,0.15); transition: 0.3s; height: 100%; display: flex; flex-direction: column; background: transparent; }
         .tech-card:hover { background: rgba(255,255,255,0.03); border-color: var(--accent); transform: translateY(-5px); }
@@ -456,12 +454,7 @@
            12. MOBILE BREAKPOINTS
            ----------------------------------------------------------- */
         @media (max-width: 900px) {
-            /* Restored Mobile Behavior: Image visible at bottom */
-            .bg-layer { 
-                background-size: 100%; 
-                background-position: center 80%; 
-                opacity: 0.85; 
-            }
+            .bg-layer { background-size: cover; opacity: 0.5; mask-image: none; background-attachment: scroll; }
             .grid-3, .specs-layout, .gallery-masonry, .zenith-calc, .dos-donts, .refine-grid { grid-template-columns: 1fr; }
             .gallery-masonry { column-count: 2; column-gap: 10px; }
             .cart-inner { width: 100%; max-width: 100%; padding: 25px; }
@@ -1140,93 +1133,106 @@
             }
         }
 
-        // --- PREMIUM CART LOGIC (REFINED) ---
-        let cart = [];
-
-        function addToCart(name, price) {
-            let existingItem = cart.find(i => i.name === name);
-            if (existingItem) {
-                existingItem.qty++;
-            } else {
-                cart.push({name, price, qty: 1});
-            }
-            renderCart();
-            showToast();
-            const fab = document.querySelector('.cart-fab');
-            fab.style.transform = 'scale(1.2) rotate(10deg)';
-            setTimeout(() => fab.style.transform = '', 300);
-        }
-
-        function updateQty(name, change) {
-            let item = cart.find(i => i.name === name);
-            if(item) {
-                item.qty += change;
-                if(item.qty <= 0) removeFromCart(name);
-            }
-            renderCart();
-        }
-
-        function removeFromCart(name) {
-            cart = cart.filter(i => i.name !== name);
-            renderCart();
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cartItems'); 
-            container.innerHTML = ''; 
-            let total = 0;
-            let count = 0;
-
-            if (cart.length === 0) {
-                container.innerHTML = '<div class="empty-cart">Your cart is empty.<br>Start adding some magic. ✨</div>';
-                document.getElementById('cartTotal').innerText = '₹0';
-                document.getElementById('cartCount').innerText = '0';
-                return;
-            }
-
-            cart.forEach(item => { 
-                total += item.price * item.qty;
-                count += item.qty;
-                
-                container.innerHTML += `
-                <div class="cart-item">
-                    <div class="c-info">
-                        <h4>${item.name}</h4>
-                        <p>High-Gloss System</p>
-                    </div>
-                    <div class="c-actions">
-                        <div class="c-price">₹${(item.price * item.qty).toLocaleString()}</div>
-                        <div class="qty-control">
-                            <div class="qty-btn" onclick="updateQty('${item.name}', -1)">-</div>
-                            <div class="qty-val">${item.qty}</div>
-                            <div class="qty-btn" onclick="updateQty('${item.name}', 1)">+</div>
-                        </div>
-                    </div>
-                </div>`; 
-            });
-            
-            document.getElementById('cartTotal').innerText = `₹${total.toLocaleString()}`; 
-            document.getElementById('cartCount').innerText = count;
-        }
-
-        function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); }
-        function showToast() { const t = document.getElementById('toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+        // --- INTELLIGENT TIMER ---
+        let timerInt;
         
-        function checkoutWhatsApp() {
-            if(cart.length === 0) return alert('Your cart is empty!');
+        function startPhase(phase) {
+            clearInterval(timerInt);
+            let duration = 0;
+            const ring = document.getElementById('prog-ring');
+            const circumference = 565;
             
+            if (phase === 'mix') {
+                duration = 180; // 3 mins
+                document.getElementById('time-label').innerText = "Mixing";
+                document.getElementById('clock-msg').innerText = "Scrape sides & bottom.";
+            } else if (phase === 'pour') {
+                // INTELLIGENT LOGIC: Large mass = Less working time
+                let baseTime = 2400; // 40 mins
+                if (calcState.mass > 1000) baseTime = 1800; // 30 mins for >1kg
+                duration = baseTime;
+                document.getElementById('time-label').innerText = "Working";
+                document.getElementById('clock-msg').innerText = calcState.mass > 1000 ? "Large Batch: Pour quickly." : "Take your time.";
+            }
+
+            let timeLeft = duration;
+            
+            timerInt = setInterval(() => {
+                timeLeft--;
+                const m = Math.floor(timeLeft / 60).toString().padStart(2,'0');
+                const s = (timeLeft % 60).toString().padStart(2,'0');
+                document.getElementById('time-display').innerHTML = `${m}:${s}<span id='time-label'>${phase}</span>`;
+                
+                // Ring Progress
+                const offset = circumference - (timeLeft / duration) * circumference;
+                ring.style.strokeDashoffset = offset;
+
+                if(timeLeft <= 0) {
+                    clearInterval(timerInt);
+                    alert("Phase Complete!");
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInt);
+            document.getElementById('time-display').innerHTML = "00:00<span id='time-label'>Idle</span>";
+            document.getElementById('prog-ring').style.strokeDashoffset = 565;
+            document.getElementById('clock-msg').innerText = "";
+        }
+
+        // --- CHECKLIST ---
+        function toggleCheck(el) {
+            el.classList.toggle('checked');
+            const all = document.querySelectorAll('.check-item');
+            const active = document.querySelectorAll('.check-item.checked');
+            const status = document.getElementById('launch-status');
+            
+            if(all.length === active.length) {
+                status.innerText = "🚀 READY TO POUR";
+                status.style.color = "#10b981";
+                status.style.fontWeight = "800";
+            } else {
+                status.innerText = "STANDBY";
+                status.style.color = "#666";
+            }
+        }
+
+        // --- WEATHER (OPEN-METEO) ---
+        async function autoDetectWeather() {
+            if(location.protocol !== 'https:' && location.hostname !== 'localhost') {
+                return alert("GPS requires HTTPS.");
+            }
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (pos) => {
+                    try {
+                        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true&hourly=relativehumidity_2m`);
+                        const data = await res.json();
+                        const tOut = data.current_weather.temperature;
+                        // Physics: Concrete Thermal Lag Approximation
+                        let tIn = tOut > 30 ? tOut - 3 : tOut;
+                        document.getElementById('val-temp').innerText = Math.round(tIn) + "°C";
+                        document.getElementById('weather-intelligence').style.display='block';
+                        document.getElementById('weather-intelligence').innerHTML = `Satellite: ${tOut}°C <br> Indoor Est: ${Math.round(tIn)}°C`;
+                    } catch(e) { alert("Weather data unavailable."); }
+                });
+            }
+        }
+
+        // --- CART ---
+        let cart = [];
+        function addToCart(n, p) { cart.push({n,p}); updateCart(); document.getElementById('toast').classList.add('show'); setTimeout(()=>document.getElementById('toast').classList.remove('show'),2000); }
+        function updateCart() {
+            document.querySelector('.cart-count').innerText = cart.length;
             let total = 0;
-            let msg = `*NEW ORDER REQUEST* %0A------------------%0A`;
-            
-            cart.forEach(i => { 
-                msg += `• ${i.name} x ${i.qty} = ₹${(i.price * i.qty).toLocaleString()}%0A`; 
-                total += i.price * i.qty;
-            });
-            
-            msg += `------------------%0A*TOTAL: ₹${total.toLocaleString()}*%0A%0AHi M-X Lumes, I would like to confirm shipping for this order.`;
-            
-            const number = "917668077298";
-            window.location.href = `https://wa.me/${number}?text=${msg}`;
+            let html = '';
+            cart.forEach(i => { total += i.p; html += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; color:#ccc;"><span>${i.n}</span><span>₹${i.p}</span></div>`; });
+            document.getElementById('cartItems').innerHTML = html;
+            document.getElementById('cartTotal').innerText = '₹' + total;
+        }
+        function checkoutWhatsApp() {
+            let msg = "Order: "; cart.forEach(i => msg += i.n + ", ");
+            window.location.href = `https://wa.me/917668077298?text=${msg}`;
         }
     </script>
 </body>
