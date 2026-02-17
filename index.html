@@ -34,6 +34,7 @@
             --ease-fluid: cubic-bezier(0.2, 0.0, 0, 1.0);
             --whatsapp: #25D366;
             
+            /* iPhone Notch Safety Variables */
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
         }
@@ -45,7 +46,6 @@
             scroll-behavior: smooth; 
             overflow-x: hidden; 
             width: 100%;
-            background-color: #000;
         }
         
         body {
@@ -68,32 +68,33 @@
         input[type=number] { -moz-appearance: textfield; }
 
         /* -----------------------------------------------------------
-           2. BACKGROUND ENGINE (RESTORED 65% SLIDE-OVER)
+           2. BACKGROUND ENGINE (RESTORED FROM FIRST CODE)
            ----------------------------------------------------------- */
         .bg-layer {
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100vh; 
-            z-index: -5;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5;
             background-color: #000;
             
-            /* YOUR PRODUCT IMAGE */
+            /* RESTORED: Your File */
             background-image: url('product-1.webp'); 
             
-            /* The 65% Scale & Bottom Anchor */
+            /* RESTORED: 65% Scale & Bottom Position */
             background-position: center bottom;
             background-repeat: no-repeat;
             background-size: 65%;
             
-            opacity: 1;
-            will-change: transform;
+            /* RESTORED: Radial Mask for Fade */
+            -webkit-mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
+            mask-image: radial-gradient(circle at 50% 100%, black 20%, transparent 100%);
+            
+            /* RESTORED: Opacity */
+            opacity: 0.85;
+            
+            will-change: opacity; transition: opacity 1s var(--ease-fluid);
         }
 
-        /* No gradient overlay needed if we want crisp image, 
-           but a subtle bottom fade helps integration */
         .bg-gradient {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -4;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 60%, rgba(0,0,0,1) 95%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 60%, #000 95%);
             pointer-events: none;
         }
 
@@ -102,12 +103,12 @@
            ----------------------------------------------------------- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        /* Sections have solid background to create "Slide Over" effect */
+        /* RESTORED: Solid Background for Sections (Slide Over Effect) */
         .section { 
             padding: 100px 0; 
             position: relative; 
             z-index: 2; 
-            background-color: #000; /* Crucial for covering the fixed image */
+            background-color: #000; /* Covers the fixed image */
         }
         
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease-fluid); }
@@ -207,15 +208,17 @@
             font-size: clamp(48px, 12vw, 110px); 
             font-weight: 800; line-height: 0.95; letter-spacing: -0.04em;
             margin-bottom: 25px;
-            color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            background: linear-gradient(180deg, #fff 20%, #888 100%); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         .hero h1 span { 
             font-weight: 300; display: block; font-size: 0.4em; letter-spacing: 0.2em; 
-            color: rgba(255,255,255,0.8); margin-top: 10px; 
+            color: rgba(255,255,255,0.7); margin-top: 10px; -webkit-text-fill-color: rgba(255,255,255,0.7);
         }
 
         .hero p { 
-            color: #ddd; font-size: 18px; max-width: 500px; margin: 0 auto 40px; 
+            color: #ccc; font-size: 18px; max-width: 500px; margin: 0 auto 40px; 
             line-height: 1.6; text-shadow: 0 5px 20px rgba(0,0,0,1);
         }
 
@@ -237,7 +240,7 @@
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* -----------------------------------------------------------
-           5. STATS & SHOP (HAS BACKGROUND TO COVER IMAGE)
+           5. STATS & SHOP
            ----------------------------------------------------------- */
         .stats-bar { border-bottom: 1px solid var(--border); padding: 40px 0; margin-top: -1px; background: #000; }
         .stats-grid { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; text-align: center; }
@@ -250,7 +253,7 @@
         .p-tag { font-size: 10px; border: 1px solid var(--border); padding: 6px 12px; border-radius: 20px; color: var(--text-dim); text-transform: uppercase; display: inline-block; margin-bottom: 15px; letter-spacing: 1px; }
 
         /* -----------------------------------------------------------
-           6. TECHNOLOGY DEEP DIVE
+           6. TECHNOLOGY DEEP DIVE (TITAN SCIENCE)
            ----------------------------------------------------------- */
         .tech-card { padding: 40px; border-top: 1px solid rgba(255,255,255,0.15); transition: 0.3s; height: 100%; display: flex; flex-direction: column; background: transparent; }
         .tech-card:hover { background: rgba(255,255,255,0.03); border-color: var(--accent); transform: translateY(-5px); }
@@ -453,11 +456,11 @@
            12. MOBILE BREAKPOINTS
            ----------------------------------------------------------- */
         @media (max-width: 900px) {
-            /* Mobile: Image scaled down for vertical layout, anchored low */
+            /* Restored Mobile Behavior: Image visible at bottom */
             .bg-layer { 
                 background-size: 100%; 
                 background-position: center 80%; 
-                opacity: 1; /* Keep it visible on mobile too */
+                opacity: 0.85; 
             }
             .grid-3, .specs-layout, .gallery-masonry, .zenith-calc, .dos-donts, .refine-grid { grid-template-columns: 1fr; }
             .gallery-masonry { column-count: 2; column-gap: 10px; }
@@ -859,25 +862,7 @@
 
     <script>
         // --- CORE UI LOGIC ---
-        window.addEventListener('scroll', () => { 
-            const nav = document.querySelector('.navbar');
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-            
-            // Hero Fade Out
-            const heroContent = document.querySelector('.hero-content');
-            if(heroContent) {
-                const scroll = window.scrollY;
-                heroContent.style.opacity = 1 - (scroll / 600);
-                heroContent.style.transform = `translateY(${scroll * 0.3}px)`;
-            }
-            
-            // Background Fade
-            const bg = document.querySelector('.bg-layer');
-            if(bg) {
-                const opacity = Math.max(0, 1 - (window.scrollY / 800));
-                bg.style.opacity = opacity;
-            }
-        }, {passive: true});
+        window.addEventListener('scroll', () => { document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50); }, {passive: true});
         
         function smoothScroll(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
