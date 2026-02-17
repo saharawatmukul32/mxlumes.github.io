@@ -11,7 +11,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* -----------------------------------------------------------
@@ -63,7 +63,6 @@
         button { cursor: pointer; border: none; outline: none; background: none; font-family: inherit; }
         img { display: block; max-width: 100%; height: auto; user-select: none; }
 
-        /* Input Fixes for iPhone Zoom */
         input, select, textarea { font-size: 16px !important; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
@@ -352,79 +351,124 @@
         .cost-inp { width: 70px; background: transparent; border: none; border-bottom: 1px solid #444; color: #fff; text-align: right; font-weight: 700; padding-bottom: 2px; }
 
         /* -----------------------------------------------------------
-           9. PREMIUM FOOTER (TITAN ONYX)
+           9. PREMIUM FOOTER (VISIONARY EDITION)
            ----------------------------------------------------------- */
         .footer { 
             position: relative; 
-            padding: 100px 20px 40px; 
-            margin-top: 120px; 
-            background: radial-gradient(circle at 50% 0%, #111 0%, #000 70%); 
+            padding: 120px 20px 60px; 
+            margin-top: 150px; 
+            background: #000; 
             overflow: hidden; 
-            border-top: 1px solid var(--border);
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
         
-        /* Subtle holographic watermark */
-        .footer-watermark { 
-            position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); 
-            font-size: 30vw; font-weight: 800; color: #fff; opacity: 0.02; 
-            pointer-events: none; white-space: nowrap; line-height: 0.8; 
-            font-family: 'Space Grotesk', sans-serif; 
+        .footer-content { 
+            position: relative; 
+            z-index: 2; 
+            max-width: 1200px; 
+            margin: 0 auto; 
         }
 
-        .footer-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
-
-        /* Top Grid */
-        .f-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 50px; 
-            margin-bottom: 80px; 
+        .f-top-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 80px;
+            margin-bottom: 100px;
         }
 
-        .f-brand h2 { font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #fff; margin-bottom: 20px; }
-        .f-brand p { font-size: 13px; color: var(--text-dim); line-height: 1.6; max-width: 250px; }
+        /* The Vision Section */
+        .f-vision-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .f-vision-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 300;
+            color: #fff;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+        .f-vision-text span { color: #555; }
+
+        /* The Founders Block */
+        .f-founders {
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .f-signature {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            color: #fff;
+            font-weight: 500;
+            padding-left: 20px;
+            border-left: 1px solid #333;
+        }
+        .f-role {
+            display: block;
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        /* The Badges */
+        .f-badges {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .f-badge {
+            padding: 12px 24px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50px;
+            font-size: 12px;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background: rgba(255,255,255,0.02);
+            transition: 0.3s;
+        }
+        .f-badge:hover {
+            border-color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Bottom Row */
+        .f-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
         
-        .f-title { font-size: 11px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; opacity: 0.8; }
-        
-        .f-links { list-style: none; padding: 0; }
-        .f-links li { margin-bottom: 15px; }
-        .f-link { 
-            font-size: 14px; color: var(--text-dim); transition: 0.3s; position: relative; 
-            padding-left: 0; display: inline-block;
+        .f-nav {
+            display: flex;
+            gap: 30px;
         }
-        .f-link:hover { color: #fff; padding-left: 8px; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-        .f-link::before { content:'›'; position:absolute; left:0; opacity:0; transition:0.3s; }
-        .f-link:hover::before { opacity:1; left:-12px; color:var(--accent); }
+        .f-nav-link {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .f-nav-link:hover { color: #fff; }
 
-        /* Newsletter Input */
-        .f-input-group { position: relative; max-width: 300px; }
-        .f-input { 
-            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); 
-            padding: 16px; border-radius: 12px; color: #fff; outline: none; transition: 0.3s; 
+        .f-copy {
+            font-size: 12px;
+            color: #444;
         }
-        .f-input:focus { border-color: var(--accent); background: rgba(255,255,255,0.08); }
-        .f-submit { 
-            position: absolute; right: 8px; top: 8px; background: #fff; color: #000; 
-            border: none; width: 36px; height: 36px; border-radius: 8px; 
-            cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;
-        }
-        .f-submit:hover { transform: scale(1.05); }
-
-        /* Bottom Bar */
-        .f-bottom { 
-            border-top: 1px solid rgba(255,255,255,0.05); 
-            padding-top: 40px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            flex-wrap: wrap; gap: 20px;
-        }
-        .f-copy { font-size: 12px; color: #555; }
-        .f-socials { display: flex; gap: 15px; }
-        .f-icon { 
-            width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05); 
-            display: flex; justify-content: center; align-items: center; color: #fff; 
-            transition: 0.3s; cursor: pointer; border: 1px solid transparent;
-        }
-        .f-icon:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-3px); }
 
         /* -----------------------------------------------------------
            10. CART SIDEBAR & FAB
@@ -487,8 +531,11 @@
             .refine-grid { grid-template-columns: 1fr; }
             .z-res-val { font-size: 56px; }
             .section { padding: 80px 0; }
-            .f-grid { gap: 40px; }
-            .f-bottom { flex-direction: column; text-align: center; }
+            
+            /* Footer Mobile */
+            .f-top-grid { grid-template-columns: 1fr; gap: 50px; }
+            .f-bottom-row { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .f-nav { flex-wrap: wrap; gap: 20px; }
         }
     </style>
 </head>
@@ -719,43 +766,49 @@
     <footer class="footer">
         <div class="footer-overlay"></div>
         <div class="footer-watermark">M-X</div>
+        
         <div class="footer-content">
-            <div class="footer-cta"><h2>Ready to Create?</h2><button class="btn btn-primary" onclick="smoothScroll('shop')">Start Your Order</button></div>
-            <div class="f-grid">
-                <div class="f-col f-brand">
-                    <h2>M-X LUMES</h2>
-                    <p>Engineered in Meerut for professional artisans. The definitive epoxy system.</p>
+            <div class="f-top-grid">
+                <div>
+                    <div class="f-vision-title">The Vision</div>
+                    <div class="f-vision-text">
+                        "We refused to accept that Indian artists deserved anything less than the <span>world's best</span>. Bridging the gap between foreign precision and Indian artistry."
+                    </div>
+                    <div class="f-founders">
+                        <div>
+                            <div class="f-signature">Mukul Saharawat</div>
+                            <span class="f-role">Founder</span>
+                        </div>
+                        <div>
+                            <div class="f-signature">Mahima Pandey</div>
+                            <span class="f-role">Co-Founder</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="f-col">
-                    <div class="f-title">Products</div>
-                    <ul class="f-links">
-                        <li><a href="#" class="f-link">Transparent Plus</a></li>
-                        <li><a href="#" class="f-link">Deep Pour Pro</a></li>
-                        <li><a href="#" class="f-link">Pigments</a></li>
-                    </ul>
-                </div>
-                <div class="f-col">
-                    <div class="f-title">Support</div>
-                    <ul class="f-links">
-                        <li><a href="#" class="f-link">Track Order</a></li>
-                        <li><a href="#" class="f-link">Shipping Policy</a></li>
-                        <li><a href="#" class="f-link">Returns</a></li>
-                    </ul>
-                </div>
-                <div class="f-col">
-                    <div class="f-title">Stay in the flow</div>
-                    <div class="f-input-group">
-                        <input type="email" class="f-input" placeholder="Enter your email">
-                        <button class="f-submit">➝</button>
+                
+                <div>
+                    <div class="f-vision-title">Origin & Quality</div>
+                    <div class="f-badges">
+                        <div class="f-badge">✦ Imported Ingredients</div>
+                        <div class="f-badge">🇮🇳 Engineered in India</div>
+                        <div class="f-badge">💎 Crystal Series</div>
+                    </div>
+                    
+                    <div style="margin-top:40px;">
+                        <button class="btn btn-primary" onclick="smoothScroll('shop')">Start Your Order</button>
                     </div>
                 </div>
             </div>
-            <div class="f-bottom">
-                <div class="f-copy">© 2026 M-X Lumes. All Rights Reserved.</div>
-                <div class="f-socials">
-                    <div class="f-icon">IG</div>
-                    <div class="f-icon">WA</div>
-                    <div class="f-icon">YT</div>
+
+            <div class="f-bottom-row">
+                <div class="f-nav">
+                    <a href="#" class="f-nav-link">Shop</a>
+                    <a href="#" class="f-nav-link">Calculator</a>
+                    <a href="#" class="f-nav-link">Legal</a>
+                    <a href="#" class="f-nav-link">Contact</a>
+                </div>
+                <div class="f-copy">
+                    © 2026 M-X Lumes. Engineered in Meerut.
                 </div>
             </div>
         </div>
