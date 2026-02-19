@@ -47,7 +47,7 @@
             font-size: 16px; 
             scroll-behavior: smooth; 
             width: 100%;
-            overflow-x: hidden;
+            overflow-x: hidden; 
         }
         
         body {
@@ -71,7 +71,7 @@
         input[type=number] { -moz-appearance: textfield; }
 
         /* =========================================
-           2. BACKGROUND ENGINE (GPU OPTIMIZED)
+           2. BACKGROUND ENGINE
            ========================================= */
         .bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -5;
@@ -239,7 +239,7 @@
         .g-img { width: 100%; height: auto; display: block; }
 
         /* =========================================
-           8. FEATURES TABLE (CRITICAL MOBILE FIX)
+           8. FEATURES TABLE (RESPONSIVE FIT FIX)
            ========================================= */
         .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 80px; }
         .bento-item { background: var(--glass); border: 1px solid var(--border); border-radius: 24px; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
@@ -257,36 +257,31 @@
         }
         .comp-container::before { content:''; position: absolute; top:0; right:0; width: 50%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent)); }
 
-        /* --- TABLE WRAPPER (This fixes the horizontal scroll) --- */
         .comp-wrapper { 
             width: 100%; 
             display: block;
-            overflow-x: auto; /* Forces horizontal scrollbar */
-            -webkit-overflow-scrolling: touch; /* Momentum scrolling */
             margin-bottom: 50px; 
             border-radius: 24px; 
             border: 1px solid var(--border); 
-            touch-action: pan-x; /* Crucial for swiping */
-            background: #0a0a0a; /* Default to solid background for speed */
+            background: #0a0a0a; 
         }
 
         .comp-table { 
             width: 100%; 
             border-collapse: collapse; 
-            min-width: 800px; /* CRITICAL: Forces table to be wider than phone, triggering scroll */
+            /* DESKTOP DEFAULT */
+            table-layout: auto; 
         }
         
         .comp-table th { 
             text-align: left; padding: 20px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; 
             border-bottom: 1px solid rgba(255,255,255,0.1); 
-            white-space: nowrap; /* Prevents text wrapping */
-            width: 30%; 
         }
         .comp-table th.col-mx, .comp-table td.col-mx { width: 40%; background: rgba(99,102,241,0.03); border-right: 1px solid rgba(99,102,241,0.1); border-left: 1px solid rgba(99,102,241,0.1); }
         
         .comp-row { transition: 0.2s; }
         .comp-row:hover { background: rgba(255,255,255,0.02); }
-        .comp-cell { padding: 25px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; color: #fff; white-space: nowrap; }
+        .comp-cell { padding: 25px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; color: #fff; }
         .comp-cell.dim { color: #555; font-weight: 500; }
         .comp-cell.bright { color: #fff; font-weight: 700; text-shadow: 0 0 15px rgba(99,102,241,0.3); }
         .comp-cell.bright span { color: var(--accent); margin-right: 8px; }
@@ -307,7 +302,7 @@
         .dd-box.donts { background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2); }
 
         /* =========================================
-           9. CALCULATOR (FULL LOGIC)
+           9. TITAN FUSION CALCULATOR
            ========================================= */
         .zenith-calc {
             background: var(--bg-panel); border: 1px solid var(--border);
@@ -488,34 +483,38 @@
             .f-nav { flex-wrap: wrap; gap: 20px; }
             .f-vision-text { font-size: 24px; }
             
-            /* 5. TABLE SCROLL FIX (THE BIG ONE) */
+            /* 5. TABLE FIX: FIT SCREEN (SQUASH STRATEGY) */
             .comp-container { padding: 15px; border-radius: 16px; width: 100%; overflow: hidden; }
             
             .comp-wrapper {
-                margin-left: -20px; /* Pull to edge */
-                width: calc(100% + 40px); /* Full width */
-                border-radius: 0;
-                border-left: none;
-                border-right: none;
-                overflow-x: auto !important; /* FORCE SCROLL */
-                -webkit-overflow-scrolling: touch !important; /* SMOOTH SCROLL */
+                margin: 0;
+                width: 100%;
+                border-radius: 12px;
+                border: 1px solid var(--border);
                 background: #0a0a0a;
             }
             
-            .comp-table th:first-child, .comp-table td:first-child { padding-left: 15px; }
-            .comp-table th:last-child, .comp-table td:last-child { padding-right: 15px; }
-            
-            .comp-container::after {
-                content: '→ Swipe table to see more';
-                display: block;
-                text-align: center;
-                font-size: 10px;
-                color: var(--accent);
-                padding-top: 15px;
-                opacity: 0.7;
-                text-transform: uppercase;
-                letter-spacing: 1px;
+            .comp-table {
+                width: 100%;
+                table-layout: fixed; /* STRICT WIDTHS */
+                min-width: auto; /* Allow shrinking */
             }
+            
+            .comp-cell, .comp-table th {
+                white-space: normal; /* ALLOW WRAPPING */
+                font-size: 10px; /* SMALLER TEXT */
+                padding: 10px 4px; /* TIGHT PADDING */
+                line-height: 1.3;
+                word-wrap: break-word;
+            }
+            
+            /* FORCE COLUMN WIDTHS TO FIT PORTRAIT */
+            .comp-table th:nth-child(1) { width: 20%; } /* Parameter */
+            .comp-table th:nth-child(2) { width: 45%; } /* M-X (Hero) */
+            .comp-table th:nth-child(3) { width: 35%; } /* Generic */
+            
+            /* Remove scroll hint since it fits now */
+            .comp-container::after { display: none; }
         }
     </style>
 </head>
