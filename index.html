@@ -13,6 +13,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <link rel="preload" href="product-1.webp" as="image">
+    <link rel="preload" href="MX_LUMES_4_8kg_Master_Kit.png" as="image">
+    <link rel="preload" href="MX_LUMES_20kg_Set_15kg_Resin_5kg_Hardener.png" as="image">
+    
     <style>
         /* =========================================
            1. CORE VARIABLES & RESET
@@ -73,16 +77,16 @@
         input[type=number] { -moz-appearance: textfield; }
 
         /* =========================================
-           2. BACKGROUND ENGINE (GPU OPTIMIZED)
+           2. BACKGROUND ENGINE (CRISP & DEEP BLACK)
            ========================================= */
         .bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -5;
-            background-color: #000;
+            background-color: var(--bg-oled);
             background-image: url('product-1.webp');
             background-position: center bottom;
             background-repeat: no-repeat;
             background-size: 65%;
-            opacity: 0.6;
+            opacity: 0.85; /* Increased for maximum clarity */
             mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
             -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
             will-change: transform;
@@ -91,14 +95,10 @@
 
         .bg-gradient {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -4;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 60%, #000 100%);
+            /* Smoother fade to pure deep black */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 60%, #000000 100%);
             pointer-events: none;
             transform: translateZ(0);
-        }
-
-        .grain {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; opacity: 0.04; pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* =========================================
@@ -108,12 +108,13 @@
         
         .section { padding: 100px 0; position: relative; z-index: 2; }
         
-        /* Upgraded Cinematic Reveal */
+        /* Cinematic Reveal Engine */
         .reveal { 
             opacity: 0; 
             transform: translateY(40px) scale(0.98); 
             filter: blur(5px);
             transition: all 1.2s var(--ease-fluid); 
+            will-change: transform, opacity, filter;
         }
         .reveal.active { 
             opacity: 1; 
@@ -178,7 +179,7 @@
         .nav-link:hover { color: #fff; }
 
         .hero { 
-            /* Reduced gap: min-height changed from 100dvh to 80dvh */
+            /* Reduced gap: min-height changed to 80dvh */
             min-height: 80dvh; display: flex; flex-direction: column; justify-content: center; 
             align-items: center; text-align: center; z-index: 10; padding-top: 80px; padding-bottom: 40px; 
         }
@@ -206,9 +207,8 @@
         
         .product-card { 
             padding: 30px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; 
-            transition: all 0.6s var(--ease-fluid); /* Fluid card transition */
+            transition: all 0.6s var(--ease-fluid); 
         }
-        /* New Hover Lift Effect */
         .product-card:hover {
             transform: translateY(-12px);
             border-color: rgba(255,255,255,0.4) !important;
@@ -475,7 +475,7 @@
             /* 1. Prevent Background Jitter & Freeze */
             .bg-layer { 
                 background-size: cover; 
-                opacity: 0.4; 
+                opacity: 0.85; /* Keep crisp on mobile */
                 background-attachment: scroll; 
                 background-position: center center;
                 will-change: transform;
@@ -550,7 +550,7 @@
 
     <div class="bg-layer"></div>
     <div class="bg-gradient"></div>
-    <div class="grain"></div>
+    
     <div id="toast" class="toast">Added to Cart</div>
 
     <nav class="navbar">
@@ -594,7 +594,7 @@
                 <div class="glass product-card reveal">
                     <div>
                         <span class="p-tag">Starter Kit</span>
-                        <img src="product-1.webp" alt="1.2 KG Kit" class="p-img" loading="lazy">
+                        <img src="product-1.webp" alt="1.2 KG Kit" class="p-img" loading="lazy" decoding="async">
                         <h3>1.2 KG Master Kit</h3>
                         <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">900g Resin + 300g Hardener.</p>
                         <div style="display:flex; align-items:center; margin-top:10px; color:var(--success); font-size:11px; font-weight:700; letter-spacing:1px;"><span style="margin-right:5px;">🚚</span> No Extra Shipping Charges</div>
@@ -611,7 +611,7 @@
                 <div class="glass product-card reveal" style="border-color:rgba(255,255,255,0.3);">
                     <div>
                         <span class="p-tag" style="background:#fff; color:#000; border-color:#fff;">Best Seller</span>
-                        <img src="MX_LUMES_4_8kg_Master_Kit.png" alt="4.8 KG Kit" class="p-img" loading="lazy">
+                        <img src="MX_LUMES_4_8kg_Master_Kit.png" alt="4.8 KG Kit" class="p-img" loading="lazy" decoding="async">
                         <h3>4.8 KG Master Kit</h3>
                         <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">3.6kg Resin + 1.2kg Hardener.</p>
                         <div style="display:flex; align-items:center; margin-top:10px; color:var(--success); font-size:11px; font-weight:700; letter-spacing:1px;"><span style="margin-right:5px;">🚚</span> No Extra Shipping Charges</div>
@@ -629,7 +629,7 @@
                     <div style="position:absolute; top:20px; right:-30px; background:var(--accent); padding:5px 30px; transform:rotate(45deg); font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:1px; z-index:2;">Super Saver</div>
                     <div>
                         <span class="p-tag" style="color:var(--accent); border-color:var(--accent);">Monthly Pack</span>
-                        <img src="MX_LUMES_20kg_Set_15kg_Resin_5kg_Hardener.png" alt="20 KG Set" class="p-img" loading="lazy">
+                        <img src="MX_LUMES_20kg_Set_15kg_Resin_5kg_Hardener.png" alt="20 KG Set" class="p-img" loading="lazy" decoding="async">
                         <h3>20 KG Studio Set</h3>
                         <p style="color:var(--text-dim); font-size:14px; margin-top:5px;">15kg Resin + 5kg Hardener.</p>
                         <div style="margin-top:10px; font-size:12px; font-weight:700; color:#fff;">Only <span style="color:var(--accent);">₹850/kg</span> for premium quality.</div>
@@ -867,12 +867,12 @@
         <div class="container">
             <h2 style="text-align:center; margin-bottom:50px;">Gallery</h2>
             <div class="gallery-masonry">
-                <div class="g-item"><img src="at3.png" class="g-img" loading="lazy"></div>
-                <div class="g-item"><img src="at1.png" class="g-img" loading="lazy"></div>
-                <div class="g-item"><img src="at2.png" class="g-img" loading="lazy"></div>
-                <div class="g-item"><img src="at4.png" class="g-img" loading="lazy"></div>
-                <div class="g-item"><img src="at5.png" class="g-img" loading="lazy"></div>
-                <div class="g-item"><img src="at4.png" class="g-img" loading="lazy" style="filter:hue-rotate(45deg);"></div>
+                <div class="g-item"><img src="at3.png" class="g-img" loading="lazy" decoding="async"></div>
+                <div class="g-item"><img src="at1.png" class="g-img" loading="lazy" decoding="async"></div>
+                <div class="g-item"><img src="at2.png" class="g-img" loading="lazy" decoding="async"></div>
+                <div class="g-item"><img src="at4.png" class="g-img" loading="lazy" decoding="async"></div>
+                <div class="g-item"><img src="at5.png" class="g-img" loading="lazy" decoding="async"></div>
+                <div class="g-item"><img src="at4.png" class="g-img" loading="lazy" decoding="async" style="filter:hue-rotate(45deg);"></div>
             </div>
             <div class="dos-donts" style="margin-top:60px;">
                 <div class="dd-box dos"><h3 style="color:var(--success); margin-bottom:20px;">✓ The Dos</h3><ul style="color:var(--text-dim); list-style:disc; padding-left:20px;"><li>Wear gloves and mask.</li><li>Work at 25°C.</li><li>Seal porous surfaces.</li></ul></div>
