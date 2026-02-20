@@ -402,7 +402,7 @@
         .empty-cart { text-align: center; color: var(--text-dim); margin-top: 50px; font-size: 14px; }
 
         /* =========================================
-           12. VIJETA AI ASSISTANT & GREETING BUBBLE
+           12. VIJETA AI ASSISTANT ZOMATO-STYLE
            ========================================= */
         .vijeta-fab { position: fixed; bottom: 30px; left: 20px; width: 65px; height: 65px; background: #000; border: 2px solid var(--accent); border-radius: 50%; z-index: 2000; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4); transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s; cursor: pointer; padding: 2px; transform: translate3d(0,0,0); }
         .vijeta-fab:hover { transform: translate3d(0,-5px,0) scale(1.05); box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6); }
@@ -410,33 +410,16 @@
         .v-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
         .v-online-dot { position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px; background: var(--success); border-radius: 50%; border: 2px solid #000; box-shadow: 0 0 10px var(--success); }
         
-        /* NEW: Greeting Bubble UI */
         .v-greeting {
-            position: fixed;
-            bottom: 105px;
-            left: 20px;
-            width: 250px;
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid var(--accent);
-            border-radius: 16px 16px 16px 4px;
-            padding: 15px;
-            color: #fff;
-            font-size: 13px;
-            line-height: 1.5;
-            z-index: 1999;
-            opacity: 0;
-            transform: translate3d(0, 20px, 0) scale(0.9);
-            transition: opacity 0.5s var(--ease-spring), transform 0.5s var(--ease-spring);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: fixed; bottom: 105px; left: 20px; width: 250px; background: rgba(20, 20, 20, 0.95);
+            border: 1px solid var(--accent); border-radius: 16px 16px 16px 4px; padding: 15px; color: #fff;
+            font-size: 13px; line-height: 1.5; z-index: 1999; opacity: 0; transform: translate3d(0, 20px, 0) scale(0.9);
+            transition: opacity 0.5s var(--ease-spring), transform 0.5s var(--ease-spring); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             pointer-events: none;
-            will-change: transform, opacity;
         }
-        .v-greeting.show {
-            opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
-        }
+        .v-greeting.show { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 
-        .vijeta-panel { position: fixed; bottom: 105px; left: 20px; width: 380px; height: 500px; background: #0a0a0a; border: 1px solid var(--border); border-radius: 24px; z-index: 2001; display: flex; flex-direction: column; overflow: hidden; opacity: 0; transform: translate3d(0, 20px, 0) scale(0.95); pointer-events: none; transition: transform 0.5s var(--ease-spring), opacity 0.5s; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+        .vijeta-panel { position: fixed; bottom: 105px; left: 20px; width: 380px; height: 550px; background: #0a0a0a; border: 1px solid var(--border); border-radius: 24px; z-index: 2001; display: flex; flex-direction: column; overflow: hidden; opacity: 0; transform: translate3d(0, 20px, 0) scale(0.95); pointer-events: none; transition: transform 0.5s var(--ease-spring), opacity 0.5s; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
         .vijeta-panel.active { opacity: 1; transform: translate3d(0, 0, 0) scale(1); pointer-events: all; }
         
         .v-header { background: rgba(99, 102, 241, 0.1); border-bottom: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; }
@@ -452,6 +435,12 @@
         .msg.bot { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .msg.user { background: var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
         
+        /* NEW: Zomato Style Chat Buttons */
+        .v-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; animation: popIn 0.4s var(--ease-spring) forwards; }
+        .v-opt-btn { background: rgba(99, 102, 241, 0.1); border: 1px solid var(--accent); color: #fff; padding: 10px 16px; border-radius: 20px; font-size: 12px; font-family: 'Manrope', sans-serif; font-weight: 600; cursor: pointer; transition: transform 0.3s var(--ease-spring), background-color 0.3s; }
+        .v-opt-btn:hover { background: var(--accent); transform: translate3d(0,-2px,0); }
+        .v-opt-btn:active { transform: scale(0.95); }
+
         .v-input-area { padding: 15px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: #050505; }
         .v-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 20px; padding: 12px 18px; color: #fff; font-size: 13px; outline: none; transition: border-color 0.3s var(--ease-fluid), background-color 0.3s var(--ease-fluid); font-family: 'Manrope', sans-serif; }
         .v-input:focus { border-color: var(--accent); background: #000; }
@@ -496,7 +485,7 @@
             .comp-table th:nth-child(3) { width: 35%; } 
             .comp-container::after { display: none; }
             
-            .vijeta-panel { width: calc(100% - 40px); left: 20px; right: 20px; height: 450px; bottom: 105px; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: #0a0a0a !important; }
+            .vijeta-panel { width: calc(100% - 40px); left: 20px; right: 20px; height: 500px; bottom: 105px; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: #0a0a0a !important; }
             .v-greeting { width: calc(100% - 110px); }
         }
     </style>
@@ -918,8 +907,7 @@
             <button class="v-close" onclick="toggleVijeta()">×</button>
         </div>
         <div class="v-chat" id="vChatBox">
-            <div class="msg bot">Namaste! 🙏 I am Vijeta, your M-X Lumes expert. I am here to help you with in-depth knowledge of our products and the advanced Project Calculator. What would you like to know?</div>
-        </div>
+            </div>
         <div class="v-input-area">
             <input type="text" id="vInput" class="v-input" placeholder="Type a question..." onkeypress="handleVijetaEnter(event)">
             <button class="v-send" onclick="sendVijetaMsg()">
@@ -1323,10 +1311,9 @@
         }
 
         // =========================================
-        // VIJETA AI ASSISTANT LOGIC (PRO-EXPERT NEURAL CORE)
+        // VIJETA AI ASSISTANT: INTERACTIVE FLOW ENGINE
         // =========================================
-        let vTimer;
-        let vPromoSent = false;
+        let chatInitialized = false;
 
         // Auto-Greeting Startup Engine
         window.addEventListener('load', () => {
@@ -1340,22 +1327,14 @@
             }, 2000); 
         });
 
-        function resetVTimer() {
-            clearTimeout(vTimer);
-            if(!vPromoSent) {
-                vTimer = setTimeout(() => {
-                    const chatBox = document.getElementById('vChatBox');
-                    chatBox.innerHTML += `<div class="msg bot" style="white-space: pre-wrap;">I highly recommend you use our 1.2KG Starter Kit once and compare the quality difference yourself. You will not regret trusting us! 💎\n\nIs there anything else I can help you with?</div>`;
-                    chatBox.scrollTop = chatBox.scrollHeight;
-                    vPromoSent = true; 
-                }, 20000); 
-            }
-        }
-
         function toggleVijeta() {
             document.getElementById('vGreeting').classList.remove('show');
             document.getElementById('vijetaPanel').classList.toggle('active');
-            resetVTimer(); 
+            
+            if(!chatInitialized) {
+                renderBotMessage(chatFlow.start);
+                chatInitialized = true;
+            }
         }
 
         function handleVijetaEnter(e) {
@@ -1367,46 +1346,166 @@
             const text = input.value.trim();
             if(!text) return;
 
+            renderUserMessage(text);
+            input.value = '';
+
+            // If user types manually, give a polite redirect back to the expert flow
+            setTimeout(() => { 
+                renderBotMessage({
+                    msg: "That is a great question! For the fastest diagnosis, please select a category below, or click 'Chat with an Expert' on our website to speak with our human team! 👇",
+                    opts: chatFlow.start.opts
+                });
+            }, 750);
+        }
+
+        function renderUserMessage(text) {
             const chatBox = document.getElementById('vChatBox');
             chatBox.innerHTML += `<div class="msg user">${text}</div>`;
-            input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
-
-            resetVTimer(); 
-
-            setTimeout(() => { generateVijetaResponse(text.toLowerCase(), chatBox); }, 750);
+            
+            // Remove previous options to keep chat clean
+            document.querySelectorAll('.v-options').forEach(el => el.style.display = 'none');
         }
 
-        function generateVijetaResponse(text, chatBox) {
-            const knowledgeBase = [
-                { keys: ['sticky', 'soft', 'not curing', 'wet', 'tacky', 'runny', 'not hard'], reply: "I understand how frustrating sticky resin can be! Let's fix this together. 👩‍🔬\n\nFirst, tell me: Did you measure by WEIGHT or VOLUME? (Our 3:1 ratio must be by weight!).\n\n🧪 The Chemical Cause:\nUncured spots happen when resin and hardener molecules don't perfectly cross-link. This is usually caused by:\n• Measuring by volume instead of weight on a digital scale.\n• Scraping the sides of your mixing cup while pouring (which drags unmixed chemicals into your art).\n• Room temperature being too cold (below 20°C).\n\n✨ The Fix:\nUnfortunately, you must scrape out the gooey parts, clean with rubbing alcohol, and do a fresh top-coat pour. Next time, try the 'Double-Cup' mixing method for a flawless cure!" },
-                { keys: ['bubble', 'bubbles', 'frothy', 'cloudy inside', 'microbubbles', 'foam'], reply: "Bubbles can ruin a beautiful piece! Let's look at the fluid dynamics. 🫧\n\nFirst, what is your room temperature? Cold resin gets thick like honey, trapping air.\n\n🧪 The Chemical Cause:\n• Cold temperatures increase the resin's viscosity.\n• Whipping the mixture too aggressively folds air into the polymer matrix.\n• Pouring on porous surfaces (like unsealed wood) that 'breathe' air into the resin.\n\n✨ The Fix:\n• Give your sealed resin/hardener bottles a warm water bath for 10 mins before mixing.\n• Stir slowly and steadily.\n• Seal porous objects with a thin coat first.\n\n(Note: M-X Lumes naturally drops surface tension to 28 dynes/cm to auto-release most bubbles!)" },
-                { keys: ['hot', 'smoke', 'smoking', 'cracked', 'cracking', 'flash cure', 'boil', 'heat'], reply: "Whoa! That is called 'Flash Curing' or an Exothermic runaway. 🔥\n\n🧪 The Chemical Cause:\nResin curing is an exothermic reaction (it creates its own heat). If you mix too large a mass, or pour too deep in a warm room, the heat gets trapped. The molecules react too fast, causing the resin to literally boil, smoke, and crack.\n\n✨ The Fix:\n• Never leave a large mixed batch sitting in the mixing cup.\n• Check our Project Calculator! If you pour deeper than 2.5cm, pour in multiple smaller layers instead.\n• Lower your room temperature to around 22°C-25°C." },
-                { keys: ['cloudy surface', 'greasy', 'blush', 'dull', 'matte finish', 'film', 'white film'], reply: "Ah, it sounds like you're experiencing 'Amine Blush'. Let's check your environment! 🌧️\n\nWas your room humidity above 60-70%?\n\n🧪 The Chemical Cause:\nWhen the hardener (amine) reacts with moisture and carbon dioxide in the air before it can completely cross-link with the resin, it creates a waxy, cloudy, or greasy film on the surface.\n\n✨ The Fix:\n• Once cured, you can wash the blush off with warm soapy water, lightly sand it, and pour a fresh clear topcoat.\n• Prevention: Turn on your AC (Dry Mode) or a dehumidifier while pouring and curing." },
-                { keys: ['yellow', 'yellowing', 'uv', 'sun', 'sunlight'], reply: "Yellowing is a common enemy of resin artists, but we engineered a defense against it! 🛡️\n\n🧪 The Chemical Cause:\nStandard epoxies degrade when exposed to UV light, breaking the polymer chains and turning the plastic yellow or amber.\n\n✨ The Solution:\nM-X Lumes Crystal Series uses advanced HALS (Hindered Amine Light Stabilizers). These actively scavenge free radicals generated by UV exposure, interrupting the degradation cycle for 10+ years of clarity! (However, we still recommend keeping cured art out of direct, continuous sunlight)." },
-                { keys: ['calc', 'calculator', 'how to use', 'features', 'help'], reply: "Here is an in-depth breakdown of my Project Calculator:\n\n• Shapes & Dimensions: Select Square, Circle, Triangle, Pyramid, or Orb. Input exact measurements in CM or IN.\n• Environment Lab: Click 'Auto-Detect' to fetch local satellite weather and convert it to indoor conditions.\n• Safety Engine: I calculate exact exotherm risks, blush risks (if humidity > 70%), and flash cures based on your pour depth.\n• Advanced Tuning: Adjust epoxy density (1.13 default), pigment %, and track exact ₹ costs per pour.\n\nAsk me about any specific feature!" },
-                { keys: ['weather', 'environment', 'temp', 'humidity', 'auto', 'satellite'], reply: "The Environment Lab is revolutionary:\n\n• Satellite Sync: I use GPS to pull real-time exterior weather.\n• Indoor Conversion: My physics algorithm calculates your exact indoor Temperature and Relative Humidity (RH).\n• Pro Safety Alerts: If indoor humidity is high, I warn you about 'Blush Risk'. If it's hot and you pour deep, I alert you to 'Flash Curing'." },
-                { keys: ['shape', 'preset', 'varmala', 'geode', 'tray', 'clock'], reply: "I built 1-click Presets for top resin projects:\n\n• Varmala Block: Auto-sets to Square (30x30x7.5cm) + Deep Casting mode.\n• Wall Clock: Auto-sets to Circle (30cm, 1cm depth) + Coating mode.\n• Geode Art: Auto-sets to Circle (10cm, 0.8cm depth).\n• Resin Tray: Auto-sets to Rect (30x20x1.5cm)." },
-                { keys: ['advanced', 'density', 'pigment', 'cost'], reply: "In the Advanced Settings (⚙️), you can:\n\n• Modify Density: Default is 1.13g/cm³. Low Viscosity systems can be dropped to 1.05.\n• Pigment %: Accounts for the extra weight of your colors.\n• Cost Tracking: Input your Kit price (e.g., ₹1000/kg), and I instantly calculate the exact ₹ cost of the current pour." },
-                { keys: ['ratio', 'mixing', 'proportion', 'how much to mix'], reply: "By default, M-X Lumes uses a 3:1 ratio by WEIGHT.\n\n• Use a digital kitchen scale.\n• If the calculator says Total Weight 400g, it will automatically break it down to 300g Resin (Part A) and 100g Hardener (Part B).\n• You can toggle to 2:1 or 1:1 in the calculator if testing other brands." },
-                { keys: ['spec', 'quality', 'tech', 'hals', 'voc', 'hard', 'food safe'], reply: "M-X Lumes Crystal Series Specifications:\n\n• HALS Tech: 99.8% UV Blocking for 10+ years of anti-yellowing.\n• Fluid Dynamics: 28 dynes/cm surface tension (auto-degassing).\n• Viscosity: Ultra-thin 180 mPas.\n• Pot Life: 120 stress-free minutes.\n• Safety: Zero VOC, BPA-Free, food-safe when fully cured." },
-                { keys: ['product', 'starter', 'master', 'super saver', 'kit', 'price', 'buy'], reply: "Here is our Studio Lineup (No Extra Shipping Charges!):\n\n• 1.2KG Starter Kit (₹1,250): Perfect for testing. (900g Resin + 300g Hardener).\n• 4.8KG Master Kit (₹4,400): The bestseller. (3.6kg Resin + 1.2kg Hardener).\n• 20KG Super Saver (₹17,000): Just ₹850/kg! (15kg Resin + 5kg Hardener)." },
-                { keys: ['hello', 'hi', 'hey', 'namaste'], reply: "Namaste! 🙏 I am Vijeta. I am here to help you with in-depth knowledge of our M-X Lumes products, resin chemistry, and the advanced Project Calculator. What are you working on today?" }
-            ];
-
-            let response = "Oh no, let's fix your resin art together! 👩‍🔬 As a chemical expert, I need a few details to diagnose the exact issue. Could you tell me:\n\n• What exactly went wrong (sticky, bubbles, cloudy, overheated)?\n• What was your room temperature and humidity?\n• Did you measure exactly by weight?\n\nTell me the symptoms, and I will give you the chemical cause and the exact solution!";
-
-            for (let item of knowledgeBase) {
-                if (item.keys.some(key => text.includes(key))) {
-                    response = item.reply;
-                    break;
-                }
+        function renderBotMessage(node) {
+            const chatBox = document.getElementById('vChatBox');
+            let html = `<div class="msg bot" style="white-space: pre-wrap;">${node.msg}</div>`;
+            
+            if (node.opts && node.opts.length > 0) {
+                html += `<div class="v-options">`;
+                node.opts.forEach(opt => {
+                    // Pass the option label and the target node key
+                    html += `<button class="v-opt-btn" onclick="handleChatOption('${opt.label}', '${opt.next}')">${opt.label}</button>`;
+                });
+                html += `</div>`;
             }
-
-            chatBox.innerHTML += `<div class="msg bot" style="white-space: pre-wrap;">${response}</div>`;
+            
+            chatBox.innerHTML += html;
             chatBox.scrollTop = chatBox.scrollHeight;
-            resetVTimer(); 
         }
+
+        function handleChatOption(label, nextNodeKey) {
+            renderUserMessage(label);
+            setTimeout(() => {
+                const nextNode = chatFlow[nextNodeKey];
+                if(nextNode) {
+                    renderBotMessage(nextNode);
+                }
+            }, 600);
+        }
+
+        // --- ZOMATO-STYLE DECISION TREE DICTIONARY ---
+        const chatFlow = {
+            start: {
+                msg: "Namaste! 🙏 I am Vijeta, your M-X Lumes Expert & Teacher. I am here to diagnose issues and explain the science of resin. How can I help you today?",
+                opts: [
+                    { label: "🧪 Resin Project Issue", next: "resin_issues" },
+                    { label: "🧮 Calculator Help", next: "calc_help" }
+                ]
+            },
+            
+            // --- RESIN DIAGNOSTICS BRANCH ---
+            resin_issues: {
+                msg: "I can help you troubleshoot! 👩‍🔬 As a chemical expert, I need to know the symptoms. What exactly is happening with your resin?",
+                opts: [
+                    { label: "Sticky / Won't Cure", next: "diag_sticky" },
+                    { label: "Too Many Bubbles", next: "diag_bubbles" },
+                    { label: "Overheating / Smoking", next: "diag_hot" },
+                    { label: "Cloudy / White Film", next: "diag_cloudy" }
+                ]
+            },
+            diag_sticky: {
+                msg: "Sticky resin is frustrating! Let's find the blunder. 🧐\n\nDid you measure the M-X Lumes kit by Weight (using a digital scale) or by Volume (using measuring cups)?",
+                opts: [
+                    { label: "By Weight (Scale)", next: "sol_sticky_weight" },
+                    { label: "By Volume (Cups)", next: "sol_sticky_volume" }
+                ]
+            },
+            sol_sticky_weight: {
+                msg: "Good job using a scale! ⚖️ Since the ratio was correct, this sticky spot was caused by poor Poly-merization.\n\n🧪 **The Chemical Cause:**\nThis happens when you scrape the unmixed resin from the sides of your cup onto your artwork, OR your room is too cold (below 20°C).\n\n✨ **The Fix:**\nScrape out the gooey parts, clean the area with isopropyl alcohol, and do a fresh top-coat. Next time, use the 'Double-Cup' mixing method!",
+                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
+            },
+            sol_sticky_volume: {
+                msg: "Ah! 💡 I found the issue. M-X Lumes 3:1 must ALWAYS be measured by WEIGHT.\n\n🧪 **The Chemical Cause:**\nResin and hardener have completely different densities. Measuring them by volume puts too much hardener in the mix, permanently breaking the chemical ratio.\n\n✨ **The Fix:**\nYou must scrape off the uncured resin, clean thoroughly with rubbing alcohol, and pour a new coat measured perfectly on a digital scale.",
+                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
+            },
+            diag_bubbles: {
+                msg: "Bubbles can ruin a flawless finish! Let's check your fluid dynamics. 🫧\n\nWhat is your room temperature right now?",
+                opts: [
+                    { label: "Cold (Below 22°C)", next: "sol_bubbles_cold" },
+                    { label: "Warm (Above 22°C)", next: "sol_bubbles_warm" }
+                ]
+            },
+            sol_bubbles_cold: {
+                msg: "That explains it! 🥶\n\n🧪 **The Chemical Cause:**\nCold temperatures make epoxy thick like honey. This high viscosity traps the air you fold in while mixing.\n\n✨ **The Fix:**\nGive your sealed bottles a warm water bath for 10 minutes before mixing. M-X Lumes naturally drops to 28 dynes/cm surface tension—if it's warm, the bubbles will auto-degas perfectly!",
+                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
+            },
+            sol_bubbles_warm: {
+                msg: "Since your room is warm, the resin viscosity is fine. 🌡️\n\n🧪 **The Cause:**\nThose bubbles are likely 'breathing' out of a porous surface (like unsealed wood/flowers) or you whipped the resin too aggressively while mixing.\n\n✨ **The Fix:**\nStir slowly, and ALWAYS seal wood or porous objects with a thin 'primer coat' of resin before doing your main deep pour.",
+                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
+            },
+            diag_hot: {
+                msg: "🔥 Whoa! That is called an 'Exothermic Runaway' (Flash Curing).\n\n🧪 **The Chemical Cause:**\nResin curing generates its own heat. If you mix too much in one cup, or pour too deep in a warm room, the heat gets trapped. The molecules react violently, causing the resin to boil, smoke, and crack.\n\n✨ **The Fix:**\nNever leave a large mixed batch in a cup. Pour it immediately. Also, check our Project Calculator—if you need to pour deeper than 2.5cm, you must pour in multiple smaller layers!",
+                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
+            },
+            diag_cloudy: {
+                msg: "🌧️ That sounds exactly like 'Amine Blush'.\n\n🧪 **The Chemical Cause:**\nWhen the hardener (amine) reacts with moisture and carbon dioxide in high-humidity air before it cross-links with the resin, it creates a waxy, cloudy, or greasy film on the surface.\n\n✨ **The Fix:**\nWash the cured blush off with warm soapy water, lightly sand it, and pour a fresh topcoat. Next time, turn on an AC (Dry Mode) or a dehumidifier while curing!",
+                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
+            },
+
+            // --- CALCULATOR HELP BRANCH ---
+            calc_help: {
+                msg: "Our Project Calculator is incredibly advanced. Which feature can I explain for you?",
+                opts: [
+                    { label: "Environment Lab", next: "exp_env" },
+                    { label: "Safety Warnings", next: "exp_safety" },
+                    { label: "How to Measure?", next: "exp_measure" }
+                ]
+            },
+            exp_env: {
+                msg: "🛰️ **The Environment Lab:**\nIf you click 'Auto-Detect Conditions', I will silently ping GPS satellites to pull your local weather data. My physics algorithm then converts that outside weather into your exact indoor Temperature and Humidity, feeding it into the Safety Engine!",
+                opts: [{ label: "Wow, understood! 😊", next: "satisfaction_yes" }, { label: "I need more help 😕", next: "satisfaction_no" }]
+            },
+            exp_safety: {
+                msg: "🛡️ **The Safety Report:**\nBased on the depth you enter and your room temperature, I instantly calculate risks. I will warn you if your pour is too deep (Flash Cure risk) or if your humidity is too high (Amine Blush risk). It takes the guesswork out of resin art!",
+                opts: [{ label: "Very helpful! 😊", next: "satisfaction_yes" }, { label: "I need more help 😕", next: "satisfaction_no" }]
+            },
+            exp_measure: {
+                msg: "⚖️ **Total Weight Breakdown:**\nJust enter your mold dimensions (like 30cm x 30cm). I will calculate the exact Total Grams you need, and automatically break it down into the exact Part A (Resin) and Part B (Hardener) you need to pour on your digital scale.",
+                opts: [{ label: "Makes sense! 😊", next: "satisfaction_yes" }, { label: "I need more help 😕", next: "satisfaction_no" }]
+            },
+
+            // --- SATISFACTION OUTCOMES ---
+            satisfaction_yes: {
+                msg: "I am so glad I could help! 🎉\n\nSince you are dedicated to perfect resin art, I highly recommend you use our 1.2KG Starter Kit for your next project and compare the quality difference yourself. You will not regret trusting M-X Lumes! 💎",
+                opts: []
+            },
+            satisfaction_no: {
+                msg: "I'm so sorry I couldn't completely fix it! 😔 \n\nEvery art piece is unique. Please drop our human expert team a WhatsApp message. They are available 24/7 to help artists just like you!",
+                opts: [{ label: "💬 Chat with Expert on WhatsApp", next: "redirect_wa" }]
+            },
+            redirect_wa: {
+                msg: "Redirecting you to our secure WhatsApp portal...",
+                opts: []
+            }
+        };
+
+        // Handle the WhatsApp redirect specific action
+        const originalHandleChatOption = handleChatOption;
+        handleChatOption = function(label, nextNodeKey) {
+            if(nextNodeKey === 'redirect_wa') {
+                window.open('https://wa.me/917668077298?text=Hi%20M-X%20Lumes!%20I%20am%20facing%20a%20complex%20issue%20with%20my%20resin%20project%20and%20need%20expert%20help.', '_blank');
+                renderUserMessage(label);
+                setTimeout(() => {
+                    const chatBox = document.getElementById('vChatBox');
+                    chatBox.innerHTML += `<div class="msg bot" style="white-space: pre-wrap;">I've opened a chat with our team for you! Is there anything else I can assist with?</div>`;
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 1000);
+                return;
+            }
+            originalHandleChatOption(label, nextNodeKey);
+        }
+
     </script>
 </body>
 </html>
