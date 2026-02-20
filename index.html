@@ -35,7 +35,7 @@
             
             --border: rgba(255, 255, 255, 0.1);
             --glass: rgba(15, 15, 15, 0.9);
-            --blur: blur(12px); /* Reduced for massive performance gain */
+            --blur: blur(12px); 
             --radius: 24px;
             
             /* High-Performance Physics Engine */
@@ -49,11 +49,16 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
+        /* CRITICAL SCROLL FIX: 
+           Removed overscroll-behavior constraints.
+           Forced smooth scroll-behavior on the HTML root.
+        */
         html { 
             font-size: 16px; 
             scroll-behavior: smooth; 
             width: 100%;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; /* Polish font rendering */
         }
         
         body {
@@ -65,7 +70,6 @@
             max-width: 100vw; 
             overflow-x: hidden;
             position: relative;
-            overscroll-behavior-y: none; 
         }
 
         h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.1; letter-spacing: -0.02em; }
@@ -87,14 +91,12 @@
             background-position: center bottom;
             background-repeat: no-repeat;
             background-size: 65%;
-            opacity: 0.6; /* Balanced for pure black contrast */
+            opacity: 0.6; 
             transform: translateZ(0); 
-            /* Removed heavy mask-image that caused freezing */
         }
 
         .bg-gradient {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -4;
-            /* Hardware-efficient fade to pure black */
             background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 50%, #000000 90%);
             pointer-events: none;
             transform: translateZ(0);
@@ -107,7 +109,6 @@
         
         .section { padding: 100px 0; position: relative; z-index: 2; }
         
-        /* High-FPS Reveal Engine (No blur filters to save GPU) */
         .reveal { 
             opacity: 0; 
             transform: translate3d(0, 40px, 0); 
@@ -365,7 +366,7 @@
         .f-copy { font-size: 12px; color: #444; }
 
         /* =========================================
-           11. CART & REMINDER HAND (HW ACCELERATED)
+           11. CART & REMINDER HAND 
            ========================================= */
         .cart-fab { position: fixed; bottom: 30px; right: 20px; width: 60px; height: 60px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 2000; box-shadow: 0 10px 30px rgba(255,255,255,0.2); transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s; cursor: pointer; transform: translate3d(0,0,0); }
         .cart-fab:hover { transform: translate3d(0,-5px,0); box-shadow: 0 15px 40px rgba(255,255,255,0.3); }
@@ -412,7 +413,6 @@
         .v-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
         .v-online-dot { position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px; background: var(--success); border-radius: 50%; border: 2px solid #000; box-shadow: 0 0 10px var(--success); }
         
-        /* Removed backdrop-filter to guarantee buttery smooth typing */
         .vijeta-panel { position: fixed; bottom: 105px; left: 20px; width: 380px; height: 500px; background: #0a0a0a; border: 1px solid var(--border); border-radius: 24px; z-index: 2001; display: flex; flex-direction: column; overflow: hidden; opacity: 0; transform: translate3d(0, 20px, 0) scale(0.95); pointer-events: none; transition: transform 0.5s var(--ease-spring), opacity 0.5s; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
         .vijeta-panel.active { opacity: 1; transform: translate3d(0, 0, 0) scale(1); pointer-events: all; }
         
@@ -430,20 +430,22 @@
         .msg.user { background: var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
         
         .v-input-area { padding: 15px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: #050505; }
-        .v-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 20px; padding: 12px 18px; color: #fff; font-size: 13px; outline: none; transition: border-color 0.3s; font-family: 'Manrope', sans-serif; }
+        .v-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 20px; padding: 12px 18px; color: #fff; font-size: 13px; outline: none; transition: border-color 0.3s var(--ease-fluid), background-color 0.3s var(--ease-fluid); font-family: 'Manrope', sans-serif; }
         .v-input:focus { border-color: var(--accent); background: #000; }
-        .v-send { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; cursor: pointer; transition: transform 0.2s var(--ease-spring), box-shadow 0.2s; }
+        .v-send { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; cursor: pointer; transition: transform 0.3s var(--ease-spring), box-shadow 0.3s; }
         .v-send:hover { transform: scale(1.08); box-shadow: 0 0 15px var(--accent-glow); }
         .v-send:active { transform: scale(0.95); }
 
         /* =========================================
-           13. MOBILE OPTIMIZATIONS (The Butter Smooth Patch)
+           13. MOBILE OPTIMIZATIONS
            ========================================= */
         @media (max-width: 900px) {
             .bg-layer { background-size: cover; opacity: 0.85; background-attachment: scroll; background-position: center center; }
-            /* Strip all costly blurs on mobile GPUs */
             :root { --blur: blur(0px); } 
             .glass, .comp-container, .comp-wrapper { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: #0a0a0a !important; box-shadow: none !important; }
+            
+            .reveal { filter: none !important; }
+            .reveal.active { filter: none !important; }
             
             .hero { min-height: 80dvh; }
             .grid-3 { grid-template-columns: 100%; } 
@@ -471,7 +473,7 @@
             .comp-table th:nth-child(3) { width: 35%; } 
             .comp-container::after { display: none; }
             
-            .vijeta-panel { width: calc(100% - 40px); left: 20px; right: 20px; height: 450px; bottom: 105px; }
+            .vijeta-panel { width: calc(100% - 40px); left: 20px; right: 20px; height: 450px; bottom: 105px; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: #0a0a0a !important; }
         }
     </style>
 </head>
