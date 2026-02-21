@@ -1575,17 +1575,18 @@
         }
 
         // =========================================
-        // FLAWLESS BARASINGHA GSAP ENGINE
+        // FLAWLESS BARASINGHA GSAP ENGINE (FIXED IDs)
         // =========================================
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const animalContainer = document.getElementById('animal-container');
                 const deerSvg = document.getElementById('animal-svg');
                 
-                const frontLegL = document.getElementById('f-leg-l');
-                const frontLegR = document.getElementById('f-leg-r');
-                const backLegL = document.getElementById('b-leg-l');
-                const backLegR = document.getElementById('b-leg-r');
+                // FIXED: IDs now perfectly match the HTML
+                const frontLegL = document.getElementById('leg-fl');
+                const frontLegR = document.getElementById('leg-fr');
+                const backLegL = document.getElementById('leg-bl');
+                const backLegR = document.getElementById('leg-br');
                 
                 const resinS = document.getElementById('resin-s');
                 const popup = document.getElementById('hardness-popup');
