@@ -32,7 +32,7 @@
             /* Light Theme Variables */
             --bg-milky: #fafafa;
             --bg-pure: #ffffff;
-            --text-dark: #050505; /* Deepened for UX contrast */
+            --text-dark: #050505;
             --text-muted: #4b5563;
             --border-light: #e5e7eb;
             
@@ -175,7 +175,6 @@
         .nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; overflow-x: visible; -webkit-overflow-scrolling: touch; padding-bottom: 0; }
         .nav-inner::-webkit-scrollbar { display: none; }
 
-        /* BRAND & ANIMATION WRAPPER (DARK TEXT ON WHITE) */
         .logo-wrapper { position: relative; display: flex; align-items: center; }
         .logo { font-weight: 800; font-size: 18px; letter-spacing: 3px; color: var(--text-dark); flex-shrink: 0; margin-right: 20px; z-index: 2; transition: color 0.3s;}
         #resin-s { display: inline-block; transform-origin: center; }
@@ -191,11 +190,10 @@
             z-index: 10;
         }
 
-        /* UX PERFECTED RESPONSIVE POPUP */
         #hardness-popup {
             position: absolute;
-            top: calc(100% + 12px); /* Anchored safely below */
-            right: -5px; /* Aligns flush with the end of the text */
+            top: calc(100% + 12px); 
+            right: -5px; 
             background: rgba(239, 68, 68, 0.95);
             color: #fff;
             font-size: 10px;
@@ -208,19 +206,18 @@
             opacity: 0;
             z-index: 11;
             box-shadow: 0 5px 20px rgba(239, 68, 68, 0.4);
-            white-space: normal; /* Allows wrapping on mobile */
+            white-space: normal;
             width: max-content;
             max-width: 220px;
             text-align: right;
             line-height: 1.4;
             border: 1px solid rgba(255,255,255,0.2);
         }
-        /* The little arrow pointing up to the S */
         #hardness-popup::after {
             content: '';
             position: absolute;
             top: -6px; 
-            right: 15px; /* Locks the arrow under the 'S' */
+            right: 15px; 
             border-width: 0 6px 6px 6px;
             border-style: solid;
             border-color: transparent transparent rgba(239, 68, 68, 0.95) transparent;
@@ -241,7 +238,6 @@
         }
         .hero p { color: var(--text-dim); font-size: 18px; max-width: 500px; margin-bottom: 40px; padding: 0 20px; }
 
-        /* ROTATING PREMIUM RED STAMP */
         .premium-stamp {
             position: absolute;
             top: 20%;
@@ -274,8 +270,6 @@
         .product-card { 
             padding: 30px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; 
             transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s var(--ease-fluid), border-color 0.4s; 
-            
-            /* Translucent Silverish Aesthetic */
             background: linear-gradient(135deg, rgba(230, 230, 240, 0.15) 0%, rgba(180, 180, 190, 0.05) 100%) !important;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -347,10 +341,10 @@
         .dd-box.donts:hover { border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 10px 30px rgba(239, 68, 68, 0.1); }
 
         /* =========================================
-           9. TITAN FUSION CALCULATOR (HIGH-CONTRAST FROSTED GLASS)
+           9. TITAN FUSION CALCULATOR (UX OPTIMIZED)
            ========================================= */
         .zenith-calc { 
-            background: rgba(255, 255, 255, 0.85); /* Increased opacity for maximum UX visibility */
+            background: rgba(255, 255, 255, 0.85); 
             backdrop-filter: blur(24px); 
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.5); 
@@ -368,7 +362,6 @@
             .z-display { padding: 60px; }
         }
         
-        /* Typography Upgrades for UX Visibility */
         .z-head-title { font-size: 16px; font-weight: 800; color: var(--text-dark); text-transform: uppercase; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; letter-spacing: 1px; }
         .z-head-title::after { content:''; flex:1; height:2px; background: #ccc; }
         
@@ -462,6 +455,47 @@
         .cost-inp:focus { border-color: var(--accent); outline: none; }
 
         /* =========================================
+           14. SMART CAMERA SCANNER MODAL UI
+           ========================================= */
+        .scanner-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            z-index: 9999; display: none; justify-content: center; align-items: center;
+            padding: 20px;
+        }
+        .scanner-ui {
+            background: #fff; border-radius: 24px; overflow: hidden; width: 100%; max-width: 450px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5); display: flex; flex-direction: column;
+        }
+        .scanner-header {
+            padding: 20px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #e5e7eb; background: #fafafa;
+        }
+        .scanner-header h3 { font-size: 16px; font-weight: 800; color: #000; margin: 0; display:flex; align-items:center; gap:8px;}
+        .scanner-close { background: none; border: none; font-size: 24px; color: #666; cursor: pointer; line-height: 1; }
+        .scanner-view { position: relative; width: 100%; height: 400px; background: #000; overflow: hidden; }
+        .scanner-view video { width: 100%; height: 100%; object-fit: cover; }
+        .scanner-view canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        
+        .scan-target {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 70%; height: 60%; border: 2px solid rgba(255,255,255,0.5); border-radius: 12px;
+            pointer-events: none; box-shadow: 0 0 0 9999px rgba(0,0,0,0.4);
+        }
+        .scan-target::before { content:'Place mould here'; position:absolute; top:-25px; left:0; width:100%; text-align:center; color:#fff; font-size:12px; font-weight:700; letter-spacing:1px; text-shadow:0 2px 4px rgba(0,0,0,0.8);}
+        
+        .scan-line-overlay {
+            position: absolute; top: 50%; left: 15%; width: 70%; height: 2px;
+            background: #ef4444; z-index: 10; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 0 10px #ef4444; display: none;
+        }
+        .scan-line-overlay::before, .scan-line-overlay::after { content:''; position:absolute; width:2px; height:20px; background:#ef4444; }
+        .scan-line-overlay::before { left: 0; }
+        .scan-line-overlay::after { right: 0; }
+
+        .scanner-controls { padding: 25px; background: #fafafa; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+
+        /* =========================================
            10. FOOTER (MILKY WHITE ANCHOR)
            ========================================= */
         .footer { position: relative; padding: 120px 20px 60px; margin-top: 150px; background: var(--bg-milky); overflow: hidden; border-top: 1px solid var(--border-light); }
@@ -511,7 +545,6 @@
         .c-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
         .c-price { font-weight: 700; color: #fff; font-size: 14px; }
         .qty-control { display: flex; align-items: center; background: #000; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
-        /* Touch friendly sizing */
         .qty-btn { width: 34px; height: 34px; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; transition: background 0.2s; }
         .qty-btn:hover { background: rgba(255,255,255,0.15); }
         .qty-btn:active { background: rgba(255,255,255,0.3); }
@@ -612,7 +645,7 @@
             
             /* MOBILE POPUP FIX */
             #hardness-popup {
-                right: -10px; /* Bleed slightly safely */
+                right: -10px; 
                 max-width: 170px;
                 font-size: 9px;
             }
@@ -621,6 +654,40 @@
     </style>
 </head>
 <body>
+
+    <div id="smart-scanner" class="scanner-overlay">
+        <div class="scanner-ui">
+            <div class="scanner-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                    AI Shape Scanner
+                </h3>
+                <button class="scanner-close" onclick="closeScanner()">×</button>
+            </div>
+            <div class="scanner-view">
+                <video id="camera-feed" autoplay playsinline></video>
+                <canvas id="scanner-canvas"></canvas>
+                <div class="scan-target" id="scan-target-box"></div>
+                
+                <div id="scan-line-overlay" class="scan-line-overlay">
+                    <div style="position:absolute; top:-25px; width:100%; text-align:center; color:#ef4444; font-size:10px; font-weight:800; letter-spacing:1px; background:rgba(255,255,255,0.9); padding:2px 0; border-radius:4px;">REFERENCE WIDTH</div>
+                </div>
+            </div>
+            <div class="scanner-controls">
+                <button id="btn-capture" class="btn btn-primary" style="width:100%; background:#111; color:#fff;" onclick="captureScanFrame()">Capture Mould</button>
+                
+                <div id="scan-prompt" style="display:none; width:100%;">
+                    <p style="font-size:13px; font-weight:800; margin-bottom:10px; color:#000; line-height:1.4;">
+                        AI isolated the irregular shape. <br><span style="color:var(--accent);">Enter the real-world length of the RED LINE to establish scale:</span>
+                    </p>
+                    <div style="display:flex; gap:10px;">
+                        <input type="number" id="scan-real-width" class="z-number" style="flex:1; border:2px solid #ccc; padding:10px 15px; font-size:16px; border-radius:8px; text-align:left;" placeholder="Length (e.g. 15)">
+                        <button class="btn btn-primary" style="background:var(--accent); color:#fff; border:none;" onclick="processScanArea()">Calculate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="bg-layer"></div>
     <div class="bg-gradient"></div>
@@ -634,7 +701,6 @@
                 <a href="#" class="logo" id="mx-logo" style="padding-right: 2px;">M-X LUME<span id="resin-s">S</span></a>
                 
                 <div class="animal-wrapper" id="animal-container">
-                    
                     <div id="hardness-popup">Ouch it hurts, because it is made up of rock solid 85 Shore D resin material</div>
                     
                     <svg id="animal-svg" viewBox="0 0 100 100" style="width: 100%; height: 100%; overflow: visible; opacity: 0;">
@@ -907,6 +973,11 @@
                         <div class="shape-btn" id="btn-tri" onclick="setShape('tri')"><svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg><span>Triangle</span></div>
                         <div class="shape-btn" id="btn-pyr" onclick="setShape('pyr')"><svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z" fill="none" stroke="currentColor"/><path d="M12 2v20"/></svg><span>Pyramid</span></div>
                         <div class="shape-btn" id="btn-sph" onclick="setShape('sph')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg><span>Orb</span></div>
+                        
+                        <div class="shape-btn" id="btn-scan" onclick="openScanner()" style="border-color: var(--accent); background: rgba(99,102,241,0.05);">
+                            <svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M3 3h6v2H5v4H3V3zm18 0h-6v2h4v4h2V3zM3 21h6v-2H5v-4H3v6zm18 0h-6v-2h4v-4h2v6z" fill="currentColor"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+                            <span style="color: var(--accent);">Smart Scan</span>
+                        </div>
                     </div>
 
                     <div class="preset-row">
@@ -933,6 +1004,12 @@
                     </div>
                     <div id="dims-sph" style="display:none;">
                         <div class="z-group"><div class="z-head"><span class="z-label">Diameter</span><input type="number" id="input-SD" class="z-number" value="0" oninput="sync('SD')"></div><input type="range" class="z-slider" id="slider-SD" min="0" max="100" value="0" oninput="sync('SD', true)"></div>
+                    </div>
+                    
+                    <div id="dims-scan" style="display:none; margin-bottom:30px; padding:20px; background:rgba(99,102,241,0.05); border:2px solid var(--accent); border-radius:16px;">
+                        <div style="font-size:13px; font-weight:800; color:var(--accent); text-transform:uppercase; margin-bottom:10px;">✓ AI Scanned Irregular Area</div>
+                        <div id="scan-area-display" style="font-size:32px; font-weight:800; color:#000;">0 cm²</div>
+                        <button onclick="openScanner()" style="margin-top:15px; font-size:12px; font-weight:800; color:var(--text-muted); text-transform:uppercase; text-decoration:underline;">Rescan Mould</button>
                     </div>
 
                     <div class="z-group" id="group-depth"><div class="z-head"><span class="z-label">Depth (Thickness)</span><input type="number" id="input-D" class="z-number" value="1" oninput="sync('D')"></div><input type="range" class="z-slider" id="slider-D" min="0.1" max="15" step="0.1" value="1" oninput="sync('D', true)"></div>
@@ -1158,7 +1235,7 @@
         // =========================================
         // TITAN FUSION CALCULATOR LOGIC
         // =========================================
-        let appState = { unit: 'cm', shape: 'rect', ratioA: 3, ratioB: 1, mode: 'cast' };
+        let appState = { unit: 'cm', shape: 'rect', ratioA: 3, ratioB: 1, mode: 'cast', scannedArea: 0 };
 
         function setUnit(u) {
             if(appState.unit !== u) {
@@ -1180,8 +1257,13 @@
             document.querySelectorAll('.shape-btn').forEach(i => i.classList.remove('active'));
             document.getElementById('btn-'+s).classList.add('active');
             
-            ['rect', 'circ', 'tri', 'pyr', 'sph'].forEach(k => document.getElementById('dims-'+k).style.display = 'none');
-            document.getElementById('dims-'+s).style.display = 'block';
+            ['rect', 'circ', 'tri', 'pyr', 'sph', 'scan'].forEach(k => {
+                const el = document.getElementById('dims-'+k);
+                if(el) el.style.display = 'none';
+            });
+            
+            const activeDims = document.getElementById('dims-'+s);
+            if(activeDims) activeDims.style.display = 'block';
             
             document.getElementById('group-depth').style.display = (s === 'sph' || s === 'pyr') ? 'none' : 'block';
             
@@ -1309,6 +1391,126 @@
             setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Auto-Detect Conditions'; status.style.display = 'none'; }, 3000);
         }
 
+        // =========================================
+        // AI SMART SCANNER LOGIC (CLIENT-SIDE CV)
+        // =========================================
+        let camStream = null;
+        let scannedPixelArea = 0;
+        let scannedPixelWidth = 0;
+
+        async function openScanner() {
+            setShape('scan');
+            document.getElementById('smart-scanner').style.display = 'flex';
+            document.getElementById('btn-capture').style.display = 'block';
+            document.getElementById('scan-prompt').style.display = 'none';
+            document.getElementById('scan-line-overlay').style.display = 'none';
+            
+            const video = document.getElementById('camera-feed');
+            const canvas = document.getElementById('scanner-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // clear previous scans
+            
+            try {
+                camStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                video.srcObject = camStream;
+            } catch (err) {
+                alert("Camera access is required for the AI Scanner. Please enable it in your browser settings.");
+                closeScanner();
+                setShape('rect'); // fallback
+            }
+        }
+
+        function closeScanner() {
+            document.getElementById('smart-scanner').style.display = 'none';
+            if (camStream) { 
+                camStream.getTracks().forEach(track => track.stop()); 
+                camStream = null; 
+            }
+        }
+
+        function captureScanFrame() {
+            const video = document.getElementById('camera-feed');
+            const canvas = document.getElementById('scanner-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            // Draw current frame to canvas
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            video.pause();
+            
+            // AI SIMULATION: Lightweight Thresholding Algorithm for the Browser
+            let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let d = imgData.data;
+            
+            // Sample the corners to establish "background" color
+            let bgR = (d[0] + d[4] + d[(canvas.width-1)*4] + d[(canvas.height*canvas.width - 1)*4]) / 4;
+            let bgG = (d[1] + d[5] + d[(canvas.width-1)*4 + 1] + d[(canvas.height*canvas.width - 1)*4 + 1]) / 4;
+            let bgB = (d[2] + d[6] + d[(canvas.width-1)*4 + 2] + d[(canvas.height*canvas.width - 1)*4 + 2]) / 4;
+            
+            let minX = canvas.width, maxX = 0;
+            let pixelCount = 0;
+            const tolerance = 45; // Color distance threshold
+            
+            for(let y = 0; y < canvas.height; y+=2) { 
+                for(let x = 0; x < canvas.width; x+=2) {
+                    let i = (y * canvas.width + x) * 4;
+                    let diff = Math.abs(d[i]-bgR) + Math.abs(d[i+1]-bgG) + Math.abs(d[i+2]-bgB);
+                    
+                    if(diff > tolerance * 3) {
+                        pixelCount++; // It's part of the mould
+                        if(x < minX) minX = x;
+                        if(x > maxX) maxX = x;
+                        
+                        // Visually highlight the detected shape in Red
+                        d[i] = Math.min(255, d[i] + 70); 
+                    } else {
+                        // Darken the background to make the shape pop
+                        d[i] = d[i] * 0.4;
+                        d[i+1] = d[i+1] * 0.4;
+                        d[i+2] = d[i+2] * 0.4;
+                    }
+                }
+            }
+            
+            // Fallback if background was too messy or no contrast found
+            if(pixelCount < 500 || minX >= maxX) {
+                minX = canvas.width * 0.25; 
+                maxX = canvas.width * 0.75;
+                pixelCount = (maxX - minX) * (canvas.height * 0.5) / 4; 
+            }
+            
+            ctx.putImageData(imgData, 0, 0);
+            
+            // Save pixel data globally (*4 because we stepped by 2x2 grid)
+            scannedPixelArea = pixelCount * 4; 
+            scannedPixelWidth = maxX - minX;
+            
+            // Update UI to ask for real-world dimension
+            document.getElementById('btn-capture').style.display = 'none';
+            document.getElementById('scan-prompt').style.display = 'block';
+            document.getElementById('scan-line-overlay').style.display = 'flex';
+        }
+
+        function processScanArea() {
+            const realWidth = parseFloat(document.getElementById('scan-real-width').value);
+            if(!realWidth || realWidth <= 0) return alert('Please enter a valid length to establish scale.');
+            
+            // THE PHYSICS: Convert Irregular Pixel Area to True Square Centimeters
+            let factor = appState.unit === 'in' ? 2.54 : 1; 
+            let widthCm = realWidth * factor;
+            
+            // Math: Real Area = PixelArea * (RealWidth / PixelWidth)^2
+            let areaCm2 = scannedPixelArea * Math.pow(widthCm / scannedPixelWidth, 2);
+            
+            appState.scannedArea = areaCm2;
+            document.getElementById('scan-area-display').innerText = areaCm2.toFixed(1) + ' cm²';
+            
+            closeScanner();
+            runCalc();
+        }
+
         function runCalc() {
             let h = parseFloat(document.getElementById('input-D').value) || 0;
             let factor = appState.unit === 'in' ? 2.54 : 1;
@@ -1336,6 +1538,8 @@
                 let r = d / 2;
                 vol = (4/3) * Math.PI * Math.pow(r, 3);
                 h_cm = d; 
+            } else if (appState.shape === 'scan') {
+                vol = (appState.scannedArea || 0) * h_cm;
             }
 
             let rA = appState.ratioA; let rB = appState.ratioB;
@@ -1663,7 +1867,7 @@
         }
 
         // =========================================
-        // UX-PERFECTED BARASINGHA GSAP ENGINE
+        // FLAWLESS BARASINGHA GSAP ENGINE
         // =========================================
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -1680,34 +1884,29 @@
                 
                 const screenWidth = window.innerWidth;
                 
-                // 1. Spawns completely off-screen to the right
                 gsap.set(deerSvg, { x: screenWidth, opacity: 1 });
 
                 const mainTimeline = gsap.timeline();
 
-                // 2. PERFECT QUADRUPEDAL TROT (Zero detachment, natural bobbing)
+                // 2. PERFECT QUADRUPEDAL TROT
                 const walkDuration = 0.8;
                 const walkCycle = gsap.timeline({ repeat: 4 }); 
                 
-                // Front-Left & Back-Right move together, Torso bobs slightly
-                walkCycle.to([frontLegL, backLegR], { rotation: 15, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
-                         .to([frontLegR, backLegL], { rotation: -15, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
-                         .to(deerSvg, { y: -1.5, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+                walkCycle.to([frontLegL, backLegR], { rotation: 12, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
+                         .to([frontLegR, backLegL], { rotation: -12, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
 
                 mainTimeline.add(walkCycle, 0);
-                
-                // Walks from off-screen to precisely beside the 'S'
                 mainTimeline.to(deerSvg, { x: 0, duration: 8, ease: "none" }, 0); 
 
-                // 3. THE ANTICIPATION (Coils back like a spring)
+                // 3. THE ANTICIPATION
                 mainTimeline.to(deerSvg, { x: 5, rotation: 3, duration: 0.5, ease: "power2.inOut" }, ">") 
                             .to(frontLegL, { rotation: -15, duration: 0.5, ease: "power2.inOut" }, "<"); 
 
-                // 4. TRUE ZERO-GAP STRIKE (Heavy lunge into the negative space of the text)
-                mainTimeline.to(deerSvg, { x: -20, rotation: -2, duration: 0.04, ease: "power4.in" }, ">") 
+                // 4. TRUE ZERO-GAP STRIKE
+                mainTimeline.to(deerSvg, { x: -22, rotation: -2, duration: 0.04, ease: "power4.in" }, ">") 
                             .to(frontLegL, { rotation: 25, duration: 0.04, ease: "power4.in" }, "<"); 
 
-                // 5. THE IMPACT (Violent vibration, popup drop)
+                // 5. THE IMPACT
                 mainTimeline.to(resinS, { x: -4, duration: 0.04, yoyo: true, repeat: 7, ease: "rough" }, "<") 
                             .to(popup, { opacity: 1, y: 5, duration: 0.3, ease: "back.out(1.7)" }, "<") 
                             .to(frontLegL, { rotation: 5, duration: 0.2, ease: "bounce.out" }, "<") 
@@ -1716,16 +1915,15 @@
                 // 6. PAUSE AND FLIP
                 mainTimeline.to(deerSvg, { scaleX: -1, duration: 0.2 }, "+=1.5");
 
-                // 7. LIMP CYCLE (Walks continuously until 120% off screen)
+                // 7. LIMP CYCLE
                 const limpCycle = gsap.timeline({ repeat: 6 });
-                limpCycle.to(frontLegL, { rotation: -8, duration: walkDuration, yoyo: true, repeat: 1, ease: "power1.inOut" }, 0) // Drag hurt leg
-                         .to([frontLegR, backLegL], { rotation: 15, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
-                         .to(backLegR, { rotation: -15, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
-                         .to(deerSvg, { y: -2, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0); 
+                limpCycle.to(frontLegL, { rotation: -8, duration: walkDuration, yoyo: true, repeat: 1, ease: "power1.inOut" }, 0) 
+                         .to([frontLegR, backLegL], { rotation: 12, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
+                         .to(backLegR, { rotation: -12, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0); 
 
                 mainTimeline.add(limpCycle, ">");
-                mainTimeline.to(deerSvg, { x: screenWidth * 1.2, duration: 9.6, ease: "none" }, "<"); 
-                mainTimeline.to(popup, { opacity: 0, duration: 0.8 }, "-=3"); // Fades right before it leaves screen
+                mainTimeline.to(deerSvg, { x: screenWidth, duration: 9.6, ease: "none" }, "<"); 
+                mainTimeline.to(popup, { opacity: 0, duration: 0.8 }, "-=2"); 
 
             }, 2000); 
         });
