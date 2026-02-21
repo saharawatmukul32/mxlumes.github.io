@@ -100,15 +100,16 @@
            ========================================= */
         .navbar { position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; display: flex; align-items: center; transition: box-shadow 0.4s var(--ease-fluid), height 0.4s var(--ease-fluid); background-color: var(--bg-milky); border-bottom: 1px solid var(--border-light); padding-top: var(--safe-top); }
         .navbar.scrolled { box-shadow: 0 10px 30px rgba(0,0,0,0.1); height: 70px; }
-        .nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; overflow-x: visible; -webkit-overflow-scrolling: touch; padding-bottom: 0; }
-        .nav-inner::-webkit-scrollbar { display: none; }
-
+        .nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; overflow-x: visible; padding-bottom: 0; }
+        
         .logo-wrapper { position: relative; display: flex; align-items: center; }
-        .logo { font-weight: 800; font-size: 18px; letter-spacing: 3px; color: var(--text-dark); flex-shrink: 0; margin-right: 20px; z-index: 2;}
+        .logo { font-weight: 800; font-size: 18px; letter-spacing: 3px; color: var(--text-dark); flex-shrink: 0; margin-right: 20px; z-index: 2; mix-blend-mode: normal;}
         #resin-s { display: inline-block; transform-origin: center; }
         
+        /* Barasingha Deer Animation Wrapper */
         .animal-wrapper { position: absolute; left: 100%; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; pointer-events: none; z-index: 10; }
 
+        /* Fixed Mobile Popup */
         #hardness-popup { position: absolute; top: calc(100% + 12px); right: -5px; background: rgba(239, 68, 68, 0.95); color: #fff; font-size: 10px; font-weight: 800; padding: 8px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px; pointer-events: none; opacity: 0; z-index: 11; box-shadow: 0 5px 20px rgba(239, 68, 68, 0.4); white-space: normal; width: max-content; max-width: 220px; text-align: right; line-height: 1.4; border: 1px solid rgba(255,255,255,0.2); }
         #hardness-popup::after { content: ''; position: absolute; top: -6px; right: 15px; border-width: 0 6px 6px 6px; border-style: solid; border-color: transparent transparent rgba(239, 68, 68, 0.95) transparent; }
 
@@ -120,6 +121,7 @@
         .hero h1 { font-size: clamp(42px, 10vw, 100px); margin-bottom: 24px; font-weight: 800; background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
         .hero p { color: var(--text-dim); font-size: 18px; max-width: 500px; margin-bottom: 40px; padding: 0 20px; }
 
+        /* Rotating Premium Stamp */
         .premium-stamp { position: absolute; top: 20%; right: 12%; width: 140px; height: 140px; animation: spinStamp 15s linear infinite; z-index: 5; pointer-events: none; opacity: 0.9; filter: drop-shadow(0 10px 20px rgba(239, 68, 68, 0.3)); }
         @keyframes spinStamp { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
@@ -149,7 +151,46 @@
         .support-card:hover { border-color: rgba(37, 211, 102, 0.5); box-shadow: 0 20px 50px rgba(37, 211, 102, 0.1); transform: translate3d(0, -5px, 0); }
 
         /* =========================================
-           9. TITAN FUSION CALCULATOR (UX OPTIMIZED)
+           6. TECHNOLOGY & SPECS
+           ========================================= */
+        .tech-card { padding: 40px; border-top: 1px solid rgba(255,255,255,0.15); transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s; height: 100%; display: flex; flex-direction: column; }
+        .tech-card:hover { background: rgba(255,255,255,0.03); border-color: var(--accent); transform: translate3d(0, -8px, 0); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .tech-icon { font-size: 40px; margin-bottom: 20px; }
+        .tech-sub { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 15px; font-weight: 700; }
+        .tech-list { margin-top: 30px; list-style: none; padding: 0; }
+        .tech-list li { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: var(--text-dim); }
+        .tech-list li span { color: #fff; font-weight: 700; font-size: 16px; font-family: 'Space Grotesk', sans-serif; }
+        .tech-list li:last-child { border-bottom: none; }
+
+        .gallery-masonry { column-count: 3; column-gap: 20px; }
+        .g-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: #0a0a0a; transition: transform 0.4s var(--ease-fluid), border-color 0.4s; }
+        .g-item:hover { transform: scale(1.02); border-color: rgba(255,255,255,0.3); }
+        .g-img { width: 100%; height: auto; display: block; }
+
+        .comp-container { background: #050505; border: 1px solid var(--border); border-radius: 30px; padding: 40px; overflow: hidden; position: relative; }
+        .comp-container::before { content:''; position: absolute; top:0; right:0; width: 50%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent)); }
+        .comp-wrapper { width: 100%; display: block; margin-bottom: 50px; border-radius: 24px; border: 1px solid var(--border); background: #0a0a0a; }
+        .comp-table { width: 100%; border-collapse: collapse; table-layout: auto; }
+        .comp-table th { text-align: left; padding: 20px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .comp-table th.col-mx, .comp-table td.col-mx { width: 40%; background: rgba(99,102,241,0.03); border-right: 1px solid rgba(99,102,241,0.1); border-left: 1px solid rgba(99,102,241,0.1); }
+        .comp-row { transition: background-color 0.2s; }
+        .comp-row:hover { background: rgba(255,255,255,0.03); }
+        .comp-cell { padding: 25px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; color: #fff; }
+        .comp-cell.dim { color: #555; font-weight: 500; }
+        .comp-cell.bright { color: #fff; font-weight: 700; text-shadow: 0 0 15px rgba(99,102,241,0.3); }
+        .comp-cell.bright span { color: var(--accent); margin-right: 8px; }
+        .comp-footer { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border); display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+
+        .dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .dd-box { padding: 50px; border-radius: 24px; border: 1px solid var(--border); transition: transform 0.4s var(--ease-fluid), border-color 0.4s, box-shadow 0.4s; }
+        .dd-box:hover { transform: translate3d(0,-5px,0); }
+        .dd-box.dos { background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2); }
+        .dd-box.dos:hover { border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1); }
+        .dd-box.donts { background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2); }
+        .dd-box.donts:hover { border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 10px 30px rgba(239, 68, 68, 0.1); }
+
+        /* =========================================
+           9. TITAN FUSION CALCULATOR (FROSTED GLASS UX)
            ========================================= */
         .zenith-calc { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 40px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 40px 100px -30px rgba(0,0,0,0.8); }
         .z-controls { padding: 40px; border-bottom: 1px solid #ccc; position: relative; }
@@ -194,19 +235,20 @@
         .shape-btn.active svg { stroke: #000; }
         .shape-btn span { font-size: 13px; font-weight: 800; color: #333; text-transform: uppercase; transition: color 0.3s; }
         .shape-btn.active span { color: #000; }
-        
-        /* THE SMART SCAN AREA DISPLAY IN CALCULATOR */
+
+        /* SMART SCAN DISPLAY BLOCK IN CALCULATOR */
         .scanned-area-display { display:none; flex-direction:column; align-items:center; margin-bottom:30px; padding:25px; background:rgba(16,185,129,0.1); border:2px dashed var(--success); border-radius:16px; transition: all 0.3s; }
         .scanned-area-display.active { display: flex; animation: popIn 0.4s var(--ease-spring); }
         .scanned-lbl { font-size:12px; font-weight:800; color:var(--success); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; }
         .scanned-val { font-size:42px; font-weight:800; color:#000; line-height:1; font-family:'Space Grotesk', sans-serif;}
         .scanned-rescan { margin-top:15px; font-size:12px; font-weight:800; color:var(--text-muted); text-transform:uppercase; text-decoration:underline; cursor:pointer; }
         .scanned-rescan:hover { color:#000; }
-
+        
         .preset-row { display: flex; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; mask-image: linear-gradient(to right, black 90%, transparent 100%); }
         .preset-btn { padding: 12px 24px; border: 2px solid #aaa; border-radius: 30px; font-size: 13px; font-weight: 800; color: #333; background: #fff; white-space: nowrap; transition: all 0.3s; cursor: pointer; }
         .preset-btn:hover { color: #000; border-color: #000; background: #f3f4f6; transform: translate3d(0,-2px,0); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
+        /* Animated Environment Lab Icons */
         .env-icons { display: inline-flex; align-items: center; gap: 10px; margin-left: auto; }
         .icon-temp { width: 18px; height: 18px; stroke: #ef4444; fill: none; animation: tempPulse 2s infinite alternate ease-in-out; }
         .icon-drop { width: 18px; height: 18px; stroke: #3b82f6; fill: none; animation: dropPulse 2s infinite alternate ease-in-out; animation-delay: 1s; }
@@ -231,7 +273,7 @@
         .p-item span { font-size: 13px; font-weight: 800; color: #333; display: block; margin-bottom: 5px; }
         .p-item b { font-size: 28px; color: #000; font-weight: 800; font-variant-numeric: tabular-nums; }
         
-        .safety-report { background: rgba(255,255,255,0.8); border-radius: 16px; padding: 20px; border-left: 6px solid #aaa; margin-bottom: 20px; transition: border-color 0.4s; border-top: 1px solid #ccc; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; }
+        .safety-report { background: rgba(255,255,255,0.8); border-radius: 16px; padding: 20px; border-left: 6px solid #aaa; margin-bottom: 20px; border-top: 1px solid #ccc; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; }
         .safety-report.safe { border-left-color: var(--success); background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); }
         .safety-report.danger { border-left-color: var(--danger); background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); }
         .sr-head { font-size: 14px; font-weight: 800; color: #000; text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between; }
@@ -242,55 +284,32 @@
         .cost-inp { width: 90px; background: transparent; border: none; border-bottom: 2px solid #aaa; color: #000; text-align: right; font-weight: 800; font-size: 20px; padding-bottom: 2px; transition: border-color 0.3s; }
 
         /* =========================================
-           14. SMART CAMERA SCANNER MODAL UI (ULTRA PRECISION)
+           14. SMART CAMERA SCANNER MODAL (ADOBE STYLE CONTOUR)
            ========================================= */
-        .scanner-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            z-index: 9999; display: none; justify-content: center; align-items: center;
-            padding: 20px; opacity: 0; transition: opacity 0.4s var(--ease-fluid);
-        }
+        .scanner-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: opacity 0.4s var(--ease-fluid); }
         .scanner-overlay.active { opacity: 1; display: flex; }
-        .scanner-ui {
-            background: #fff; border-radius: 24px; overflow: hidden; width: 100%; max-width: 450px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5); display: flex; flex-direction: column;
-            transform: scale(0.95); transition: transform 0.4s var(--ease-spring);
-        }
+        .scanner-ui { background: #fff; border-radius: 24px; overflow: hidden; width: 100%; max-width: 450px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); display: flex; flex-direction: column; transform: scale(0.95); transition: transform 0.4s var(--ease-spring); }
         .scanner-overlay.active .scanner-ui { transform: scale(1); }
-        .scanner-header {
-            padding: 20px; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid #e5e7eb; background: #fafafa;
-        }
+        
+        .scanner-header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e5e7eb; background: #fafafa; }
         .scanner-header h3 { font-size: 16px; font-weight: 800; color: #000; margin: 0; display:flex; align-items:center; gap:8px;}
         .scanner-close { background: none; border: none; font-size: 28px; color: #666; cursor: pointer; line-height: 1; padding: 5px; }
         
-        .scanner-view { position: relative; width: 100%; height: 350px; background: #000; overflow: hidden; }
+        .scanner-view { position: relative; width: 100%; height: 400px; background: #000; overflow: hidden; }
         .scanner-view video { width: 100%; height: 100%; object-fit: cover; }
         .scanner-view canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; z-index: 5; }
         
-        .scan-instruction {
-            position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.7); color: #fff; padding: 8px 16px; border-radius: 20px;
-            font-size: 12px; font-weight: 800; z-index: 10; text-align: center; white-space: nowrap;
-        }
-        
-        .scan-target {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 70%; height: 70%; border: 2px dashed rgba(255,255,255,0.8); border-radius: 20px;
-            pointer-events: none; transition: all 0.3s; z-index: 2; box-shadow: 0 0 0 9999px rgba(0,0,0,0.3);
-        }
+        .scan-instruction { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; z-index: 10; text-align: center; white-space: nowrap; }
 
         .scanner-controls { padding: 25px; background: #fafafa; display: flex; flex-direction: column; align-items: center; gap: 15px; }
         
-        .scan-inputs { display: grid; grid-template-columns: 1fr 100px; gap: 10px; width: 100%; }
-        .scan-inputs input, .scan-inputs select { 
-            border: 2px solid #ccc; padding: 14px; font-size: 16px; font-weight: 800; 
-            border-radius: 12px; width: 100%; outline: none; background: #fff; color: #000;
-        }
+        .scan-inputs { display: flex; gap: 10px; width: 100%; }
+        .scan-inputs input { flex: 1; border: 2px solid #ccc; padding: 14px; font-size: 16px; font-weight: 800; border-radius: 12px; outline: none; background: #fff; color: #000; }
+        .scan-inputs select { width: 80px; border: 2px solid #ccc; padding: 14px; font-size: 14px; font-weight: 800; border-radius: 12px; outline: none; background: #fff; color: #000; }
         .scan-inputs input:focus, .scan-inputs select:focus { border-color: var(--success); }
 
         /* =========================================
-           10. FOOTER
+           10. FOOTER (MILKY WHITE ANCHOR)
            ========================================= */
         .footer { position: relative; padding: 120px 20px 60px; margin-top: 150px; background: var(--bg-milky); overflow: hidden; border-top: 1px solid var(--border-light); }
         .footer-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
@@ -380,7 +399,6 @@
         .v-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 20px; padding: 12px 18px; color: #fff; font-size: 13px; outline: none; }
         .v-input:focus { border-color: var(--accent); background: #000; }
         .v-send { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; cursor: pointer; transition: transform 0.3s var(--ease-spring), box-shadow 0.3s; }
-        .v-send:hover { transform: scale(1.08); box-shadow: 0 0 15px var(--accent-glow); }
 
         /* =========================================
            13. MOBILE OPTIMIZATIONS
@@ -413,18 +431,16 @@
             .comp-table th:nth-child(3) { width: 35%; } 
             .comp-container::after { display: none; }
             
-            .vijeta-panel { width: calc(100% - 40px); left: 20px; right: 20px; height: 500px; bottom: 105px; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: #0a0a0a !important; }
+            .vijeta-panel { width: calc(100% - 40px); left: 20px; right: 20px; height: 500px; bottom: 105px; backdrop-filter: none !important; background: #0a0a0a !important; }
             .v-greeting { width: calc(100% - 110px); }
             
             .premium-stamp { top: 12%; right: 5%; width: 100px; height: 100px; }
             
-            /* MOBILE POPUP FIX */
             #hardness-popup { right: -10px; max-width: 170px; font-size: 9px; }
             #hardness-popup::after { right: 20px; }
             
             /* MOBILE SCANNER FIX */
             .scanner-ui { max-width: 95%; }
-            .scan-inputs { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -443,9 +459,7 @@
             <div class="scanner-view">
                 <video id="camera-feed" autoplay playsinline></video>
                 <canvas id="scanner-canvas"></canvas>
-                
                 <div class="scan-instruction" id="scan-instruction">Center mould & hold steady</div>
-                <div class="scan-target" id="scan-target-box"></div>
             </div>
             
             <div class="scanner-controls">
@@ -463,8 +477,8 @@
                             <option value="mm">mm</option>
                             <option value="in">inch</option>
                         </select>
-                        <button class="btn btn-primary" style="background:var(--accent); color:#fff; border:none; width:100%; grid-column: 1 / -1; margin-top:5px; font-size: 14px;" onclick="processCalibration()">Calculate Area</button>
                     </div>
+                    <button class="btn btn-primary" style="background:var(--accent); color:#fff; border:none; width:100%; margin-top:10px; font-size: 14px;" onclick="processCalibration()">Calculate Area</button>
                 </div>
             </div>
         </div>
@@ -843,6 +857,10 @@
                 <div class="g-item"><img src="at5.png" class="g-img" loading="lazy" decoding="async"></div>
                 <div class="g-item"><img src="at4.png" class="g-img" loading="lazy" decoding="async" style="filter:hue-rotate(45deg);"></div>
             </div>
+            <div class="dos-donts" style="margin-top:60px;">
+                <div class="dd-box dos"><h3 style="color:var(--success); margin-bottom:20px;">✓ The Dos</h3><ul style="color:var(--text-dim); list-style:disc; padding-left:20px;"><li>Wear gloves and mask.</li><li>Work at 25°C.</li><li>Seal porous surfaces.</li></ul></div>
+                <div class="dd-box donts"><h3 style="color:var(--danger); margin-bottom:20px;">✕ The Don'ts</h3><ul style="color:var(--text-dim); list-style:disc; padding-left:20px;"><li>Don't mix by volume.</li><li>Don't scrape cup on pour.</li><li>Avoid water contact.</li></ul></div>
+            </div>
         </div>
     </section>
 
@@ -911,8 +929,7 @@
             <div class="v-title"><span></span>Vijeta AI Assistant</div>
             <button class="v-close" onclick="toggleVijeta()">×</button>
         </div>
-        <div class="v-chat" id="vChatBox">
-            </div>
+        <div class="v-chat" id="vChatBox"></div>
         <div class="v-input-area">
             <input type="text" id="vInput" class="v-input" placeholder="Type a question..." onkeypress="handleVijetaEnter(event)">
             <button class="v-send" onclick="sendVijetaMsg()">
@@ -933,8 +950,7 @@
                 <button onclick="toggleCart()" style="color:#fff; font-size:24px;">×</button>
             </div>
             
-            <div id="cartItems" style="flex:1; overflow-y:auto; padding-right:5px;">
-                </div>
+            <div id="cartItems" style="flex:1; overflow-y:auto; padding-right:5px;"></div>
             
             <div class="cart-summary" style="margin-top:20px; border-top:1px solid var(--border); padding-top:20px;">
                 <div class="cart-total" style="display:flex; justify-content:space-between; font-size:20px; font-weight:700; margin-bottom:20px;">
@@ -986,10 +1002,7 @@
             const inc = target / 30; 
             const timer = setInterval(() => { 
                 count += inc; 
-                if(count >= target) { 
-                    count = target; 
-                    clearInterval(timer); 
-                } 
+                if(count >= target) { count = target; clearInterval(timer); } 
                 el.innerText = Math.floor(count) + (el.innerText.includes('%') ? '%' : ''); 
             }, 30); 
         }
@@ -1089,6 +1102,7 @@
             status.innerText = "Attempting Satellite Lock...";
             
             try {
+                if(!navigator.geolocation) throw new Error("No Geo");
                 const position = await new Promise((resolve, reject) => {
                     navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: false, timeout: 8000, maximumAge: 600000 });
                 });
@@ -1130,7 +1144,6 @@
 
                 document.getElementById('env-temp').value = Math.round(tIn);
                 document.getElementById('val-temp').innerText = Math.round(tIn) + '°C';
-                
                 document.getElementById('env-hum').value = Math.round(rhIn);
                 document.getElementById('val-hum').innerText = Math.round(rhIn) + '%';
                 
@@ -1143,7 +1156,7 @@
                 intelligence.innerHTML = `🛰️ Ext: <b>${tOut}°C</b> / <b>${rhOut}%</b><br>🏠 Int: <b>${Math.round(tIn)}°C</b> / <b>${Math.round(rhIn)}%</b>`;
                 
                 setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Auto-Detect Conditions'; }, 5000);
-            } catch (e) { throw e; }
+            } catch (e) { handleWeatherError(btn, status, "Weather API Offline"); }
         }
 
         function handleWeatherError(btn, status, msg) {
@@ -1154,7 +1167,7 @@
         }
 
         // =========================================
-        // AI SMART SCANNER (RADIAL EDGE DETECTION)
+        // AI SMART SCANNER (ADOBE STYLE CONTOUR)
         // =========================================
         let camStream = null;
         let scannedPixelArea = 0;
@@ -1169,18 +1182,24 @@
             document.getElementById('btn-capture').style.display = 'block';
             document.getElementById('scan-prompt').style.display = 'none';
             document.getElementById('scan-instruction').style.display = 'block';
-            document.getElementById('scan-target-box').style.display = 'block';
             
             const video = document.getElementById('camera-feed');
             const canvas = document.getElementById('scanner-canvas');
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height); 
             
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                alert("Camera access is blocked or unsupported. Please use HTTPS.");
+                closeScanner();
+                setShape('rect');
+                return;
+            }
+
             try {
                 camStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
                 video.srcObject = camStream;
             } catch (err) {
-                alert("Camera access is required for the AI Scanner. Please enable it in your browser settings.");
+                alert("Please allow camera access to use the AI Scanner.");
                 closeScanner();
                 setShape('rect'); 
             }
@@ -1208,61 +1227,54 @@
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             video.pause();
             
-            // RADIAL EDGE DETECTION
+            // RADIAL RAYCASTING EDGE DETECTION
             let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             let d = imgData.data;
             
             let cx = canvas.width / 2;
             let cy = canvas.height / 2;
             
-            // Get center color (assuming mold is centered)
             let centerIdx = (Math.floor(cy) * canvas.width + Math.floor(cx)) * 4;
             let targetR = d[centerIdx], targetG = d[centerIdx+1], targetB = d[centerIdx+2];
             
             let points = [];
-            const tolerance = 60; // How much color can vary before it's considered an "edge"
-            const maxRadius = Math.min(canvas.width, canvas.height) / 2;
+            const tolerance = 60; 
+            const maxRadius = Math.min(canvas.width, canvas.height) / 2.2;
 
-            // Cast 64 rays outwards from the center to find edges
-            for(let angle = 0; angle < Math.PI * 2; angle += (Math.PI * 2) / 64) {
+            for(let i=0; i<64; i++) {
+                let angle = (i/64) * Math.PI * 2;
                 let edgeFound = false;
-                for(let r = 10; r < maxRadius; r += 2) {
-                    let px = Math.floor(cx + Math.cos(angle) * r);
-                    let py = Math.floor(cy + Math.sin(angle) * r);
+                for(let r=10; r<maxRadius; r+=2) {
+                    let px = Math.floor(cx + Math.cos(angle)*r);
+                    let py = Math.floor(cy + Math.sin(angle)*r);
+                    if(px<0 || py<0 || px>=canvas.width || py>=canvas.height) break;
                     
-                    if(px < 0 || py < 0 || px >= canvas.width || py >= canvas.height) break;
-
-                    let i = (py * canvas.width + px) * 4;
-                    let diff = Math.abs(d[i]-targetR) + Math.abs(d[i+1]-targetG) + Math.abs(d[i+2]-targetB);
-                    
+                    let idx = (py * canvas.width + px) * 4;
+                    let diff = Math.abs(d[idx]-targetR) + Math.abs(d[idx+1]-targetG) + Math.abs(d[idx+2]-targetB);
                     if(diff > tolerance) {
                         points.push({x: px, y: py});
-                        edgeFound = true;
-                        break; // Stop ray at the edge
+                        edgeFound = true; break;
                     }
                 }
-                if(!edgeFound) {
-                    // Hit the boundary of the screen
-                    points.push({x: Math.floor(cx + Math.cos(angle) * maxRadius), y: Math.floor(cy + Math.sin(angle) * maxRadius)});
-                }
+                if(!edgeFound) points.push({x: cx + Math.cos(angle)*maxRadius, y: cy + Math.sin(angle)*maxRadius});
             }
 
-            // Darken the background to make UI pop
-            ctx.fillStyle = "rgba(0,0,0,0.6)";
+            // Darken Background
+            ctx.fillStyle = "rgba(0,0,0,0.7)";
             ctx.fillRect(0,0, canvas.width, canvas.height);
             
-            // Draw the precise glowing polygon
+            // Draw Glowing Green Polygon
             ctx.beginPath();
             ctx.moveTo(points[0].x, points[0].y);
             for(let i=1; i<points.length; i++) { ctx.lineTo(points[i].x, points[i].y); }
             ctx.closePath();
-            ctx.strokeStyle = "#10b981"; // Success Green
+            ctx.strokeStyle = "#10b981"; 
             ctx.lineWidth = 4;
             ctx.shadowColor = "#10b981";
             ctx.shadowBlur = 15;
             ctx.stroke();
 
-            // Calculate Area using Shoelace Formula
+            // Math: Calculate Irregular Pixel Area
             let area = 0;
             for (let i = 0; i < points.length; i++) {
                 let j = (i + 1) % points.length;
@@ -1271,7 +1283,7 @@
             }
             scannedPixelArea = Math.abs(area / 2);
 
-            // Find longest axis (red line)
+            // Math: Find Longest Axis Line
             let maxDist = 0;
             let pt1 = points[0], pt2 = points[0];
             for(let i=0; i<points.length; i++){
@@ -1282,7 +1294,7 @@
             }
             scannedPixelLongestDistance = maxDist;
 
-            // Draw Red Calibration Line across longest axis
+            // Draw Red Calibration Line
             ctx.beginPath();
             ctx.moveTo(pt1.x, pt1.y);
             ctx.lineTo(pt2.x, pt2.y);
@@ -1292,7 +1304,6 @@
             ctx.lineWidth = 3;
             ctx.stroke();
             
-            // Draw end caps
             ctx.fillStyle = "#ef4444";
             ctx.beginPath(); ctx.arc(pt1.x, pt1.y, 6, 0, Math.PI*2); ctx.fill();
             ctx.beginPath(); ctx.arc(pt2.x, pt2.y, 6, 0, Math.PI*2); ctx.fill();
@@ -1300,7 +1311,6 @@
             // UI Transitions
             document.getElementById('btn-capture').style.display = 'none';
             document.getElementById('scan-instruction').style.display = 'none';
-            document.getElementById('scan-target-box').style.display = 'none';
             document.getElementById('scan-prompt').style.display = 'block';
         }
 
@@ -1308,15 +1318,11 @@
             const inputLen = parseFloat(document.getElementById('scan-line-length').value);
             const unit = document.getElementById('scan-unit').value;
             
-            if(!inputLen || inputLen <= 0) {
-                return alert('Please enter a valid length for the red line.');
-            }
+            if(!inputLen || inputLen <= 0) return alert('Please enter a valid length for the red line.');
             
-            // PHYSICS: Convert Irregular Polygon Area to True Square Centimeters
+            // Physics: Irregular Scaling Equation
             let factor = (unit === 'in') ? 2.54 : ((unit === 'mm') ? 0.1 : 1);
             let realLen_cm = inputLen * factor;
-            
-            // Area_Real = Area_Pixel * (Length_Real / Length_Pixel)^2
             let areaCm2 = scannedPixelArea * Math.pow(realLen_cm / scannedPixelLongestDistance, 2);
             
             appState.scannedArea = areaCm2;
@@ -1421,11 +1427,8 @@
         function updateReminder() {
             const reminder = document.getElementById('cartReminder');
             const sidebar = document.getElementById('cartSidebar');
-            if (cart.length > 0 && !sidebar.classList.contains('active')) {
-                reminder.classList.add('show');
-            } else {
-                reminder.classList.remove('show');
-            }
+            if (cart.length > 0 && !sidebar.classList.contains('active')) { reminder.classList.add('show'); } 
+            else { reminder.classList.remove('show'); }
         }
 
         function addToCart(name, price) {
@@ -1455,8 +1458,7 @@
                 container.innerHTML = '<div class="empty-cart">Your cart is empty.<br>Start adding some magic. ✨</div>';
                 document.getElementById('cartTotal').innerText = '₹0';
                 document.getElementById('cartCount').innerText = '0';
-                updateReminder();
-                return;
+                updateReminder(); return;
             }
 
             cart.forEach(item => { 
@@ -1479,11 +1481,7 @@
             updateReminder();
         }
 
-        function toggleCart() { 
-            document.getElementById('cartSidebar').classList.toggle('active'); 
-            updateReminder(); 
-        }
-        
+        function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); updateReminder(); }
         function showToast() { const t = document.getElementById('toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
         
         function checkoutWhatsApp() {
@@ -1513,25 +1511,17 @@
         function toggleVijeta() {
             document.getElementById('vGreeting').classList.remove('show');
             document.getElementById('vijetaPanel').classList.toggle('active');
-            
-            if(!chatInitialized) {
-                renderBotMessage(chatFlow.start);
-                chatInitialized = true;
-            }
+            if(!chatInitialized) { renderBotMessage(chatFlow.start); chatInitialized = true; }
         }
 
-        function handleVijetaEnter(e) {
-            if(e.key === 'Enter') sendVijetaMsg();
-        }
+        function handleVijetaEnter(e) { if(e.key === 'Enter') sendVijetaMsg(); }
 
         function sendVijetaMsg() {
             const input = document.getElementById('vInput');
             const text = input.value.trim();
             if(!text) return;
-
             renderUserMessage(text);
             input.value = '';
-
             setTimeout(() => { 
                 renderBotMessage({
                     msg: "That is a great question! For the fastest diagnosis, please select a category below, or click 'Chat with an Expert' on our website to speak with our human team! 👇",
@@ -1544,130 +1534,42 @@
             const chatBox = document.getElementById('vChatBox');
             chatBox.innerHTML += `<div class="msg user">${text}</div>`;
             chatBox.scrollTop = chatBox.scrollHeight;
-            
             document.querySelectorAll('.v-options').forEach(el => el.style.display = 'none');
         }
 
         function renderBotMessage(node) {
             const chatBox = document.getElementById('vChatBox');
             let html = `<div class="msg bot" style="white-space: pre-wrap;">${node.msg}</div>`;
-            
             if (node.opts && node.opts.length > 0) {
                 html += `<div class="v-options">`;
-                node.opts.forEach(opt => {
-                    html += `<button class="v-opt-btn" onclick="handleChatOption('${opt.label}', '${opt.next}')">${opt.label}</button>`;
-                });
+                node.opts.forEach(opt => { html += `<button class="v-opt-btn" onclick="handleChatOption('${opt.label}', '${opt.next}')">${opt.label}</button>`; });
                 html += `</div>`;
             }
-            
             chatBox.innerHTML += html;
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        function handleChatOption(label, nextNodeKey) {
-            renderUserMessage(label);
-            setTimeout(() => {
-                const nextNode = chatFlow[nextNodeKey];
-                if(nextNode) {
-                    renderBotMessage(nextNode);
-                }
-            }, 600);
-        }
-
         const chatFlow = {
-            start: {
-                msg: "Namaste! 🙏 I am Vijeta, your M-X Lumes Expert & Teacher. I am here to diagnose issues and explain the science of resin. How can I help you today?",
-                opts: [
-                    { label: "🧪 Resin Project Issue", next: "resin_issues" },
-                    { label: "🧮 Calculator Help", next: "calc_help" }
-                ]
-            },
-            
-            resin_issues: {
-                msg: "I can help you troubleshoot! 👩‍🔬 As a chemical expert, I need to know the symptoms. What exactly is happening with your resin?",
-                opts: [
-                    { label: "Sticky / Won't Cure", next: "diag_sticky" },
-                    { label: "Too Many Bubbles", next: "diag_bubbles" },
-                    { label: "Overheating / Smoking", next: "diag_hot" },
-                    { label: "Cloudy / White Film", next: "diag_cloudy" }
-                ]
-            },
-            diag_sticky: {
-                msg: "Sticky resin is frustrating! Let's find the blunder. 🧐\n\nDid you measure the M-X Lumes kit by Weight (using a digital scale) or by Volume (using measuring cups)?",
-                opts: [
-                    { label: "By Weight (Scale)", next: "sol_sticky_weight" },
-                    { label: "By Volume (Cups)", next: "sol_sticky_volume" }
-                ]
-            },
-            sol_sticky_weight: {
-                msg: "Good job using a scale! ⚖️ Since the ratio was correct, this sticky spot was caused by poor Poly-merization.\n\n🧪 **The Chemical Cause:**\nThis happens when you scrape the unmixed resin from the sides of your cup onto your artwork, OR your room is too cold (below 20°C).\n\n✨ **The Fix:**\nScrape out the gooey parts, clean the area with isopropyl alcohol, and do a fresh top-coat. Next time, use the 'Double-Cup' mixing method!",
-                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
-            },
-            sol_sticky_volume: {
-                msg: "Ah! 💡 I found the issue. M-X Lumes 3:1 must ALWAYS be measured by WEIGHT.\n\n🧪 **The Chemical Cause:**\nResin and hardener have completely different densities. Measuring them by volume puts too much hardener in the mix, permanently breaking the chemical ratio.\n\n✨ **The Fix:**\nYou must scrape off the uncured resin, clean thoroughly with rubbing alcohol, and pour a new coat measured perfectly on a digital scale.",
-                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
-            },
-            diag_bubbles: {
-                msg: "Bubbles can ruin a flawless finish! Let's check your fluid dynamics. 🫧\n\nWhat is your room temperature right now?",
-                opts: [
-                    { label: "Cold (Below 22°C)", next: "sol_bubbles_cold" },
-                    { label: "Warm (Above 22°C)", next: "sol_bubbles_warm" }
-                ]
-            },
-            sol_bubbles_cold: {
-                msg: "That explains it! 🥶\n\n🧪 **The Chemical Cause:**\nCold temperatures make epoxy thick like honey. This high viscosity traps the air you fold in while mixing.\n\n✨ **The Fix:**\nGive your sealed bottles a warm water bath for 10 minutes before mixing. M-X Lumes naturally drops to 28 dynes/cm surface tension—if it's warm, the bubbles will auto-degas perfectly!",
-                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
-            },
-            sol_bubbles_warm: {
-                msg: "Since your room is warm, the resin viscosity is fine. 🌡️\n\n🧪 **The Cause:**\nThose bubbles are likely 'breathing' out of a porous surface (like unsealed wood/flowers) or you whipped the resin too aggressively while mixing.\n\n✨ **The Fix:**\nStir slowly, and ALWAYS seal wood or porous objects with a thin 'primer coat' of resin before doing your main deep pour.",
-                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
-            },
-            diag_hot: {
-                msg: "🔥 Whoa! That is called an 'Exothermic Runaway' (Flash Curing).\n\n🧪 **The Chemical Cause:**\nResin curing generates its own heat. If you mix too much in one cup, or pour too deep in a warm room, the heat gets trapped. The molecules react violently, causing the resin to boil, smoke, and crack.\n\n✨ **The Fix:**\nNever leave a large mixed batch in a cup. Pour it immediately. Also, check our Project Calculator—if you need to pour deeper than 2.5cm, you must pour in multiple smaller layers!",
-                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
-            },
-            diag_cloudy: {
-                msg: "🌧️ That sounds exactly like 'Amine Blush'.\n\n🧪 **The Chemical Cause:**\nWhen the hardener (amine) reacts with moisture and carbon dioxide in high-humidity air before it cross-links with the resin, it creates a waxy, cloudy, or greasy film on the surface.\n\n✨ **The Fix:**\nWash the cured blush off with warm soapy water, lightly sand it, and pour a fresh topcoat. Next time, turn on an AC (Dry Mode) or a dehumidifier while curing!",
-                opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }]
-            },
-
-            calc_help: {
-                msg: "Our Project Calculator is incredibly advanced. Which feature can I explain for you?",
-                opts: [
-                    { label: "Environment Lab", next: "exp_env" },
-                    { label: "Safety Warnings", next: "exp_safety" },
-                    { label: "How to Measure?", next: "exp_measure" }
-                ]
-            },
-            exp_env: {
-                msg: "🛰️ **The Environment Lab:**\nIf you click 'Auto-Detect Conditions', I will silently ping GPS satellites to pull your local weather data. My physics algorithm then converts that outside weather into your exact indoor Temperature and Humidity, feeding it into the Safety Engine!",
-                opts: [{ label: "Wow, understood! 😊", next: "satisfaction_yes" }, { label: "I need more help 😕", next: "satisfaction_no" }]
-            },
-            exp_safety: {
-                msg: "🛡️ **The Safety Report:**\nBased on the depth you enter and your room temperature, I instantly calculate risks. I will warn you if your pour is too deep (Flash Cure risk) or if your humidity is too high (Amine Blush risk). It takes the guesswork out of resin art!",
-                opts: [{ label: "Very helpful! 😊", next: "satisfaction_yes" }, { label: "I need more help 😕", next: "satisfaction_no" }]
-            },
-            exp_measure: {
-                msg: "⚖️ **Total Weight Breakdown:**\nJust enter your mold dimensions (like 30cm x 30cm). I will calculate the exact Total Grams you need, and automatically break it down into the exact Part A (Resin) and Part B (Hardener) you need to pour on your digital scale.",
-                opts: [{ label: "Makes sense! 😊", next: "satisfaction_yes" }, { label: "I need more help 😕", next: "satisfaction_no" }]
-            },
-
-            satisfaction_yes: {
-                msg: "I am so glad I could help! 🎉\n\nSince you are dedicated to perfect resin art, I highly recommend you use our 1.2KG Starter Kit for your next project and compare the quality difference yourself. You will not regret trusting M-X Lumes! 💎",
-                opts: []
-            },
-            satisfaction_no: {
-                msg: "I'm so sorry I couldn't completely fix it! 😔 \n\nEvery art piece is unique. Please drop our human expert team a WhatsApp message. They are available 24/7 to help artists just like you!",
-                opts: [{ label: "💬 Chat with Expert on WhatsApp", next: "redirect_wa" }]
-            },
-            redirect_wa: {
-                msg: "Redirecting you to our secure WhatsApp portal...",
-                opts: []
-            }
+            start: { msg: "Namaste! 🙏 I am Vijeta, your M-X Lumes Expert & Teacher. I am here to diagnose issues and explain the science of resin. How can I help you today?", opts: [{ label: "🧪 Resin Project Issue", next: "resin_issues" }, { label: "🧮 Calculator Help", next: "calc_help" }] },
+            resin_issues: { msg: "I can help you troubleshoot! 👩‍🔬 As a chemical expert, I need to know the symptoms. What exactly is happening with your resin?", opts: [{ label: "Sticky / Won't Cure", next: "diag_sticky" }, { label: "Too Many Bubbles", next: "diag_bubbles" }, { label: "Overheating / Smoking", next: "diag_hot" }, { label: "Cloudy / White Film", next: "diag_cloudy" }] },
+            diag_sticky: { msg: "Sticky resin is frustrating! Let's find the blunder. 🧐\n\nDid you measure the M-X Lumes kit by Weight (using a digital scale) or by Volume (using measuring cups)?", opts: [{ label: "By Weight (Scale)", next: "sol_sticky_weight" }, { label: "By Volume (Cups)", next: "sol_sticky_volume" }] },
+            sol_sticky_weight: { msg: "Good job using a scale! ⚖️ Since the ratio was correct, this sticky spot was caused by poor Poly-merization.\n\n🧪 **The Chemical Cause:**\nThis happens when you scrape the unmixed resin from the sides of your cup onto your artwork, OR your room is too cold (below 20°C).\n\n✨ **The Fix:**\nScrape out the gooey parts, clean the area with isopropyl alcohol, and do a fresh top-coat. Next time, use the 'Double-Cup' mixing method!", opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }] },
+            sol_sticky_volume: { msg: "Ah! 💡 I found the issue. M-X Lumes 3:1 must ALWAYS be measured by WEIGHT.\n\n🧪 **The Chemical Cause:**\nResin and hardener have completely different densities. Measuring them by volume puts too much hardener in the mix, permanently breaking the chemical ratio.\n\n✨ **The Fix:**\nYou must scrape off the uncured resin, clean thoroughly with rubbing alcohol, and pour a new coat measured perfectly on a digital scale.", opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }] },
+            diag_bubbles: { msg: "Bubbles can ruin a flawless finish! Let's check your fluid dynamics. 🫧\n\nWhat is your room temperature right now?", opts: [{ label: "Cold (Below 22°C)", next: "sol_bubbles_cold" }, { label: "Warm (Above 22°C)", next: "sol_bubbles_warm" }] },
+            sol_bubbles_cold: { msg: "That explains it! 🥶\n\n🧪 **The Chemical Cause:**\nCold temperatures make epoxy thick like honey. This high viscosity traps the air you fold in while mixing.\n\n✨ **The Fix:**\nGive your sealed bottles a warm water bath for 10 minutes before mixing. M-X Lumes naturally drops to 28 dynes/cm surface tension—if it's warm, the bubbles will auto-degas perfectly!", opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }] },
+            sol_bubbles_warm: { msg: "Since your room is warm, the resin viscosity is fine. 🌡️\n\n🧪 **The Cause:**\nThose bubbles are likely 'breathing' out of a porous surface (like unsealed wood/flowers) or you whipped the resin too aggressively while mixing.\n\n✨ **The Fix:**\nStir slowly, and ALWAYS seal wood or porous objects with a thin 'primer coat' of resin before doing your main deep pour.", opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }] },
+            diag_hot: { msg: "🔥 Whoa! That is called an 'Exothermic Runaway' (Flash Curing).\n\n🧪 **The Chemical Cause:**\nResin curing generates its own heat. If you mix too much in one cup, or pour too deep in a warm room, the heat gets trapped. The molecules react violently, causing the resin to boil, smoke, and crack.\n\n✨ **The Fix:**\nNever leave a large mixed batch in a cup. Pour it immediately. Also, check our Project Calculator—if you need to pour deeper than 2.5cm, you must pour in multiple smaller layers!", opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }] },
+            diag_cloudy: { msg: "🌧️ That sounds exactly like 'Amine Blush'.\n\n🧪 **The Chemical Cause:**\nWhen the hardener (amine) reacts with moisture and carbon dioxide in high-humidity air before it cross-links with the resin, it creates a waxy, cloudy, or greasy film on the surface.\n\n✨ **The Fix:**\nWash the cured blush off with warm soapy water, lightly sand it, and pour a fresh topcoat. Next time, turn on an AC (Dry Mode) or a dehumidifier while curing!", opts: [{ label: "Yes, this helps! 😊", next: "satisfaction_yes" }, { label: "No, I need more help 😕", next: "satisfaction_no" }] },
+            calc_help: { msg: "Our Project Calculator is incredibly advanced. Which feature can I explain for you?", opts: [{ label: "Environment Lab", next: "exp_env" }, { label: "Safety Warnings", next: "exp_safety" }, { label: "How to Measure?", next: "exp_measure" }] },
+            exp_env: { msg: "🛰️ **The Environment Lab:**\nIf you click 'Auto-Detect Conditions', I will silently ping GPS satellites to pull your local weather data. My physics algorithm then converts that outside weather into your exact indoor Temperature and Humidity, feeding it into the Safety Engine!", opts: [{ label: "Wow, understood! 😊", next: "satisfaction_yes" }, { label: "I need more help 😕", next: "satisfaction_no" }] },
+            exp_safety: { msg: "🛡️ **The Safety Report:**\nBased on the depth you enter and your room temperature, I instantly calculate risks. I will warn you if your pour is too deep (Flash Cure risk) or if your humidity is too high (Amine Blush risk). It takes the guesswork out of resin art!", opts: [{ label: "Very helpful! 😊", next: "satisfaction_yes" }, { label: "I need more help 😕", next: "satisfaction_no" }] },
+            exp_measure: { msg: "⚖️ **Total Weight Breakdown:**\nJust enter your mold dimensions (like 30cm x 30cm). I will calculate the exact Total Grams you need, and automatically break it down into the exact Part A (Resin) and Part B (Hardener) you need to pour on your digital scale.", opts: [{ label: "Makes sense! 😊", next: "satisfaction_yes" }, { label: "I need more help 😕", next: "satisfaction_no" }] },
+            satisfaction_yes: { msg: "I am so glad I could help! 🎉\n\nSince you are dedicated to perfect resin art, I highly recommend you use our 1.2KG Starter Kit for your next project and compare the quality difference yourself. You will not regret trusting M-X Lumes! 💎", opts: [] },
+            satisfaction_no: { msg: "I'm so sorry I couldn't completely fix it! 😔 \n\nEvery art piece is unique. Please drop our human expert team a WhatsApp message. They are available 24/7 to help artists just like you!", opts: [{ label: "💬 Chat with Expert on WhatsApp", next: "redirect_wa" }] },
+            redirect_wa: { msg: "Redirecting you to our secure WhatsApp portal...", opts: [] }
         };
 
-        const originalHandleChatOption = handleChatOption;
-        handleChatOption = function(label, nextNodeKey) {
+        function handleChatOption(label, nextNodeKey) {
             if(nextNodeKey === 'redirect_wa') {
                 window.open('https://wa.me/917668077298?text=Hi%20M-X%20Lumes!%20I%20am%20facing%20a%20complex%20issue%20with%20my%20resin%20project%20and%20need%20expert%20help.', '_blank');
                 renderUserMessage(label);
@@ -1678,11 +1580,12 @@
                 }, 1000);
                 return;
             }
-            originalHandleChatOption(label, nextNodeKey);
+            renderUserMessage(label);
+            setTimeout(() => { const nextNode = chatFlow[nextNodeKey]; if(nextNode) renderBotMessage(nextNode); }, 600);
         }
 
         // =========================================
-        // FLAWLESS BARASINGHA GSAP ENGINE
+        // GSAP ENGINE: FLAWLESS BARASINGHA KINEMATICS
         // =========================================
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -1702,42 +1605,44 @@
 
                 const mainTimeline = gsap.timeline();
 
-                // 2. PERFECT QUADRUPEDAL TROT
+                // 1. PERFECT QUADRUPEDAL TROT (Zero joint breaking, smooth bobbing)
                 const walkDuration = 0.8;
                 const walkCycle = gsap.timeline({ repeat: 4 }); 
                 
-                walkCycle.to([frontLegL, backLegR], { rotation: 12, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
-                         .to([frontLegR, backLegL], { rotation: -12, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+                walkCycle.to([frontLegL, backLegR], { rotation: 15, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
+                         .to([frontLegR, backLegL], { rotation: -15, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
+                         .to(deerSvg, { y: -1.5, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
 
                 mainTimeline.add(walkCycle, 0);
                 mainTimeline.to(deerSvg, { x: 0, duration: 8, ease: "none" }, 0); 
 
-                // 3. THE ANTICIPATION
+                // 2. THE ANTICIPATION (Coils back like a spring)
                 mainTimeline.to(deerSvg, { x: 5, rotation: 3, duration: 0.5, ease: "power2.inOut" }, ">") 
                             .to(frontLegL, { rotation: -15, duration: 0.5, ease: "power2.inOut" }, "<"); 
 
-                // 4. TRUE ZERO-GAP STRIKE
-                mainTimeline.to(deerSvg, { x: -22, rotation: -2, duration: 0.04, ease: "power4.in" }, ">") 
+                // 3. TRUE ZERO-GAP STRIKE (Heavy lunge into the negative space of the text)
+                mainTimeline.to(deerSvg, { x: -20, rotation: -2, duration: 0.04, ease: "power4.in" }, ">") 
                             .to(frontLegL, { rotation: 25, duration: 0.04, ease: "power4.in" }, "<"); 
 
-                // 5. THE IMPACT
+                // 4. THE IMPACT (Violent vibration, popup drop)
                 mainTimeline.to(resinS, { x: -4, duration: 0.04, yoyo: true, repeat: 7, ease: "rough" }, "<") 
                             .to(popup, { opacity: 1, y: 5, duration: 0.3, ease: "back.out(1.7)" }, "<") 
                             .to(frontLegL, { rotation: 5, duration: 0.2, ease: "bounce.out" }, "<") 
                             .to(deerSvg, { x: 8, rotation: 0, duration: 0.2, ease: "power2.out" }, "<"); 
 
-                // 6. PAUSE AND FLIP
+                // 5. PAUSE AND FLIP
                 mainTimeline.to(deerSvg, { scaleX: -1, duration: 0.2 }, "+=1.5");
 
-                // 7. LIMP CYCLE
+                // 6. LIMP CYCLE (Walks continuously until 120% off screen)
                 const limpCycle = gsap.timeline({ repeat: 6 });
                 limpCycle.to(frontLegL, { rotation: -8, duration: walkDuration, yoyo: true, repeat: 1, ease: "power1.inOut" }, 0) 
-                         .to([frontLegR, backLegL], { rotation: 12, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
-                         .to(backLegR, { rotation: -12, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0); 
+                         .to([frontLegR, backLegL], { rotation: 15, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
+                         .to(backLegR, { rotation: -15, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0)
+                         .to(deerSvg, { y: -2, duration: walkDuration, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0); 
 
                 mainTimeline.add(limpCycle, ">");
                 mainTimeline.to(deerSvg, { x: screenWidth * 1.2, duration: 9.6, ease: "none" }, "<"); 
-                mainTimeline.to(popup, { opacity: 0, duration: 0.8 }, "-=2"); 
+                mainTimeline.to(popup, { opacity: 0, duration: 0.8 }, "-=3"); // Fades right before it leaves screen
 
             }, 2000); 
         });
